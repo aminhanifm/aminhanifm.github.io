@@ -2,7 +2,7 @@
 
 const config = {
   github: {
-    username: 'arifszn', // Your GitHub org/user name. (Required)
+    username: 'aminhanifm', // Your GitHub org/user name. (Required)
     sortBy: 'stars', // stars | updated
     limit: 10, // How many projects to display.
     exclude: {
@@ -11,66 +11,51 @@ const config = {
     },
   },
   social: {
-    linkedin: 'ariful-alam',
-    twitter: 'arif_szn',
-    mastodon: 'arifszn@mastodon.social',
+    linkedin: 'amin-hanif-mahmud-b10b5914a',
+    twitter: 'aminhanifm',
+    mastodon: '',
     facebook: '',
     instagram: '',
     dribbble: '',
     behance: '',
-    medium: 'arifszn',
-    dev: 'arifszn',
-    stackoverflow: '', // format: userid/username
-    skype: '',
+    medium: 'aminhanif24',
+    dev: '',
+    stackoverflow: '10861353/amin-hanif', // format: userid/username
+    skype: 'aminhanif24',
     telegram: '',
-    website: 'https://arifszn.com',
+    website: 'aminhanifm.github.io',
     phone: '',
-    email: 'arifulalamszn@gmail.com',
+    email: 'aminhanifm@gmail.com',
   },
   resume: {
     fileUrl:
       'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf', // Empty fileUrl will hide the `Download Resume` button.
   },
   skills: [
-    'PHP',
-    'Laravel',
-    'JavaScript',
-    'React.js',
-    'Node.js',
-    'Nest.js',
-    'MySQL',
-    'PostgreSQL',
-    'Git',
-    'Docker',
-    'PHPUnit',
-    'CSS',
-    'Antd',
-    'Tailwind',
+    'Unity',
+    'Construct 3',
+    'Construct 2',
+    'C#',
+    'Javascript',
+    'HTML',
   ],
   experiences: [
     {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'September 2021',
-      to: 'Present',
-      companyLink: 'https://example.com',
-    },
-    {
-      company: 'Company Name',
-      position: 'Position',
-      from: 'July 2019',
-      to: 'August 2021',
-      companyLink: 'https://example.com',
+      company: 'uniXcorp',
+      position: 'Founder',
+      from: 'December 2019',
+      to: 'January 2023',
+      companyLink: 'https://unixcorpgamedev.id',
     },
   ],
-  /* certifications: [
+  certifications: [
     {
       name: 'Lorem ipsum',
       body: 'Lorem ipsum dolor sit amet',
       year: 'March 2022',
       link: 'https://example.com'
     },
-  ], */
+  ],
   education: [
     {
       institution: 'Institution Name',
@@ -179,10 +164,9 @@ const config = {
 
   // Optional Footer. Supports plain text or HTML.
   footer: `Made with <a 
-      class="text-primary" href="https://github.com/arifszn/gitprofile"
+      class="text-primary" href="https://github.com/aminhanifm"
       target="_blank"
-      rel="noreferrer"
-    >GitProfile</a> and ❤️`,
+      rel="noreferrer"`,
 };
 
 export default config;
