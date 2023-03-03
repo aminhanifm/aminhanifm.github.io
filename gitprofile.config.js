@@ -160,7 +160,7 @@ const config = {
       description:
         'Hide n Seek Nusantara is a game with the concept of hide-and-seek culture, where players can choose a place to play, namely Borobudur, Museum Angkut, Coban Rondo Labyrinth. And players can collect coins to buy perk to use in the game',
       imageUrl: 'https://i.imgur.com/KkBP3wQ.png',
-      link: '',
+      link: 'https://play.google.com/store/apps/details?id=com.unixcorp.hidenseeknusantara',
     },
     {
       title: 'The Covid Hero',
@@ -168,6 +168,13 @@ const config = {
         'The Covid Hero is set against the backdrop of the corona virus outbreak which has made people restless who need to stay at home and keep their distance from other people, and this game aims to be a medium of entertainment and education for people who are at home in a way that we have presented in an interesting and unique way.',
       imageUrl: 'https://i.imgur.com/8NABMww.png',
       link: 'https://amin-hanif.itch.io/the-covid-hero',
+    },
+    {
+      title: 'Tag Runner',
+      description:
+        'Tag Runner is a platformer game that allows you to play with your friends with addicting gameplay and full of features!',
+      imageUrl: 'https://i.imgur.com/cZogVFY.png',
+      link: 'https://play.google.com/store/apps/details?id=com.unixcorp.tagrunner',
     },
     {
       title: 'Isolated Forest',
@@ -181,14 +188,14 @@ const config = {
       description:
         'Dungeon tells the story of an adventurer who tries to collect Mystic Crystals in various types of dungeons. The Mystical Crystal is used to open the gate forever in order to save the village from monster attacks.',
       imageUrl: 'https://i.imgur.com/GtNpXLV.png',
-      link: '',
+      link: 'https://drive.google.com/drive/folders/1XDNVrY3BjNq0WMhC1UcTEqSd3ARiN7aV?usp=share_link',
     },
     {
       title: 'Life of a Dropshipper',
       description:
         'Life of a Dropshipper is a game where players will act as characters who have experience in doing a job and have sufficient economics for a relatively long period of time. But it is undeniable that the character that will be played by the player must do a new job, namely doing business due to previous work problems, therefore players can try to simulate how to do business in the fashion field, namely dropshipping in this all-digital era in this game.',
       imageUrl: 'https://i.imgur.com/Um07QUd.png',
-      link: '',
+      link: 'https://drive.google.com/drive/folders/1dbIn3c8PiSNC_FVIzIU-zGDvRcEW0z38?usp=sharing',
     },
     {
       title: 'Adventure of Hanacaraka',
@@ -202,7 +209,7 @@ const config = {
       description:
         'Javanese Cuisine is a 2D cultural simulation of selling Javanese food and drinks. Help Bambang to pay his rent by selling it within 30days. Buy ingredients to make the cuisine for the customers passing by. It allows players to upgrade the stall until it reaches the maximum level. Higher reputation higher chance to get a customer.',
       imageUrl: 'https://i.imgur.com/fRv7Tf7.png',
-      link: '',
+      link: 'https://drive.google.com/file/d/1KjzrO6ocj1siLeuNpgQLRMburaqBmjfZ/view?usp=share_link',
     },
     {
       title: 'TaxSim',
@@ -216,14 +223,14 @@ const config = {
       description:
         'Kompleks Lalu Lintas is a 2D simulation game where you become a resident who moves in a complex called "Tertib Lalu Lintas" with the aim of wanting to understand more about traffic rules. In this game there are also puzzles and trivia that help you understand traffic rules.',
       imageUrl: 'https://i.imgur.com/OlqxEuF.png',
-      link: '',
+      link: 'https://drive.google.com/drive/folders/1AMHhhM1Q3oBhgp78PJohZQLzJc7wIAPO?usp=share_link',
     },
     {
       title: 'Yudi si Anak Magang Housekeeping',
       description:
         'An interactive narrative where gives you an experience as Yudi an intern of housekeeping in a hotel called Santika hotel',
       imageUrl: 'https://i.imgur.com/1icEOaj.png',
-      link: '',
+      link: 'https://drive.google.com/file/d/1d1KUP7KZ8Qd6PSE8ExllBzg7LhZ3IUEn/view?usp=share_link',
     },
     {
       title: 'Heisters',
@@ -247,7 +254,7 @@ const config = {
     limit: 0, // How many posts to display. Max is 10.
   },
   googleAnalytics: {
-    id: '', // GA3 tracking id/GA4 tag id UA-XXXXXXXXX-X | G-XXXXXXXXXX
+    id: 'UA-83610880-1', // GA3 tracking id/GA4 tag id UA-XXXXXXXXX-X | G-XXXXXXXXXX
   },
   // Track visitor interaction and behavior. https://www.hotjar.com
   hotjar: {
@@ -266,7 +273,7 @@ const config = {
     respectPrefersColorScheme: false,
 
     // Hide the ring in Profile picture
-    hideAvatarRing: false,
+    hideAvatarRing: true,
 
     // Available themes. To remove any theme, exclude from here.
     themes: [
