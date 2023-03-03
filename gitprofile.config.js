@@ -235,7 +235,7 @@ const config = {
     {
       title: 'Animal Chase',
       description:
-        'Keep your distance from hunters in the forest! The hunter will catch you if you are close enough to them, it's your destiny to run away from them and don't step on the trap!',
+        'Keep your distance from hunters in the forest! The hunter will catch you if you are close enough to them, its your destiny to run away from them and dont step on the trap!',
       imageUrl: 'https://imgur.com/j8XS0xC',
       link: 'https://play.google.com/store/apps/details?id=com.unixcorp.animalchase',
     },
