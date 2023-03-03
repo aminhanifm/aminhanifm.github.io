@@ -159,84 +159,84 @@ const config = {
       title: 'Hide N Seek Nusantara',
       description:
         'Hide n Seek Nusantara is a game with the concept of hide-and-seek culture, where players can choose a place to play, namely Borobudur, Museum Angkut, Coban Rondo Labyrinth. And players can collect coins to buy perk to use in the game',
-      imageUrl: 'https://imgur.com/KkBP3wQ',
+      imageUrl: 'https://i.imgur.com/KkBP3wQ.png',
       link: '',
     },
     {
       title: 'The Covid Hero',
       description:
         'The Covid Hero is set against the backdrop of the corona virus outbreak which has made people restless who need to stay at home and keep their distance from other people, and this game aims to be a medium of entertainment and education for people who are at home in a way that we have presented in an interesting and unique way.',
-      imageUrl: 'https://via.placeholder.com/250x250',
-      link: '',
+      imageUrl: 'https://i.imgur.com/8NABMww.png',
+      link: 'https://amin-hanif.itch.io/the-covid-hero',
     },
     {
       title: 'Isolated Forest',
       description:
         'A journey leads you to be trapped in an unknown forest. With physically challenging nature and ghosts bothering you mentally. Can you survive? If so, then an exciting adventure awaits you. Farming, Hunting, Mining, to Make unique and interesting items. Beware of ghosts, he always lurks from directions you never expect. Survival is not only a matter of means but also an amazingly long process.',
-      imageUrl: 'https://imgur.com/ThNG1Nv',
+      imageUrl: 'https://i.imgur.com/ThNG1Nv.png',
       link: 'https://amin-hanif.itch.io/isolated-forest',
     },
     {
       title: 'Mysticalipse Dungeon',
       description:
         'Dungeon tells the story of an adventurer who tries to collect Mystic Crystals in various types of dungeons. The Mystical Crystal is used to open the gate forever in order to save the village from monster attacks.',
-      imageUrl: 'https://imgur.com/GtNpXLV',
+      imageUrl: 'https://i.imgur.com/GtNpXLV.png',
       link: '',
     },
     {
       title: 'Life of a Dropshipper',
       description:
         'Life of a Dropshipper is a game where players will act as characters who have experience in doing a job and have sufficient economics for a relatively long period of time. But it is undeniable that the character that will be played by the player must do a new job, namely doing business due to previous work problems, therefore players can try to simulate how to do business in the fashion field, namely dropshipping in this all-digital era in this game.',
-      imageUrl: 'https://imgur.com/Um07QUd',
+      imageUrl: 'https://i.imgur.com/Um07QUd.png',
       link: '',
     },
     {
       title: 'Adventure of Hanacaraka',
       description:
         'Adventure of Hanacaraka is a top down 2D cultural adventure game that allows players to control 2 characters to help each other solve puzzles, collect hanacaraka characters, kill monsters, and find hidden tools that can be used to complete a level.',
-      imageUrl: 'https://imgur.com/HuMByX7',
+      imageUrl: 'https://i.imgur.com/HuMByX7.png',
       link: 'https://amin-hanif.itch.io/aoh',
     },
     {
       title: 'Javanese Cuisine',
       description:
         'Javanese Cuisine is a 2D cultural simulation of selling Javanese food and drinks. Help Bambang to pay his rent by selling it within 30days. Buy ingredients to make the cuisine for the customers passing by. It allows players to upgrade the stall until it reaches the maximum level. Higher reputation higher chance to get a customer.',
-      imageUrl: 'https://imgur.com/fRv7Tf7',
+      imageUrl: 'https://i.imgur.com/fRv7Tf7.png',
       link: '',
     },
     {
       title: 'TaxSim',
       description:
         'TaxSim is a casual tax-themed game with an interactive 2D simulation and education concept. This game provides learning about taxation in Indonesia in general, as well as providing unpleasant surprises in learning. Providing a background game at the Primary Tax Service Office which is packaged in pixel art and the feel of relaxing music makes the game even more interesting.',
-      imageUrl: 'https://imgur.com/yMrvwIi',
+      imageUrl: 'https://i.imgur.com/yMrvwIi.png',
       link: 'https://amin-hanif.itch.io/taxsim',
     },
     {
       title: 'Kompleks Lalu Lintas',
       description:
         'Kompleks Lalu Lintas is a 2D simulation game where you become a resident who moves in a complex called "Tertib Lalu Lintas" with the aim of wanting to understand more about traffic rules. In this game there are also puzzles and trivia that help you understand traffic rules.',
-      imageUrl: 'https://imgur.com/OlqxEuF',
+      imageUrl: 'https://i.imgur.com/OlqxEuF.png',
       link: '',
     },
     {
       title: 'Yudi si Anak Magang Housekeeping',
       description:
         'An interactive narrative where gives you an experience as Yudi an intern of housekeeping in a hotel called Santika hotel',
-      imageUrl: 'https://imgur.com/1icEOaj',
+      imageUrl: 'https://i.imgur.com/1icEOaj.png',
       link: '',
     },
     {
       title: 'Heisters',
       description:
         'Play as heisters who rob other heisters then uses the loot to build your own squad and base. Feel the thrill of shooting enemies while searching and breaking into enemy vaults. Then, enjoy your loot by using it to build a strong base and an unstoppable squad.',
-      imageUrl: 'https://imgur.com/HXBBhq8',
+      imageUrl: 'https://i.imgur.com/HXBBhq8.png',
       link: 'https://play.google.com/store/apps/details?id=com.uniXcorp.Heisters',
     },
     {
       title: 'Animal Chase',
       description:
         'Keep your distance from hunters in the forest! The hunter will catch you if you are close enough to them, its your destiny to run away from them and dont step on the trap!',
-      imageUrl: 'https://imgur.com/j8XS0xC',
+      imageUrl: 'https://i.imgur.com/j8XS0xC.png',
       link: 'https://play.google.com/store/apps/details?id=com.unixcorp.animalchase',
     },
   ],
@@ -251,7 +251,7 @@ const config = {
   },
   // Track visitor interaction and behavior. https://www.hotjar.com
   hotjar: {
-    id: '',
+    id: '3392501',
     snippetVersion: 6,
   },
   themeConfig: {
