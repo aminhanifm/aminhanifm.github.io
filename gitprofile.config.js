@@ -174,7 +174,7 @@ const config = {
       description:
         'A journey leads you to be trapped in an unknown forest. With physically challenging nature and ghosts bothering you mentally. Can you survive? If so, then an exciting adventure awaits you. Farming, Hunting, Mining, to Make unique and interesting items. Beware of ghosts, he always lurks from directions you never expect. Survival is not only a matter of means but also an amazingly long process.',
       imageUrl: 'https://imgur.com/ThNG1Nv',
-      link: '',
+      link: 'https://amin-hanif.itch.io/isolated-forest',
     },
     {
       title: 'Mysticalipse Dungeon',
