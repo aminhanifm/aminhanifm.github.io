@@ -172,7 +172,7 @@ const config = {
     {
       title: 'Tag Runner',
       description:
-        'Tag Runner is a platformer game that allows you to play with your friends with addicting gameplay and full of features!',
+        'Tag Runner is a multiplayer platformer game that allows you to play with your friends with addicting gameplay and full of features!',
       imageUrl: 'https://i.imgur.com/cZogVFY.png',
       link: 'https://play.google.com/store/apps/details?id=com.unixcorp.tagrunner',
     },
