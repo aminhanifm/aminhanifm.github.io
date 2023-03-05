@@ -226,6 +226,13 @@ const config = {
       link: 'https://drive.google.com/drive/folders/1AMHhhM1Q3oBhgp78PJohZQLzJc7wIAPO?usp=share_link',
     },
     {
+      title: 'Sleep Gravity',
+      description:
+        'A multiplayer platform side-scroller game that lets you run towards your dreams before your opponents. Survive from your opponents and hinder their dream by spawning obstacles in front of them.',
+      imageUrl: 'https://i.imgur.com/vhVNpTt.png',
+      link: 'https://unixcorp.itch.io/sleep-gravity',
+    },
+    {
       title: 'Yudi si Anak Magang Housekeeping',
       description:
         'An interactive narrative where gives you an experience as Yudi an intern of housekeeping in a hotel called Santika hotel',
