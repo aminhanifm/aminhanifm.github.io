@@ -53,7 +53,7 @@ const Certification = ({ certifications, loading }) => {
                   skeleton({ width: 'w-32', height: 'h-8' })
                 ) : (
                   <span className="text-base-content opacity-70">
-                    Certification
+                    Achievements
                   </span>
                 )}
               </h5>
