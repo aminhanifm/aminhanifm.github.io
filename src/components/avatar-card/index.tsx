@@ -2,9 +2,9 @@ import { FALLBACK_IMAGE } from '../../constants';
 import { Profile } from '../../interfaces/profile';
 import { skeleton } from '../../utils';
 import LazyImage from '../lazy-image';
+import localProfile from '../local-profile'; // Import the local profile data
 
 interface AvatarCardProps {
-  profile: Profile | null;
   loading: boolean;
   avatarRing: boolean;
   resumeFileUrl?: string;
@@ -12,18 +12,18 @@ interface AvatarCardProps {
 
 /**
  * Renders an AvatarCard component.
- * @param profile - The profile object.
  * @param loading - A boolean indicating if the profile is loading.
  * @param avatarRing - A boolean indicating if the avatar should have a ring.
  * @param resumeFileUrl - The URL of the resume file.
  * @returns JSX element representing the AvatarCard.
  */
 const AvatarCard: React.FC<AvatarCardProps> = ({
-  profile,
   loading,
   avatarRing,
   resumeFileUrl,
 }): JSX.Element => {
+  const profile = localProfile; // Use the local profile data
+
   return (
     <div className="card shadow-lg compact bg-base-100">
       <div className="grid place-items-center py-8">

@@ -3,6 +3,13 @@ import LazyImage from '../lazy-image';
 import { ga, skeleton } from '../../utils';
 import { SanitizedExternalProject } from '../../interfaces/sanitized-config';
 
+const platformIcons = {
+  android: '/images/android-logo.png', // Replace with the path to your Android logo
+  ios: '/images/ios-logo.png',         // Replace with the path to your iOS logo
+  windows: '/images/windows-logo.png', // Replace with the path to your Windows logo
+  web: '/images/web-logo.png', // Replace with the path to your web logo
+};
+
 const ExternalProjectCard = ({
   externalProjects,
   header,
@@ -88,35 +95,47 @@ const ExternalProjectCard = ({
           window?.open(item.link, '_blank');
         }}
       >
-        <div className="p-8 h-full w-full">
-          <div className="flex items-center flex-col">
-            <div className="w-full">
-              <div className="px-4">
-                <div className="text-center w-full">
-                  <h2 className="font-medium text-center opacity-60 mb-2">
-                    {item.title}
-                  </h2>
-                  {item.imageUrl && (
-                    <div className="avatar opacity-90">
-                      <div className="w-24 h-24 mask mask-squircle">
-                        <LazyImage
-                          src={item.imageUrl}
-                          alt={'thumbnail'}
-                          placeholder={skeleton({
-                            widthCls: 'w-full',
-                            heightCls: 'h-full',
-                            shape: '',
-                          })}
-                        />
-                      </div>
-                    </div>
-                  )}
-                  <p className="mt-2 text-base-content text-opacity-60 text-sm text-justify">
-                    {item.description}
-                  </p>
+        <div className="p-8 h-full w-full flex flex-col justify-between">
+          <div>
+            <div className="text-center w-full">
+              <h2 className="font-medium text-center opacity-60 mb-2">
+                {item.title}
+              </h2>
+              {item.imageUrl && (
+                <div className="avatar opacity-90">
+                  <div className="w-24 h-24 mask mask-squircle">
+                    <LazyImage
+                      src={item.imageUrl}
+                      alt={'thumbnail'}
+                      placeholder={skeleton({
+                        widthCls: 'w-full',
+                        heightCls: 'h-full',
+                        shape: '',
+                      })}
+                    />
+                  </div>
                 </div>
-              </div>
+              )}
+              <p className="mt-2 text-base-content text-opacity-60 text-sm text-justify">
+                {item.description}
+              </p>
             </div>
+          </div>
+          {/* Platform Logos */}
+          <div className="flex justify-center space-x-2 mt-4">
+            {item.platform?.map((platform, idx) => (
+              <img
+                key={idx}
+                src={platformIcons[platform as keyof typeof platformIcons]}
+                alt={platform}
+                className="w-5 h-5"
+                title={platform}
+                style={{
+                  filter: 'grayscale(100%)', // Apply grayscale filter
+                  opacity: 0.45, // Optional: Adjust opacity for a softer look
+                }}
+              />
+            ))}
           </div>
         </div>
       </a>

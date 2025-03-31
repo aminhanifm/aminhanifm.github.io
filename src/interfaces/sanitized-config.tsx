@@ -24,6 +24,7 @@ export interface SanitizedExternalProject {
   description?: string;
   imageUrl?: string;
   link: string;
+  platform?: Array<string>; // Add this property to specify platform icons
 }
 
 export interface SanitizedExternalProjects {
