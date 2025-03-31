@@ -31,6 +31,13 @@ import BlogCard from './blog-card';
 import Footer from './footer';
 import PublicationCard from './publication-card';
 
+export interface AvatarCardProps {
+  loading: boolean;
+  avatarRing: boolean;
+  resumeFileUrl?: string;
+  profile: Profile | null;
+}
+
 /**
  * Renders the GitProfile component.
  *
@@ -207,7 +214,6 @@ const GitProfile = ({ config }: { config: Config }) => {
                       />
                     )}
                     <AvatarCard
-                      profile={profile}
                       loading={loading}
                       avatarRing={sanitizedConfig.themeConfig.displayAvatarRing}
                       resumeFileUrl={sanitizedConfig.resume.fileUrl}
