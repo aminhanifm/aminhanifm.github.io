@@ -1,5 +1,4 @@
 import { FALLBACK_IMAGE } from '../../constants';
-import { Profile } from '../../interfaces/profile';
 import { skeleton } from '../../utils';
 import LazyImage from '../lazy-image';
 import localProfile from '../local-profile'; // Import the local profile data
