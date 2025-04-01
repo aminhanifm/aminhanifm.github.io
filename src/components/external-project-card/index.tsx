@@ -1,13 +1,14 @@
+import { useState } from 'react';
 import { Fragment } from 'react';
 import LazyImage from '../lazy-image';
 import { ga, skeleton } from '../../utils';
 import { SanitizedExternalProject } from '../../interfaces/sanitized-config';
 
 const platformIcons = {
-  android: '/images/android-logo.png', // Replace with the path to your Android logo
-  ios: '/images/ios-logo.png',         // Replace with the path to your iOS logo
-  windows: '/images/windows-logo.png', // Replace with the path to your Windows logo
-  web: '/images/web-logo.png', // Replace with the path to your web logo
+  android: '/images/android-logo.png',
+  ios: '/images/ios-logo.png',
+  windows: '/images/windows-logo.png',
+  web: '/images/web-logo.png',
 };
 
 const ExternalProjectCard = ({
@@ -21,9 +22,19 @@ const ExternalProjectCard = ({
   loading: boolean;
   googleAnalyticId?: string;
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 17; // Maximum number of cards per page
+
+  // Calculate the indices for slicing the projects
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentProjects = externalProjects.slice(indexOfFirstCard, indexOfLastCard);
+
+  const totalPages = Math.ceil(externalProjects.length / cardsPerPage);
+
   const renderSkeleton = () => {
     const array = [];
-    for (let index = 0; index < externalProjects.length; index++) {
+    for (let index = 0; index < cardsPerPage; index++) {
       array.push(
         <div className="card shadow-lg compact bg-base-100" key={index}>
           <div className="p-8 h-full w-full">
@@ -74,7 +85,7 @@ const ExternalProjectCard = ({
   };
 
   const renderExternalProjects = () => {
-    return externalProjects.map((item, index) => (
+    return currentProjects.map((item, index) => (
       <a
         className="card shadow-lg compact bg-base-100 cursor-pointer"
         key={index}
@@ -131,8 +142,8 @@ const ExternalProjectCard = ({
                 className="w-5 h-5"
                 title={platform}
                 style={{
-                  filter: 'grayscale(100%)', // Apply grayscale filter
-                  opacity: 0.45, // Optional: Adjust opacity for a softer look
+                  filter: 'grayscale(100%)',
+                  opacity: 0.45,
                 }}
               />
             ))}
@@ -140,6 +151,10 @@ const ExternalProjectCard = ({
         </div>
       </a>
     ));
+  };
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -164,6 +179,22 @@ const ExternalProjectCard = ({
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {loading ? renderSkeleton() : renderExternalProjects()}
                   </div>
+                </div>
+                {/* Pagination Buttons */}
+                <div className="flex justify-center mt-4 space-x-2">
+                  {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => handlePageChange(index + 1)}
+                      className={`btn btn-sm ${
+                        currentPage === index + 1
+                          ? 'btn-primary'
+                          : 'btn-outline'
+                      }`}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
