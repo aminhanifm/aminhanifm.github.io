@@ -215,6 +215,13 @@ interface Resume {
   fileUrl?: string;
 }
 
+interface Port {
+  /**
+   * Resume file url
+   */
+  fileUrl?: string;
+}
+
 interface Experience {
   company?: string;
   position?: string;
@@ -408,6 +415,11 @@ interface Config {
    * Resume
    */
   resume?: Resume;
+
+  /**
+   * Portfolio
+   */
+  port?: Port;
 
   /**
    * Google Analytics config
