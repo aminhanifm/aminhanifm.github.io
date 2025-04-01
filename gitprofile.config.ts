@@ -65,6 +65,46 @@ const CONFIG = {
           platform: ['android'],
         },
         {
+          title: 'Taxland',
+          description:
+            'Taxland is a 3D simulation game that allows players to experience the world of taxation in a fun and engaging way. Player can learn about tax regulations, finish tax-related tasks, and explore a vibrant virtual world filled with challenges.',
+          imageUrl: 'https://i.imgur.com/Wj5aBqy.png',
+          link: 'https://drive.google.com/file/d/1ySA0Bt6hdgTqGVZXnn4VMBDXJfqzMsut/view?usp=sharing',
+          platform: ['web'],
+        },
+        {
+          title: 'Goya Universe (Discontinued)',
+          description:
+            'A web3-based game that allows players to explore and interact with a virtual universe filled with unique characters and places. Players can collect and trade digital assets, participate in events, and engage with other players in a decentralized environment.',
+          imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyvfOf2HOenWsox8hAjRIUgsE5MZmUVXnrsQ&s',
+          link: 'https://drive.google.com/file/d/1QaVAEBM0Lh84UhaIfu1FDI5vGrKkkuRG/view?usp=drive_link',
+          platform: ['web'],
+        },
+        {
+          title: 'Krispy Kreme AR Game',
+          description:
+            'An augmented reality game that allows players to experience the thrill of avoiding obstacles in their real-world  environment.',
+          imageUrl: 'https://cdn-icons-png.freepik.com/512/5969/5969346.png',
+          link: 'https://drive.google.com/file/d/1SQ7MBLer7ONgzqdSg1ai3xg4kafvAWE2/view?usp=drive_link',
+          platform: ['android', 'web'],
+        },
+        {
+          title: 'Furniture AR',
+          description:
+            'An augmented reality application that allows users to visualize and interact with virtual furniture in their real-world environment. Users can place, rotate, and scale furniture items to see how they fit into their space before making a purchase.',
+          imageUrl: 'https://cdn-icons-png.freepik.com/512/5969/5969346.png',
+          link: 'https://drive.google.com/file/d/1kIDeO71JEw7gvmI9KHu0GCjX1aUBHuD3/view?usp=sharing',
+          platform: ['android', 'web'],
+        },
+        {
+          title: 'KFC AR Game',
+          description:
+            'An augmented reality game that allows players to experience the thrill of collecting virtual chicken and placing it into a KFC bucket in their real-world environment. Using their mobile devices, players can explore their surroundings and retrieve fallen chicken.',
+          imageUrl: 'https://cdn-icons-png.freepik.com/512/5969/5969346.png',
+          link: 'https://drive.google.com/file/d/1l4veG-OZHedKNyJSdiLnZlvUmr1-Bgy5/view?usp=sharing',
+          platform: ['android', 'web'],
+        },
+        {
           title: 'Puzzling Polygons',
           description:
             'Welcome to Puzzling Polygons, the mesmerizing 2D puzzle game that challenges your wit and creativity! Immerse yourself in a world of hexagons and unlock the secrets within as you embark on a journey of brain-teasing delight.',
@@ -240,7 +280,7 @@ const CONFIG = {
   },
   resume: {
     fileUrl:
-      'https://drive.google.com/file/d/1KIKgyWUiiscJLNZj06yvUcIYE2rtbFbf/view?usp=sharing', // Empty fileUrl will hide the `Download Resume` button.
+      'https://drive.google.com/file/d/1te60l7zApV1c2GNUoy73K0286dXVOh1v/view?usp=sharing', // Empty fileUrl will hide the `Download Resume` button.
   },
   skills: [
     'Unity',
