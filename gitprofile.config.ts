@@ -39,6 +39,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/SEu2SyF.png',
           link: 'https://drive.google.com/file/d/153Zfy7d8Ltkg2QTY1tBVhmjJkbO0VHes/view?usp=drive_link',
           platform: ['android'],
+          youtubeLink: '',
         },
         {
           title: 'Brickball-Mania',
@@ -47,6 +48,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/m0L5Uv4.png',
           link: 'https://drive.google.com/file/d/1S4ZOBXIomyNhVQOpoFm5W4yPCZiFJdeF/view?usp=sharing',
           platform: ['android'],
+          youtubeLink: '',
         },
         {
           title: 'Collecto Frenzy 3D',
@@ -55,6 +57,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/PPU9qlU.png',
           link: 'https://drive.google.com/file/d/1uwHRye2zn1skRkvnuB63mj4IHYvobxzN/view?usp=drive_link',
           platform: ['android'],
+          youtubeLink: '',
         },
         {
           title: 'Downtown Rush',
@@ -63,6 +66,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/79ebEci.png',
           link: 'https://drive.google.com/file/d/1urNKIZpdSL-N0IwHgRUDV0RcRLXKxPBW/view?usp=sharing',
           platform: ['android'],
+          youtubeLink: '',
         },
         {
           title: 'Taxland',
@@ -71,6 +75,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/Wj5aBqy.png',
           link: 'https://drive.google.com/file/d/1ySA0Bt6hdgTqGVZXnn4VMBDXJfqzMsut/view?usp=sharing',
           platform: ['web'],
+          youtubeLink: '',
         },
         {
           title: 'Goya Universe (Discontinued)',
@@ -79,6 +84,7 @@ const CONFIG = {
           imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyvfOf2HOenWsox8hAjRIUgsE5MZmUVXnrsQ&s',
           link: 'https://drive.google.com/file/d/1QaVAEBM0Lh84UhaIfu1FDI5vGrKkkuRG/view?usp=drive_link',
           platform: ['web'],
+          youtubeLink: '',
         },
         {
           title: 'Krispy Kreme AR Game',
@@ -87,6 +93,7 @@ const CONFIG = {
           imageUrl: 'https://cdn-icons-png.freepik.com/512/5969/5969346.png',
           link: 'https://drive.google.com/file/d/1SQ7MBLer7ONgzqdSg1ai3xg4kafvAWE2/view?usp=drive_link',
           platform: ['android', 'web'],
+          youtubeLink: '',
         },
         {
           title: 'Furniture AR',
@@ -95,6 +102,7 @@ const CONFIG = {
           imageUrl: 'https://cdn-icons-png.freepik.com/512/5969/5969346.png',
           link: 'https://drive.google.com/file/d/1kIDeO71JEw7gvmI9KHu0GCjX1aUBHuD3/view?usp=sharing',
           platform: ['android', 'web'],
+          youtubeLink: '',
         },
         {
           title: 'KFC AR Game',
@@ -103,6 +111,7 @@ const CONFIG = {
           imageUrl: 'https://cdn-icons-png.freepik.com/512/5969/5969346.png',
           link: 'https://drive.google.com/file/d/1l4veG-OZHedKNyJSdiLnZlvUmr1-Bgy5/view?usp=sharing',
           platform: ['android', 'web'],
+          youtubeLink: '',
         },
         {
           title: 'Puzzling Polygons',
@@ -111,6 +120,7 @@ const CONFIG = {
           imageUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/bb/90/0c/bb900c99-6b03-b400-86f9-d141906890df/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/314x0w.webp',
           link: 'https://apps.apple.com/us/app/puzzling-polygons/id6468189395',
           platform: ['android', 'ios'],
+          youtubeLink: '',
         },
         {
           title: 'Jump and Boom',
@@ -119,6 +129,7 @@ const CONFIG = {
           imageUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Purple116/v4/63/8a/83/638a8357-6175-0336-1e4e-1a854b169f24/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/314x0w.webp',
           link: 'https://apps.apple.com/us/app/jump-and-boom/id6467084131',
           platform: ['android', 'ios'],
+          youtubeLink: '',
         },
         {
           title: 'Swoosh Ball',
@@ -127,6 +138,7 @@ const CONFIG = {
           imageUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/e9/4d/c9/e94dc92a-d88a-cae9-3df8-23ba073346bf/AppIcon-0-0-1x_U007emarketing-0-0-0-7-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/314x0w.webp',
           link: 'https://apps.apple.com/us/app/swoosh-ball/id6468182659',
           platform: ['android', 'ios'],
+          youtubeLink: '',
         },
         {
           title: 'Dragon Ranch',
@@ -135,6 +147,7 @@ const CONFIG = {
           imageUrl: 'https://play-lh.googleusercontent.com/85oX1UXh-7-qYAJ-jPDbamUUKknAIWF1oHS40hXD-NpJ4gOlDRI4MX3mKUM0NkejBe0=s512-rw',
           link: 'https://play.google.com/store/apps/details?id=com.unixcorp.dragonranch',
           platform: ['android'],
+          youtubeLink: '',
         },
         {
           title: 'Animal Chase',
@@ -143,6 +156,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/j8XS0xC.png',
           link: 'https://play.google.com/store/apps/details?id=com.unixcorp.animalchase',
           platform: ['android'],
+          youtubeLink: '',
         },
         {
           title: 'Heisters',
@@ -151,6 +165,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/HXBBhq8.png',
           link: 'https://play.google.com/store/apps/details?id=com.uniXcorp.Heisters',
           platform: ['android'],
+          youtubeLink: '',
         },
         {
           title: 'Yudi si Anak Magang Housekeeping',
@@ -159,6 +174,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/1icEOaj.png',
           link: 'https://drive.google.com/file/d/1d1KUP7KZ8Qd6PSE8ExllBzg7LhZ3IUEn/view?usp=share_link',
           platform: ['windows'],
+          youtubeLink: '',
         },
         {
           title: 'Sleep Gravity',
@@ -167,6 +183,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/vhVNpTt.png',
           link: 'https://unixcorp.itch.io/sleep-gravity',
           platform: ['android', 'windows', 'web'],
+          youtubeLink: '',
         },
         {
           title: 'Kompleks Lalu Lintas',
@@ -175,6 +192,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/OlqxEuF.png',
           link: 'https://drive.google.com/drive/folders/1AMHhhM1Q3oBhgp78PJohZQLzJc7wIAPO?usp=share_link',
           platform: ['android', 'windows'],
+          youtubeLink: '',
         },
         {
           title: 'TaxSim',
@@ -183,6 +201,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/yMrvwIi.png',
           link: 'https://amin-hanif.itch.io/taxsim',
           platform: ['android', 'windows'],
+          youtubeLink: '',
         },
         {
           title: 'Javanese Cuisine',
@@ -191,6 +210,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/fRv7Tf7.png',
           link: 'https://drive.google.com/file/d/1KjzrO6ocj1siLeuNpgQLRMburaqBmjfZ/view?usp=share_link',
           platform: ['windows'],
+          youtubeLink: '',
         },
         {
           title: 'Adventure of Hanacaraka',
@@ -199,6 +219,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/HuMByX7.png',
           link: 'https://amin-hanif.itch.io/aoh',
           platform: ['windows', 'web'],
+          youtubeLink: '',
         },
         {
           title: 'Life of a Dropshipper',
@@ -207,6 +228,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/Um07QUd.png',
           link: 'https://drive.google.com/drive/folders/1dbIn3c8PiSNC_FVIzIU-zGDvRcEW0z38?usp=sharing',
           platform: ['windows'],
+          youtubeLink: '',
         },
         {
           title: 'Mysticalipse Dungeon',
@@ -215,6 +237,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/GtNpXLV.png',
           link: 'https://drive.google.com/drive/folders/1XDNVrY3BjNq0WMhC1UcTEqSd3ARiN7aV?usp=share_link',
           platform: ['android', 'windows'],
+          youtubeLink: '',
         },
         {
           title: 'Isolated Forest',
@@ -223,6 +246,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/ThNG1Nv.png',
           link: 'https://amin-hanif.itch.io/isolated-forest',
           platform: ['windows', 'web'],
+          youtubeLink: '',
         },
         {
           title: 'Tag Runner',
@@ -231,6 +255,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/cZogVFY.png',
           link: 'https://play.google.com/store/apps/details?id=com.unixcorp.tagrunner',
           platform: ['android', 'windows', 'web'],
+          youtubeLink: '',
         },
         {
           title: 'The Covid Hero',
@@ -239,6 +264,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/8NABMww.png',
           link: 'https://amin-hanif.itch.io/the-covid-hero',
           platform: ['android', 'windows', 'web'],
+          youtubeLink: '',
         },
         {
           title: 'Hide N Seek Nusantara',
@@ -247,6 +273,7 @@ const CONFIG = {
           imageUrl: 'https://i.imgur.com/KkBP3wQ.png',
           link: 'https://play.google.com/store/apps/details?id=com.unixcorp.hidenseeknusantara',
           platform: ['android'],
+          youtubeLink: '',
         },
       ],
     },

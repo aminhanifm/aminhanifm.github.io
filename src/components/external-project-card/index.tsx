@@ -11,6 +11,8 @@ const platformIcons = {
   web: '/images/web-logo.png',
 };
 
+const youtubeIcon = '/images/youtube-logo.png'; // Add the YouTube icon path
+
 const ExternalProjectCard = ({
   externalProjects,
   header,
@@ -86,10 +88,9 @@ const ExternalProjectCard = ({
 
   const renderExternalProjects = () => {
     return currentProjects.map((item, index) => (
-      <a
-        className="card shadow-lg compact bg-base-100 cursor-pointer"
+      <div
+        className="card shadow-lg compact bg-base-100 cursor-pointer relative"
         key={index}
-        href={item.link}
         onClick={(e) => {
           e.preventDefault();
 
@@ -149,7 +150,28 @@ const ExternalProjectCard = ({
             ))}
           </div>
         </div>
-      </a>
+        {/* YouTube Button */}
+        {item.youtubeLink && (
+          <a
+            href={item.youtubeLink}
+            target="_blank"
+            rel="noreferrer"
+            className="absolute bottom-4 right-4 z-20 pointer-events-auto"
+            onClick={(e) => e.stopPropagation()} // Prevents the card click event
+          >
+            <img
+              src={youtubeIcon}
+              alt="YouTube"
+              className="w-6 h-6"
+              title="Watch on YouTube"
+              style={{
+                filter: 'grayscale(100%)',
+                opacity: 0.8,
+              }}
+            />
+          </a>
+        )}
+      </div>
     ));
   };
 

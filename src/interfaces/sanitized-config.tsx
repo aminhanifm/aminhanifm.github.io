@@ -25,6 +25,7 @@ export interface SanitizedExternalProject {
   imageUrl?: string;
   link: string;
   platform?: Array<string>; // Add this property to specify platform icons
+  youtubeLink?: string; // Add this property for YouTube links
 }
 
 export interface SanitizedExternalProjects {
