@@ -35,3 +35,15 @@ npm run build
 ```
 
 The site deploys to GitHub Pages through `.github/workflows/deploy.yml`.
+
+## Google Analytics
+
+Google Analytics is optional and disabled unless `VITE_GA_MEASUREMENT_ID` is set.
+
+For GitHub Pages, add a repository variable named `VITE_GA_MEASUREMENT_ID` with the GA4 measurement ID, for example `G-XXXXXXXXXX`, then rerun the deploy workflow.
+
+For local testing, create a local `.env.local` file with:
+
+```bash
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
