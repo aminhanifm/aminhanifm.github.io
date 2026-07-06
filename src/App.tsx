@@ -19,6 +19,7 @@ import {
   FaTrophy,
 } from 'react-icons/fa';
 import { SiGoogleplay, SiItchdotio } from 'react-icons/si';
+import { trackEvent } from './analytics';
 import { awards, experiences, profile, projects, stats, type LinkKind, type Project } from './data/portfolio';
 
 const featuredProjects = projects.filter((project) => project.featured);
@@ -36,6 +37,9 @@ const heroPreviewProjects = featuredProjects.slice(0, 4);
 
 type Theme = 'dark' | 'light';
 type ProjectFilterId = 'all' | 'featured' | 'mobile' | 'pc-web' | 'ar' | 'simulation' | 'leadership';
+type ProjectDetailSource = 'featured_work' | 'project_library' | 'project_detail_drawer';
+type ProjectDetailCloseMethod = 'backdrop' | 'button' | 'escape';
+type ProjectBrowseDirection = 'previous' | 'next';
 
 type RevealStyle = CSSProperties & {
   '--reveal-index'?: number;
@@ -179,6 +183,16 @@ function labelForLink(kind: LinkKind) {
   return 'Open link';
 }
 
+function trackProjectLinkClick(project: Project, source: ProjectDetailSource) {
+  trackEvent('project_link_click', {
+    project_title: project.title,
+    project_year: project.year,
+    link_kind: project.linkKind,
+    link_label: labelForLink(project.linkKind),
+    source,
+  });
+}
+
 function ProjectCard({
   project,
   compact = false,
@@ -190,6 +204,8 @@ function ProjectCard({
   index?: number;
   onOpen: (project: Project) => void;
 }) {
+  const trackingSource: ProjectDetailSource = compact ? 'featured_work' : 'project_library';
+
   return (
     <article
       className={compact ? 'project-card featured-card' : 'project-card library-card'}
@@ -226,7 +242,14 @@ function ProjectCard({
           {project.note ? <p className="project-note">{project.note}</p> : null}
         </div>
         <div className="project-actions">
-          <a className="icon-link" href={project.link} target="_blank" rel="noreferrer" aria-label={`${labelForLink(project.linkKind)} link for ${project.title}`}>
+          <a
+            className="icon-link"
+            href={project.link}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`${labelForLink(project.linkKind)} link for ${project.title}`}
+            onClick={() => trackProjectLinkClick(project, trackingSource)}
+          >
             {iconForLink(project.linkKind)}
             <span>{labelForLink(project.linkKind)}</span>
           </a>
@@ -247,8 +270,8 @@ function ProjectDetailsDrawer({
 }: {
   project: Project | null;
   projectList: Project[];
-  onClose: () => void;
-  onSelectProject: (project: Project) => void;
+  onClose: (method: ProjectDetailCloseMethod) => void;
+  onSelectProject: (project: Project, direction: ProjectBrowseDirection) => void;
 }) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const hasFocusedDrawerRef = useRef(false);
@@ -278,7 +301,7 @@ function ProjectDetailsDrawer({
 
   return (
     <div className="case-drawer-layer">
-      <button className="drawer-backdrop" type="button" onClick={onClose} aria-label="Close project details" />
+      <button className="drawer-backdrop" type="button" onClick={() => onClose('backdrop')} aria-label="Close project details" />
       <aside className="case-drawer" role="dialog" aria-modal="true" aria-labelledby="case-drawer-title">
         <header className="case-header">
           <div>
@@ -290,7 +313,7 @@ function ProjectDetailsDrawer({
               <span>{project.platforms.join(' / ')}</span>
             </div>
           </div>
-          <button className="icon-button" type="button" onClick={onClose} aria-label="Close project details" ref={closeButtonRef}>
+          <button className="icon-button" type="button" onClick={() => onClose('button')} aria-label="Close project details" ref={closeButtonRef}>
             <FaTimes aria-hidden="true" />
           </button>
         </header>
@@ -351,7 +374,14 @@ function ProjectDetailsDrawer({
         {project.note ? <p className="project-note case-note">{project.note}</p> : null}
 
         <div className="case-actions">
-          <a className="button primary" href={project.link} target="_blank" rel="noreferrer" aria-label={`Open ${labelForLink(project.linkKind)} for ${project.title}`}>
+          <a
+            className="button primary"
+            href={project.link}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={`Open ${labelForLink(project.linkKind)} for ${project.title}`}
+            onClick={() => trackProjectLinkClick(project, 'project_detail_drawer')}
+          >
             {iconForLink(project.linkKind)}
             {labelForLink(project.linkKind)}
           </a>
@@ -359,7 +389,7 @@ function ProjectDetailsDrawer({
             <button
               className="nav-project-button"
               type="button"
-              onClick={() => previousProject && onSelectProject(previousProject)}
+              onClick={() => previousProject && onSelectProject(previousProject, 'previous')}
               disabled={!previousProject}
               aria-label={previousProject ? `Previous project: ${previousProject.title}` : 'No previous project'}
             >
@@ -372,7 +402,7 @@ function ProjectDetailsDrawer({
             <button
               className="nav-project-button"
               type="button"
-              onClick={() => nextProject && onSelectProject(nextProject)}
+              onClick={() => nextProject && onSelectProject(nextProject, 'next')}
               disabled={!nextProject}
               aria-label={nextProject ? `Next project: ${nextProject.title}` : 'No next project'}
             >
@@ -403,15 +433,55 @@ function App() {
 
   useRevealMotion(activeFilter);
 
-  const openProjectDetails = (project: Project, projectList: Project[]) => {
+  const openProjectDetails = (project: Project, projectList: Project[], source: ProjectDetailSource) => {
+    trackEvent('project_detail_open', {
+      project_title: project.title,
+      project_year: project.year,
+      source,
+    });
     setDrawerProjectList(projectList);
     setSelectedProject(project);
+  };
+
+  const closeProjectDetails = (method: ProjectDetailCloseMethod) => {
+    if (selectedProject) {
+      trackEvent('project_detail_close', {
+        project_title: selectedProject.title,
+        close_method: method,
+      });
+    }
+
+    setSelectedProject(null);
+  };
+
+  const selectProjectFromDrawer = (project: Project, direction: ProjectBrowseDirection) => {
+    trackEvent('project_detail_browse', {
+      from_project_title: selectedProject?.title,
+      project_title: project.title,
+      direction,
+    });
+    setSelectedProject(project);
+  };
+
+  const selectProjectFilter = (filterId: ProjectFilterId) => {
+    const filter = projectFilterOptions.find((item) => item.id === filterId);
+
+    trackEvent('project_filter_click', {
+      filter_id: filterId,
+      filter_label: filter?.label,
+      project_count: filter?.count,
+    });
+    setActiveFilter(filterId);
   };
 
   const switchTheme = () => {
     const root = document.documentElement;
     root.classList.add('theme-transition');
     window.setTimeout(() => root.classList.remove('theme-transition'), 340);
+    trackEvent('theme_toggle', {
+      theme_from: theme,
+      theme_to: nextTheme,
+    });
     setTheme(nextTheme);
   };
 
@@ -427,6 +497,10 @@ function App() {
     const previousOverflow = document.body.style.overflow;
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
+        trackEvent('project_detail_close', {
+          project_title: selectedProject.title,
+          close_method: 'escape',
+        });
         setSelectedProject(null);
       }
     };
@@ -444,7 +518,12 @@ function App() {
     <div className="site-shell">
       <header className="site-header">
         <div className="topbar section-shell">
-          <a className="brand" href="#top" aria-label="Amin Hanif home">
+          <a
+            className="brand"
+            href="#top"
+            aria-label="Amin Hanif home"
+            onClick={() => trackEvent('site_navigation_click', { target_section: 'top', source: 'header_brand' })}
+          >
             AH
           </a>
           <div className="header-actions">
@@ -454,6 +533,7 @@ function App() {
                   className={activeSection === item.id ? 'is-active' : undefined}
                   href={`#${item.id}`}
                   aria-current={activeSection === item.id ? 'page' : undefined}
+                  onClick={() => trackEvent('site_navigation_click', { target_section: item.id, source: 'header_nav' })}
                   key={item.id}
                 >
                   {item.label}
@@ -487,15 +567,34 @@ function App() {
               Available for work
             </p>
             <div className="action-row" aria-label="Primary links">
-              <a className="button primary" href={profile.resume} target="_blank" rel="noreferrer">
+              <a
+                className="button primary"
+                href={profile.resume}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackEvent('resume_click', { source: 'hero', document_type: 'resume' })}
+              >
                 <FaFilePdf aria-hidden="true" />
                 Resume
               </a>
-              <a className="button secondary" href={profile.portfolio} target="_blank" rel="noreferrer">
+              <a
+                className="button secondary"
+                href={profile.portfolio}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackEvent('portfolio_click', { source: 'hero', document_type: 'portfolio' })}
+              >
                 <FaGamepad aria-hidden="true" />
                 Portfolio
               </a>
-              <a className="button ghost" href={profile.github} target="_blank" rel="noreferrer" aria-label="GitHub profile">
+              <a
+                className="button ghost"
+                href={profile.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub profile"
+                onClick={() => trackEvent('external_profile_click', { profile_link: 'github', source: 'hero' })}
+              >
                 <FaGithub aria-hidden="true" />
                 GitHub
               </a>
@@ -572,7 +671,7 @@ function App() {
                 project={project}
                 compact
                 index={index}
-                onOpen={(projectToOpen) => openProjectDetails(projectToOpen, featuredProjects)}
+                onOpen={(projectToOpen) => openProjectDetails(projectToOpen, featuredProjects, 'featured_work')}
               />
             ))}
           </div>
@@ -594,7 +693,7 @@ function App() {
                   className={activeFilter === filter.id ? 'filter-button is-active' : 'filter-button'}
                   type="button"
                   key={filter.id}
-                  onClick={() => setActiveFilter(filter.id)}
+                  onClick={() => selectProjectFilter(filter.id)}
                   aria-pressed={activeFilter === filter.id}
                 >
                   <span>{filter.label}</span>
@@ -609,7 +708,7 @@ function App() {
                 key={`${activeFilter}-${project.title}`}
                 project={project}
                 index={index}
-                onOpen={(projectToOpen) => openProjectDetails(projectToOpen, filteredProjects)}
+                onOpen={(projectToOpen) => openProjectDetails(projectToOpen, filteredProjects, 'project_library')}
               />
             ))}
           </div>
@@ -675,7 +774,15 @@ function App() {
               ))}
             </ol>
             {additionalAwards.length > 0 ? (
-              <details className="award-details">
+              <details
+                className="award-details"
+                onToggle={(event) =>
+                  trackEvent('awards_toggle', {
+                    state: event.currentTarget.open ? 'open' : 'closed',
+                    awards_count: additionalAwards.length,
+                  })
+                }
+              >
                 <summary>
                   <span className="summary-more">Show {additionalAwards.length} more awards</span>
                   <span className="summary-less">Show fewer awards</span>
@@ -696,15 +803,31 @@ function App() {
             <h2>Open to remote game development opportunities.</h2>
           </div>
           <div className="contact-actions">
-            <a className="button primary" href={`mailto:${profile.email}`}>
+            <a
+              className="button primary"
+              href={`mailto:${profile.email}`}
+              onClick={() => trackEvent('contact_click', { contact_method: 'email', source: 'contact' })}
+            >
               <FaEnvelope aria-hidden="true" />
               Email
             </a>
-            <a className="button secondary" href={profile.linkedin} target="_blank" rel="noreferrer">
+            <a
+              className="button secondary"
+              href={profile.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackEvent('contact_click', { contact_method: 'linkedin', source: 'contact' })}
+            >
               <FaLinkedin aria-hidden="true" />
               LinkedIn
             </a>
-            <a className="button ghost" href={profile.github} target="_blank" rel="noreferrer">
+            <a
+              className="button ghost"
+              href={profile.github}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackEvent('contact_click', { contact_method: 'github', source: 'contact' })}
+            >
               <FaGithub aria-hidden="true" />
               GitHub
             </a>
@@ -714,8 +837,8 @@ function App() {
       <ProjectDetailsDrawer
         project={selectedProject}
         projectList={drawerProjectList}
-        onClose={() => setSelectedProject(null)}
-        onSelectProject={setSelectedProject}
+        onClose={closeProjectDetails}
+        onSelectProject={selectProjectFromDrawer}
       />
     </div>
   );

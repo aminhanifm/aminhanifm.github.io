@@ -47,3 +47,18 @@ For local testing, create a local `.env.local` file with:
 ```bash
 VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
+
+Custom events are sent for primary portfolio actions:
+
+- `resume_click`
+- `portfolio_click`
+- `project_link_click`
+- `project_detail_open`
+- `project_detail_close`
+- `project_detail_browse`
+- `project_filter_click`
+- `theme_toggle`
+- `site_navigation_click`
+- `awards_toggle`
+- `contact_click`
+- `external_profile_click`

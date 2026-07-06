@@ -1,10 +1,12 @@
 const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID?.trim();
 
 type GtagCommand = 'config' | 'event' | 'js' | 'set';
+type AnalyticsEventValue = string | number | boolean;
+type AnalyticsEventParams = Record<string, AnalyticsEventValue | null | undefined>;
 
 type GtagArguments =
   | [GtagCommand, string | Date]
-  | [GtagCommand, string, Record<string, unknown>];
+  | [GtagCommand, string, Record<string, AnalyticsEventValue>];
 
 declare global {
   interface Window {
@@ -34,4 +36,16 @@ export function initGoogleAnalytics() {
     page_title: document.title,
     page_path: window.location.pathname + window.location.search + window.location.hash,
   });
+}
+
+export function trackEvent(eventName: string, params: AnalyticsEventParams = {}) {
+  if (!window.gtag) {
+    return;
+  }
+
+  const eventParams = Object.fromEntries(
+    Object.entries(params).filter(([, value]) => value !== undefined && value !== null),
+  ) as Record<string, AnalyticsEventValue>;
+
+  window.gtag('event', eventName, eventParams);
 }
