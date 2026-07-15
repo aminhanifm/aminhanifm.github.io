@@ -36,6 +36,18 @@ npm run build
 
 The site deploys to GitHub Pages through `.github/workflows/deploy.yml`.
 
+## Privacy policy hub
+
+App and game privacy policies use stable directory-based URLs so they work on
+GitHub Pages without client-side routing:
+
+- Policy directory: `/privacy/`
+- LaterPin: `/privacy/laterpin/`
+
+Add future policies under `public/privacy/<app-slug>/index.html`, link them from
+`public/privacy/index.html`, and add their canonical URL to `public/sitemap.xml`.
+The policy pages intentionally load no analytics or external resources.
+
 ## Google Analytics
 
 Google Analytics is optional and disabled unless `VITE_GA_MEASUREMENT_ID` is set.
