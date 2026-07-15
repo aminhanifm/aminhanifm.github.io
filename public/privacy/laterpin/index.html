@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Privacy policy for LaterPin: Remind Me Later, the private and offline-first Android reminder app."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://aminhanifm.github.io/privacy/laterpin/" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="../privacy.css" />
+    <title>LaterPin Privacy Policy | Amin Hanif</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/">Amin Hanif</a>
+        <a class="header-link" href="../">All privacy policies</a>
+      </div>
+    </header>
+
+    <main class="page-shell" id="content">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li><a href="../">Privacy policies</a></li>
+          <li aria-current="page">LaterPin</li>
+        </ol>
+      </nav>
+
+      <header>
+        <p class="eyebrow">Privacy policy</p>
+        <h1>LaterPin</h1>
+        <p class="lede">
+          LaterPin keeps reminder content private and offline. This policy explains what stays on
+          the device, when Google Play is contacted, and the controls available to users.
+        </p>
+
+        <dl class="policy-meta">
+          <div>
+            <dt>Effective date</dt>
+            <dd>July 13, 2026</dd>
+          </div>
+          <div>
+            <dt>App</dt>
+            <dd>LaterPin: Remind Me Later</dd>
+          </div>
+          <div>
+            <dt>Package</dt>
+            <dd><code>com.aminhanifm.laterpin</code></dd>
+          </div>
+        </dl>
+      </header>
+
+      <div class="policy-layout">
+        <nav class="contents" aria-label="Policy sections">
+          <strong>On this page</strong>
+          <ul>
+            <li><a href="#summary">Summary</a></li>
+            <li><a href="#device-storage">Device storage</a></li>
+            <li><a href="#collection">Collection and sharing</a></li>
+            <li><a href="#network">Network and external apps</a></li>
+            <li><a href="#purchases">Google Play purchases</a></li>
+            <li><a href="#permissions">Android permissions</a></li>
+            <li><a href="#notifications">Notifications</a></li>
+            <li><a href="#backup">Backup and transfer</a></li>
+            <li><a href="#retention">Retention and deletion</a></li>
+            <li><a href="#security">Security</a></li>
+            <li><a href="#children">Children's privacy</a></li>
+            <li><a href="#changes">Policy changes</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+
+        <article class="policy-content">
+          <section class="policy-section" id="summary">
+            <h2>Summary</h2>
+            <p>
+              LaterPin is designed to keep reminder content private and offline. No account is
+              required. The app does not contain analytics, advertising, crash-reporting,
+              social-login, or cloud-service SDKs. Optional lifetime Pro access uses Google Play
+              Billing. LaterPin does not collect or transmit reminder content or usage data to the
+              developer and does not sell, rent, or share it.
+            </p>
+          </section>
+
+          <section class="policy-section" id="device-storage">
+            <h2>Information stored on the device</h2>
+            <p>LaterPin stores the information a user chooses to provide, including:</p>
+            <ul>
+              <li>reminder titles, text or HTTP/HTTPS links, and user-created tag labels;</li>
+              <li>reminder, creation, completion, and notification times;</li>
+              <li>reminder status, such as active, completed, or dismissed;</li>
+              <li>
+                language, theme, morning/evening preset times, custom preset labels and delays,
+                and related app preferences; and
+              </li>
+              <li>
+                a cached Pro-access flag and, in development builds only, the selected entitlement
+                test mode.
+              </li>
+            </ul>
+            <p>
+              Reminder data is stored in the app's private Room database. Preferences are stored
+              with Android DataStore. This data is used only to provide the reminder features
+              requested by the user.
+            </p>
+          </section>
+
+          <section class="policy-section" id="collection">
+            <h2>Information collection and sharing</h2>
+            <p>
+              LaterPin does not require an account and does not collect personal information on a
+              developer-controlled server. It does not transmit reminder content, usage data,
+              device identifiers, diagnostics, or advertising identifiers to the developer. It
+              does not sell or share data.
+            </p>
+            <p>
+              Content enters LaterPin only when the user types it or deliberately sends it through
+              Android's Share function. LaterPin does not read WhatsApp, notifications from other
+              apps, browsing history, messages, contacts, or files automatically.
+            </p>
+          </section>
+
+          <section class="policy-section" id="network">
+            <h2>Network access and external apps</h2>
+            <p>
+              LaterPin does not download reminder content, webpages, or remote previews. The
+              Google Play Billing library contributes Internet and network-state access only for
+              optional Pro product, purchase, acknowledgement, and restore operations. When a
+              user chooses Open for an HTTP/HTTPS link, LaterPin sends an <code>ACTION_VIEW</code>
+              request to an external browser or compatible app. When a user chooses Share,
+              Android's system share interface sends content only to the app the user selects.
+              Those external apps operate under their own privacy policies and may use a network
+              connection independently of LaterPin.
+            </p>
+          </section>
+
+          <section class="policy-section" id="purchases">
+            <h2>Google Play purchases</h2>
+            <p>
+              If the user opens the Pro purchase or restore flow, LaterPin communicates with the
+              Google Play Billing service to request localized product information and the state
+              of the non-consumable <code>laterpin_pro_lifetime</code> purchase. Google Play handles
+              payment details directly under Google's terms. LaterPin does not receive credit-card
+              or other payment-account details and does not send purchase records to a
+              LaterPin-operated server. The app processes the product identifier, purchase state,
+              acknowledgement state, and purchase token locally only as required to grant,
+              restore, and acknowledge Pro access.
+            </p>
+            <p>
+              A pending purchase does not grant Pro access. A confirmed purchase is cached locally
+              so temporary verification failures do not disable existing Pro reminders. A
+              confirmed refund or revocation removes future Pro access without deleting reminder
+              data.
+            </p>
+          </section>
+
+          <section class="policy-section" id="permissions">
+            <h2>Android permissions and special access</h2>
+            <p>LaterPin requests or declares only the access needed for reminders:</p>
+            <ul>
+              <li>
+                <strong>Notifications (<code>POST_NOTIFICATIONS</code>):</strong> used only to
+                display user-created reminders on Android 13 and newer. Denying this permission
+                does not delete reminders; it prevents notification delivery until the user
+                enables it.
+              </li>
+              <li>
+                <strong>Boot completed (<code>RECEIVE_BOOT_COMPLETED</code>):</strong> used to
+                restore active reminder schedules after a device restart.
+              </li>
+              <li>
+                <strong>Precise alarms (<code>SCHEDULE_EXACT_ALARM</code>):</strong> used only for
+                times selected by the user. Precise timing is optional. If special access is
+                unavailable or denied, LaterPin falls back to policy-safe inexact scheduling.
+              </li>
+              <li>
+                <strong>Google Play Billing:</strong> <code>com.android.vending.BILLING</code>,
+                <code>INTERNET</code>, and <code>ACCESS_NETWORK_STATE</code> are used only to load
+                the optional Pro product, launch or restore a purchase, verify its current state,
+                and acknowledge it.
+              </li>
+            </ul>
+            <p>
+              LaterPin does not request <code>USE_EXACT_ALARM</code>, broad package visibility,
+              contacts, storage, location, camera, microphone, or accessibility-service access.
+            </p>
+          </section>
+
+          <section class="policy-section" id="notifications">
+            <h2>Notifications and lock-screen visibility</h2>
+            <p>
+              Reminder titles and previews may appear in Android notifications. Their visibility
+              on the lock screen is controlled by the user's Android notification and privacy
+              settings. Users should choose an appropriate lock-screen visibility setting for
+              sensitive reminder content.
+            </p>
+          </section>
+
+          <section class="policy-section" id="backup">
+            <h2>Android backup and device transfer</h2>
+            <p>
+              The app permits Android's standard backup and device-transfer mechanisms to include
+              the local reminder database and settings. Depending on the user's device, account,
+              and Android backup settings, the operating system may copy this app data to the
+              user's Android backup service or a new device. This process is controlled by Android
+              and the user's backup provider, not by a LaterPin server.
+            </p>
+            <p>
+              Uninstalling LaterPin removes its local app data from the device, subject to Android
+              retaining or later restoring a backup. Users can manage backup behavior in Android
+              system settings.
+            </p>
+          </section>
+
+          <section class="policy-section" id="retention">
+            <h2>Data retention and deletion</h2>
+            <p>
+              Active reminders remain until the user completes or deletes them. Completed and
+              dismissed reminders remain in History until the user deletes individual items or
+              clears History. Users can delete all app data through Android system settings or by
+              uninstalling the app, subject to the backup behavior described above.
+            </p>
+            <p>
+              Because LaterPin does not operate an account or developer-controlled server, there
+              is no remote profile or server record to delete.
+            </p>
+          </section>
+
+          <section class="policy-section" id="security">
+            <h2>Security</h2>
+            <p>
+              Data is kept in Android's app-private storage and is protected by Android's
+              application sandbox and the device's security controls. No storage method can
+              guarantee absolute security; users should protect their device with an appropriate
+              screen lock and keep Android up to date.
+            </p>
+          </section>
+
+          <section class="policy-section" id="children">
+            <h2>Children's privacy</h2>
+            <p>
+              LaterPin is a general productivity tool and is not designed to collect information
+              from children. It does not knowingly collect personal information from any user.
+            </p>
+          </section>
+
+          <section class="policy-section" id="changes">
+            <h2>Changes to this policy</h2>
+            <p>
+              If the app's data practices change, the publisher will update this policy and its
+              effective date before distributing a version with materially different practices.
+            </p>
+          </section>
+
+          <section class="policy-section" id="contact">
+            <h2>Contact</h2>
+            <p>
+              Questions about LaterPin or this policy can be sent to
+              <a href="mailto:aminhanif24@gmail.com">aminhanif24@gmail.com</a>.
+            </p>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <a href="../">Privacy policy directory</a> &middot; Last updated July 13, 2026
+      </div>
+    </footer>
+  </body>
+</html>
