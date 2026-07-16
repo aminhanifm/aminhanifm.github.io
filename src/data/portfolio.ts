@@ -1,5 +1,10 @@
 ﻿export type LinkKind = 'play' | 'appstore' | 'itch' | 'drive' | 'github' | 'web';
 
+export interface ProjectMedia {
+  src: string;
+  alt: string;
+}
+
 export interface Project {
   title: string;
   year: string;
@@ -11,6 +16,7 @@ export interface Project {
   description: string;
   role: string;
   tags: string[];
+  gallery?: ProjectMedia[];
   featured?: boolean;
   note?: string;
 }
@@ -58,6 +64,11 @@ export const projects: Project[] = [
     role:
       'Built core gameplay and third-party services, then managed delivery across programming, art, and design tasks.',
     tags: ['Unity', 'Gameplay', 'IAP', 'Analytics'],
+    gallery: [
+      { src: '/images/projects/gallery/heisters-01.jpg', alt: 'Heisters combat gameplay during a base raid' },
+      { src: '/images/projects/gallery/heisters-02.jpg', alt: 'Heisters enemy selection screen before a raid' },
+      { src: '/images/projects/gallery/heisters-03.jpg', alt: 'Heisters crew and weapon management screen' },
+    ],
   },
   {
     title: 'Ojol Life: Food Delivery Game',
@@ -73,6 +84,11 @@ export const projects: Project[] = [
     role:
       'Developed main gameplay systems including orders, customization, fuel, stamina, and the first game design.',
     tags: ['Unity', 'Simulation', 'Systems', 'Mobile'],
+    gallery: [
+      { src: '/images/projects/gallery/ojol-life-01.jpg', alt: 'Ojol Life riders exploring the city together' },
+      { src: '/images/projects/gallery/ojol-life-02.jpg', alt: 'Ojol Life passenger interaction and city traffic gameplay' },
+      { src: '/images/projects/gallery/ojol-life-03.jpg', alt: 'Ojol Life delivery and vehicle variety' },
+    ],
   },
   {
     title: 'Dragon Ranch',
@@ -89,6 +105,11 @@ export const projects: Project[] = [
     role:
       'Created core gameplay and third-party services while managing tasks for the small team.',
     tags: ['Unity', 'Management', 'Ads', 'IAP'],
+    gallery: [
+      { src: '/images/projects/gallery/dragon-ranch-01.jpg', alt: 'Dragon Ranch farm overview and character progression' },
+      { src: '/images/projects/gallery/dragon-ranch-02.jpg', alt: 'Dragon Ranch crop fields and dragon collection objective' },
+      { src: '/images/projects/gallery/dragon-ranch-03.jpg', alt: 'Dragon Ranch crop building and dragon care gameplay' },
+    ],
   },
   {
     title: 'Catmelon: Kitty Merge Fever',

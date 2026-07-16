@@ -1,6 +1,8 @@
-import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
+import { flushSync } from 'react-dom';
 import {
   FaApple,
+  FaCheck,
   FaChevronLeft,
   FaChevronRight,
   FaEnvelope,
@@ -12,6 +14,7 @@ import {
   FaGoogleDrive,
   FaInfoCircle,
   FaLinkedin,
+  FaLink,
   FaMapMarkerAlt,
   FaMoon,
   FaSun,
@@ -38,12 +41,24 @@ const heroPreviewProjects = featuredProjects.slice(0, 4);
 type Theme = 'dark' | 'light';
 type ProjectFilterId = 'all' | 'featured' | 'mobile' | 'pc-web' | 'ar' | 'simulation' | 'leadership';
 type ProjectDetailSource = 'featured_work' | 'project_library' | 'project_detail_drawer';
-type ProjectDetailCloseMethod = 'backdrop' | 'button' | 'escape';
+type ProjectDetailCloseMethod = 'backdrop' | 'button' | 'escape' | 'browser_back';
 type ProjectBrowseDirection = 'previous' | 'next';
 
 type RevealStyle = CSSProperties & {
   '--reveal-index'?: number;
+  viewTransitionName?: string;
 };
+
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (update: () => void) => unknown;
+};
+
+type PortfolioHistoryState = {
+  aminPortfolioDrawer?: boolean;
+};
+
+const PROJECT_QUERY_PARAM = 'project';
+const DRAWER_EXIT_DURATION = 220;
 
 const projectFilters: Array<{ id: ProjectFilterId; label: string }> = [
   { id: 'all', label: 'All' },
@@ -63,6 +78,88 @@ function getInitialTheme(): Theme {
 
 function revealStyle(index: number): RevealStyle {
   return { '--reveal-index': index };
+}
+
+function projectSlug(project: Project) {
+  return project.title
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+function projectCardStyle(project: Project, index: number, compact: boolean): RevealStyle {
+  const style = revealStyle(index % 6);
+
+  if (!compact) {
+    style.viewTransitionName = `project-${projectSlug(project)}`;
+  }
+
+  return style;
+}
+
+function projectFromLocation() {
+  if (typeof window === 'undefined') return null;
+
+  const slug = new URL(window.location.href).searchParams.get(PROJECT_QUERY_PARAM);
+  return slug ? projects.find((project) => projectSlug(project) === slug) ?? null : null;
+}
+
+function createProjectUrl(project: Project) {
+  const url = new URL(window.location.href);
+  url.searchParams.set(PROJECT_QUERY_PARAM, projectSlug(project));
+  return url.toString();
+}
+
+async function copyTextToClipboard(text: string) {
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text);
+      return;
+    } catch {
+      // Fall through for browsers that expose the API but block access.
+    }
+  }
+
+  const activeElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  textarea.style.pointerEvents = 'none';
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  const copied = document.execCommand('copy');
+  textarea.remove();
+  activeElement?.focus({ preventScroll: true });
+
+  if (!copied) throw new Error('Unable to copy project link.');
+}
+
+function updateProjectLocation(project: Project | null, mode: 'push' | 'replace', openedByPortfolio = false) {
+  const url = new URL(window.location.href);
+  const currentState = window.history.state && typeof window.history.state === 'object'
+    ? window.history.state
+    : {};
+  const nextState: PortfolioHistoryState & Record<string, unknown> = { ...currentState };
+
+  if (project) {
+    url.searchParams.set(PROJECT_QUERY_PARAM, projectSlug(project));
+    nextState.aminPortfolioDrawer = openedByPortfolio;
+  } else {
+    url.searchParams.delete(PROJECT_QUERY_PARAM);
+    delete nextState.aminPortfolioDrawer;
+  }
+
+  const nextUrl = `${url.pathname}${url.search}${url.hash}`;
+
+  if (mode === 'push') {
+    window.history.pushState(nextState, '', nextUrl);
+  } else {
+    window.history.replaceState(nextState, '', nextUrl);
+  }
 }
 
 function useRevealMotion(refreshKey: unknown) {
@@ -210,8 +307,9 @@ function ProjectCard({
     <article
       className={compact ? 'project-card featured-card' : 'project-card library-card'}
       data-link-kind={project.linkKind}
+      data-project-slug={projectSlug(project)}
       data-reveal="card"
-      style={revealStyle(index % 6)}
+      style={projectCardStyle(project, index, compact)}
       tabIndex={compact ? undefined : 0}
     >
       <div className="project-media" aria-hidden="true">
@@ -265,30 +363,74 @@ function ProjectCard({
 function ProjectDetailsDrawer({
   project,
   projectList,
+  closing,
+  browseDirection,
   onClose,
   onSelectProject,
 }: {
   project: Project | null;
   projectList: Project[];
+  closing: boolean;
+  browseDirection: ProjectBrowseDirection | null;
   onClose: (method: ProjectDetailCloseMethod) => void;
   onSelectProject: (project: Project, direction: ProjectBrowseDirection) => void;
 }) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
-  const hasFocusedDrawerRef = useRef(false);
+  const drawerRef = useRef<HTMLElement>(null);
+  const copyTimerRef = useRef<number | null>(null);
+  const [activeMediaIndex, setActiveMediaIndex] = useState(0);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    if (!project) {
-      hasFocusedDrawerRef.current = false;
-      return;
-    }
+    if (!project) return undefined;
 
-    if (project) {
-      if (hasFocusedDrawerRef.current) return;
+    setActiveMediaIndex(0);
+    setCopied(false);
+    if (drawerRef.current) drawerRef.current.scrollTop = 0;
 
-      closeButtonRef.current?.focus();
-      hasFocusedDrawerRef.current = true;
-    }
-  }, [project]);
+    const focusFrame = window.requestAnimationFrame(() => {
+      if (!drawerRef.current?.contains(document.activeElement)) {
+        closeButtonRef.current?.focus();
+      }
+    });
+
+    return () => window.cancelAnimationFrame(focusFrame);
+  }, [project?.title]);
+
+  useEffect(() => {
+    if (!project || closing) return undefined;
+
+    const drawer = drawerRef.current;
+    if (!drawer) return undefined;
+
+    const trapFocus = (event: KeyboardEvent) => {
+      if (event.key !== 'Tab') return;
+
+      const focusableElements = Array.from(
+        drawer.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'),
+      ).filter((element) => !element.hasAttribute('disabled'));
+
+      if (focusableElements.length === 0) return;
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === firstElement) {
+        event.preventDefault();
+        lastElement.focus();
+      } else if (!event.shiftKey && document.activeElement === lastElement) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    };
+
+    drawer.addEventListener('keydown', trapFocus);
+    return () => drawer.removeEventListener('keydown', trapFocus);
+  }, [closing, project]);
+
+  useEffect(() => () => {
+    if (copyTimerRef.current !== null) window.clearTimeout(copyTimerRef.current);
+  }, []);
 
   if (!project) return null;
 
@@ -298,11 +440,41 @@ function ProjectDetailsDrawer({
   const hasNextProject = projectIndex >= 0 && projectIndex < projectList.length - 1;
   const previousProject = hasPreviousProject ? projectList[projectIndex - 1] : null;
   const nextProject = hasNextProject ? projectList[projectIndex + 1] : null;
+  const mediaItems = project.gallery?.length
+    ? project.gallery
+    : [{ src: project.imageUrl, alt: `${project.title} project artwork` }];
+  const currentMediaIndex = Math.min(activeMediaIndex, mediaItems.length - 1);
+  const currentMedia = mediaItems[currentMediaIndex];
+  const hasGameplayGallery = Boolean(project.gallery?.length);
+
+  const copyProjectLink = async () => {
+    try {
+      await copyTextToClipboard(createProjectUrl(project));
+      setCopied(true);
+      trackEvent('project_share_copy', {
+        project_title: project.title,
+        project_year: project.year,
+      });
+
+      if (copyTimerRef.current !== null) window.clearTimeout(copyTimerRef.current);
+      copyTimerRef.current = window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      setCopied(false);
+    }
+  };
 
   return (
-    <div className="case-drawer-layer">
-      <button className="drawer-backdrop" type="button" onClick={() => onClose('backdrop')} aria-label="Close project details" />
-      <aside className="case-drawer" role="dialog" aria-modal="true" aria-labelledby="case-drawer-title">
+    <div className={closing ? 'case-drawer-layer is-closing' : 'case-drawer-layer'}>
+      <button className="drawer-backdrop" type="button" onClick={() => onClose('backdrop')} aria-hidden="true" tabIndex={-1} disabled={closing} />
+      <aside className="case-drawer" role="dialog" aria-modal="true" aria-labelledby="case-drawer-title" ref={drawerRef}>
+        <button className="icon-button case-close-button" type="button" onClick={() => onClose('button')} aria-label="Close project details" ref={closeButtonRef} disabled={closing}>
+          <FaTimes aria-hidden="true" />
+        </button>
+
+        <div
+          className={`case-drawer-content browse-${browseDirection ?? 'none'}`}
+          key={project.title}
+        >
         <header className="case-header">
           <div>
             <p className="eyebrow">Project {projectPosition} of {projectList.length}</p>
@@ -313,25 +485,52 @@ function ProjectDetailsDrawer({
               <span>{project.platforms.join(' / ')}</span>
             </div>
           </div>
-          <button className="icon-button" type="button" onClick={() => onClose('button')} aria-label="Close project details" ref={closeButtonRef}>
-            <FaTimes aria-hidden="true" />
-          </button>
         </header>
 
-        <div className="case-hero">
-          <div className="case-hero-art" aria-hidden="true">
+        <div className={hasGameplayGallery ? 'case-showcase has-gallery' : 'case-showcase artwork-only'}>
+          <div className="case-media-stage">
             <img
-              src={project.imageUrl}
-              alt=""
+              key={currentMedia.src}
+              src={currentMedia.src}
+              alt={currentMedia.alt}
               onError={(event) => {
                 event.currentTarget.src = '/ah-mark.svg';
               }}
             />
+            <div className="case-media-meta" aria-hidden="true">
+              <span>{hasGameplayGallery ? 'Gameplay gallery' : 'Project artwork'}</span>
+              <strong>{currentMediaIndex + 1} / {mediaItems.length}</strong>
+            </div>
           </div>
-          <div className="case-hero-copy">
+
+          {hasGameplayGallery ? (
+            <div className="case-media-thumbnails" aria-label={`${project.title} gameplay gallery`}>
+              {mediaItems.map((media, index) => (
+                <button
+                  className={index === currentMediaIndex ? 'is-active' : undefined}
+                  type="button"
+                  key={media.src}
+                  onClick={() => setActiveMediaIndex(index)}
+                  aria-label={`Show ${project.title} screenshot ${index + 1}`}
+                  aria-pressed={index === currentMediaIndex}
+                >
+                  <img
+                    src={media.src}
+                    alt=""
+                    loading="lazy"
+                    onError={(event) => {
+                      event.currentTarget.src = '/ah-mark.svg';
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
+          ) : null}
+        </div>
+
+        <div className="case-overview">
             <span>Overview</span>
             <p>{project.description}</p>
-          </div>
         </div>
 
         <div className="case-facts" aria-label={`${project.title} project facts`}>
@@ -374,23 +573,29 @@ function ProjectDetailsDrawer({
         {project.note ? <p className="project-note case-note">{project.note}</p> : null}
 
         <div className="case-actions">
-          <a
-            className="button primary"
-            href={project.link}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`Open ${labelForLink(project.linkKind)} for ${project.title}`}
-            onClick={() => trackProjectLinkClick(project, 'project_detail_drawer')}
-          >
-            {iconForLink(project.linkKind)}
-            {labelForLink(project.linkKind)}
-          </a>
+          <div className="case-primary-actions">
+            <a
+              className="button primary"
+              href={project.link}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Open ${labelForLink(project.linkKind)} for ${project.title}`}
+              onClick={() => trackProjectLinkClick(project, 'project_detail_drawer')}
+            >
+              {iconForLink(project.linkKind)}
+              {labelForLink(project.linkKind)}
+            </a>
+            <button className="button ghost" type="button" onClick={() => void copyProjectLink()} aria-live="polite">
+              {copied ? <FaCheck aria-hidden="true" /> : <FaLink aria-hidden="true" />}
+              {copied ? 'Copied' : 'Copy link'}
+            </button>
+          </div>
           <div className="drawer-nav" aria-label="Browse project details">
             <button
               className="nav-project-button"
               type="button"
               onClick={() => previousProject && onSelectProject(previousProject, 'previous')}
-              disabled={!previousProject}
+              disabled={closing || !previousProject}
               aria-label={previousProject ? `Previous project: ${previousProject.title}` : 'No previous project'}
             >
               <FaChevronLeft aria-hidden="true" />
@@ -403,7 +608,7 @@ function ProjectDetailsDrawer({
               className="nav-project-button"
               type="button"
               onClick={() => nextProject && onSelectProject(nextProject, 'next')}
-              disabled={!nextProject}
+              disabled={closing || !nextProject}
               aria-label={nextProject ? `Next project: ${nextProject.title}` : 'No next project'}
             >
               <span>
@@ -414,6 +619,7 @@ function ProjectDetailsDrawer({
             </button>
           </div>
         </div>
+        </div>
       </aside>
     </div>
   );
@@ -422,8 +628,15 @@ function ProjectDetailsDrawer({
 function App() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [activeFilter, setActiveFilter] = useState<ProjectFilterId>('all');
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(() => projectFromLocation());
   const [drawerProjectList, setDrawerProjectList] = useState<Project[]>(projects);
+  const [isDrawerClosing, setIsDrawerClosing] = useState(false);
+  const [drawerBrowseDirection, setDrawerBrowseDirection] = useState<ProjectBrowseDirection | null>(null);
+  const selectedProjectRef = useRef<Project | null>(selectedProject);
+  const isDrawerClosingRef = useRef(false);
+  const closeTimerRef = useRef<number | null>(null);
+  const pendingCloseMethodRef = useRef<ProjectDetailCloseMethod | null>(null);
+  const lastFocusedElementRef = useRef<HTMLElement | null>(null);
   const activeSection = useActiveSection(navSectionIds);
   const nextTheme = theme === 'dark' ? 'light' : 'dark';
   const filteredProjects = useMemo(
@@ -433,26 +646,80 @@ function App() {
 
   useRevealMotion(activeFilter);
 
+  selectedProjectRef.current = selectedProject;
+
+  const cancelDrawerClose = useCallback(() => {
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+
+    isDrawerClosingRef.current = false;
+    setIsDrawerClosing(false);
+  }, []);
+
+  const beginDrawerClose = useCallback((method: ProjectDetailCloseMethod) => {
+    const projectToClose = selectedProjectRef.current;
+    if (!projectToClose || isDrawerClosingRef.current) return;
+
+    trackEvent('project_detail_close', {
+      project_title: projectToClose.title,
+      close_method: method,
+    });
+
+    isDrawerClosingRef.current = true;
+    setIsDrawerClosing(true);
+    closeTimerRef.current = window.setTimeout(() => {
+      closeTimerRef.current = null;
+      selectedProjectRef.current = null;
+      setSelectedProject(null);
+      setDrawerBrowseDirection(null);
+      isDrawerClosingRef.current = false;
+      setIsDrawerClosing(false);
+
+      const focusTarget = lastFocusedElementRef.current;
+      lastFocusedElementRef.current = null;
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => focusTarget?.focus({ preventScroll: true }));
+      });
+    }, DRAWER_EXIT_DURATION);
+  }, []);
+
   const openProjectDetails = (project: Project, projectList: Project[], source: ProjectDetailSource) => {
     trackEvent('project_detail_open', {
       project_title: project.title,
       project_year: project.year,
       source,
     });
-    setDrawerProjectList(projectList);
-    setSelectedProject(project);
-  };
 
-  const closeProjectDetails = (method: ProjectDetailCloseMethod) => {
-    if (selectedProject) {
-      trackEvent('project_detail_close', {
-        project_title: selectedProject.title,
-        close_method: method,
-      });
+    if (!selectedProjectRef.current && document.activeElement instanceof HTMLElement) {
+      lastFocusedElementRef.current = document.activeElement;
     }
 
-    setSelectedProject(null);
+    cancelDrawerClose();
+    setDrawerProjectList(projectList);
+    setDrawerBrowseDirection(null);
+    selectedProjectRef.current = project;
+    setSelectedProject(project);
+    updateProjectLocation(project, 'push', true);
   };
+
+  const closeProjectDetails = useCallback((method: ProjectDetailCloseMethod) => {
+    if (!selectedProjectRef.current || isDrawerClosingRef.current) return;
+
+    const historyState = window.history.state as PortfolioHistoryState | null;
+    const hasProjectParameter = new URL(window.location.href).searchParams.has(PROJECT_QUERY_PARAM);
+
+    if (historyState?.aminPortfolioDrawer && hasProjectParameter) {
+      pendingCloseMethodRef.current = method;
+      window.history.back();
+      return;
+    }
+
+    pendingCloseMethodRef.current = null;
+    updateProjectLocation(null, 'replace');
+    beginDrawerClose(method);
+  }, [beginDrawerClose]);
 
   const selectProjectFromDrawer = (project: Project, direction: ProjectBrowseDirection) => {
     trackEvent('project_detail_browse', {
@@ -460,7 +727,13 @@ function App() {
       project_title: project.title,
       direction,
     });
+
+    cancelDrawerClose();
+    setDrawerBrowseDirection(direction);
+    selectedProjectRef.current = project;
     setSelectedProject(project);
+    const historyState = window.history.state as PortfolioHistoryState | null;
+    updateProjectLocation(project, 'replace', Boolean(historyState?.aminPortfolioDrawer));
   };
 
   const selectProjectFilter = (filterId: ProjectFilterId) => {
@@ -471,7 +744,19 @@ function App() {
       filter_label: filter?.label,
       project_count: filter?.count,
     });
-    setActiveFilter(filterId);
+
+    if (filterId === activeFilter) return;
+
+    const transitionDocument = document as ViewTransitionDocument;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (transitionDocument.startViewTransition && !prefersReducedMotion) {
+      transitionDocument.startViewTransition(() => {
+        flushSync(() => setActiveFilter(filterId));
+      });
+    } else {
+      setActiveFilter(filterId);
+    }
   };
 
   const switchTheme = () => {
@@ -492,27 +777,54 @@ function App() {
   }, [theme]);
 
   useEffect(() => {
+    const onPopState = () => {
+      const projectFromUrl = projectFromLocation();
+
+      if (projectFromUrl) {
+        cancelDrawerClose();
+        setDrawerProjectList(projects);
+        setDrawerBrowseDirection('next');
+        selectedProjectRef.current = projectFromUrl;
+        setSelectedProject(projectFromUrl);
+        return;
+      }
+
+      if (selectedProjectRef.current) {
+        const closeMethod = pendingCloseMethodRef.current ?? 'browser_back';
+        pendingCloseMethodRef.current = null;
+        beginDrawerClose(closeMethod);
+      }
+    };
+
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, [beginDrawerClose, cancelDrawerClose]);
+
+  useEffect(() => () => {
+    if (closeTimerRef.current !== null) window.clearTimeout(closeTimerRef.current);
+  }, []);
+
+  useEffect(() => {
     if (!selectedProject) return undefined;
 
     const previousOverflow = document.body.style.overflow;
+    const inertElements = Array.from(document.querySelectorAll<HTMLElement>('.site-header, main'));
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        trackEvent('project_detail_close', {
-          project_title: selectedProject.title,
-          close_method: 'escape',
-        });
-        setSelectedProject(null);
+        closeProjectDetails('escape');
       }
     };
 
     document.body.style.overflow = 'hidden';
+    inertElements.forEach((element) => element.setAttribute('inert', ''));
     window.addEventListener('keydown', onKeyDown);
 
     return () => {
       document.body.style.overflow = previousOverflow;
+      inertElements.forEach((element) => element.removeAttribute('inert'));
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [selectedProject]);
+  }, [closeProjectDetails, selectedProject]);
 
   return (
     <div className="site-shell">
@@ -683,7 +995,7 @@ function App() {
             <h2>Mobile, web, PC, AR, Web3, and simulation projects.</h2>
           </div>
           <div className="project-toolbar" data-reveal="item" style={revealStyle(0)}>
-            <div className="filter-heading">
+            <div className="filter-heading" aria-live="polite">
               <FaFilter aria-hidden="true" />
               <span>{filteredProjects.length} of {projects.length} projects</span>
             </div>
@@ -837,6 +1149,8 @@ function App() {
       <ProjectDetailsDrawer
         project={selectedProject}
         projectList={drawerProjectList}
+        closing={isDrawerClosing}
+        browseDirection={drawerBrowseDirection}
         onClose={closeProjectDetails}
         onSelectProject={selectProjectFromDrawer}
       />

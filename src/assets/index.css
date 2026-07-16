@@ -919,6 +919,24 @@ h3 {
   animation: filter-grid-in 280ms var(--motion-ease) both;
 }
 
+@supports (view-transition-name: project-card) {
+  ::view-transition-group(*) {
+    animation-duration: 380ms;
+    animation-timing-function: var(--motion-ease);
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    mix-blend-mode: normal;
+  }
+}
+
 .project-toolbar {
   display: flex;
   align-items: flex-start;
@@ -1620,6 +1638,10 @@ h3 {
   justify-items: end;
 }
 
+.case-drawer-layer.is-closing {
+  pointer-events: none;
+}
+
 .drawer-backdrop {
   position: absolute;
   inset: 0;
@@ -1629,13 +1651,18 @@ h3 {
   animation: fade-in 180ms ease both;
 }
 
+.case-drawer-layer.is-closing .drawer-backdrop {
+  animation: fade-out 220ms ease both;
+}
+
 .case-drawer {
   position: relative;
   z-index: 1;
-  width: min(620px, calc(100% - 28px));
+  width: min(720px, calc(100% - 28px));
   height: calc(100% - 28px);
   margin: 14px;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 24px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -1644,11 +1671,24 @@ h3 {
   animation: drawer-in 260ms var(--motion-ease) both;
 }
 
+.case-drawer-layer.is-closing .case-drawer {
+  animation: drawer-out 220ms ease both;
+}
+
+.case-drawer-content.browse-next {
+  animation: drawer-content-next 280ms var(--motion-ease) both;
+}
+
+.case-drawer-content.browse-previous {
+  animation: drawer-content-previous 280ms var(--motion-ease) both;
+}
+
 .case-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 18px;
+  padding-right: 56px;
   padding-bottom: 20px;
   border-bottom: 1px solid var(--line);
 }
@@ -1704,47 +1744,119 @@ h3 {
   transform: translateY(-1px);
 }
 
-.case-hero {
-  display: grid;
-  grid-template-columns: 132px minmax(0, 1fr);
-  align-items: center;
-  gap: 18px;
-  margin: 22px 0;
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background:
-    radial-gradient(circle at 12% 0, var(--green-soft), transparent 32%),
-    linear-gradient(135deg, rgba(124, 147, 255, 0.08), transparent 52%),
-    var(--subtle);
-  overflow: hidden;
+.case-close-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 3;
 }
 
-.case-hero-art {
-  width: 132px;
-  height: 132px;
-  display: grid;
-  place-items: center;
+.case-showcase {
+  margin: 22px 0 12px;
+}
+
+.case-media-stage {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
   border: 1px solid color-mix(in srgb, var(--teal) 24%, var(--line));
   border-radius: 8px;
   background:
-    linear-gradient(145deg, rgba(255, 255, 255, 0.08), transparent 44%),
-    var(--surface);
+    radial-gradient(circle at 12% 0, var(--green-soft), transparent 34%),
+    linear-gradient(135deg, rgba(124, 147, 255, 0.08), transparent 52%),
+    var(--subtle);
   box-shadow: var(--shadow);
 }
 
-.case-hero img {
-  width: 92px;
-  aspect-ratio: 1;
+.case-media-stage > img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  animation: case-media-in 260ms var(--motion-ease) both;
+}
+
+.case-showcase.artwork-only .case-media-stage {
+  min-height: 250px;
+  display: grid;
+  place-items: center;
+}
+
+.case-showcase.artwork-only .case-media-stage > img {
+  width: 168px;
+  height: 168px;
+  object-fit: contain;
   border-radius: 8px;
 }
 
-.case-hero-copy {
-  min-width: 0;
+.case-media-meta {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: rgba(5, 12, 20, 0.76);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 850;
+  backdrop-filter: blur(10px);
 }
 
-.case-hero-copy span {
+.case-media-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.case-media-thumbnails button {
+  min-width: 0;
+  overflow: hidden;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--button-ghost-bg);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease,
+    transform 180ms var(--motion-ease);
+}
+
+.case-media-thumbnails button:not(.is-active) {
+  opacity: 0.62;
+}
+
+.case-media-thumbnails button:hover,
+.case-media-thumbnails button:focus-visible,
+.case-media-thumbnails button.is-active {
+  border-color: rgba(80, 216, 199, 0.58);
+  opacity: 1;
+  outline: none;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+  transform: translateY(-1px);
+}
+
+.case-media-thumbnails img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.case-overview {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 88%, var(--subtle));
+}
+
+.case-overview span {
   display: block;
   margin-bottom: 6px;
   color: var(--teal);
@@ -1753,7 +1865,7 @@ h3 {
   text-transform: uppercase;
 }
 
-.case-hero-copy p {
+.case-overview p {
   margin: 0;
   color: var(--text);
   font-size: 15px;
@@ -1763,6 +1875,7 @@ h3 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
+  margin-top: 18px;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -1827,6 +1940,16 @@ h3 {
   margin-top: 22px;
   padding-top: 18px;
   border-top: 1px solid var(--line);
+}
+
+.case-primary-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+}
+
+.case-primary-actions .button {
+  min-height: 48px;
 }
 
 .case-actions .button.primary {
@@ -1902,10 +2025,44 @@ h3 {
   }
 }
 
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
 @keyframes drawer-in {
   from {
     opacity: 0;
     transform: translateX(22px) scale(0.985);
+  }
+}
+
+@keyframes drawer-out {
+  to {
+    opacity: 0;
+    transform: translateX(28px) scale(0.985);
+  }
+}
+
+@keyframes drawer-content-next {
+  from {
+    opacity: 0;
+    transform: translateX(18px);
+  }
+}
+
+@keyframes drawer-content-previous {
+  from {
+    opacity: 0;
+    transform: translateX(-18px);
+  }
+}
+
+@keyframes case-media-in {
+  from {
+    opacity: 0.45;
+    transform: scale(0.985);
   }
 }
 
@@ -1993,6 +2150,8 @@ h3 {
 
   .drawer-backdrop,
   .case-drawer,
+  .case-drawer-content,
+  .case-media-stage > img,
   .project-grid,
   .intro::before,
   .profile-panel::after,
@@ -2225,14 +2384,25 @@ h3 {
 
   .project-toolbar {
     padding: 12px;
+    overflow: hidden;
   }
 
   .filter-heading {
     white-space: normal;
   }
 
+  .filter-group {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+  }
+
   .filter-button {
-    flex: 1 1 calc(50% - 8px);
+    flex: 0 0 auto;
+    scroll-snap-align: start;
   }
 
   .project-actions {
@@ -2255,21 +2425,30 @@ h3 {
     padding: 18px;
   }
 
+  .case-close-button {
+    top: 18px;
+    right: 18px;
+  }
+
+  .case-header {
+    padding-right: 50px;
+  }
+
   .case-header h2 {
     font-size: 26px;
   }
 
-  .case-hero {
-    grid-template-columns: 1fr;
+  .case-showcase.artwork-only .case-media-stage {
+    min-height: 210px;
   }
 
-  .case-hero-art {
-    width: 108px;
-    height: 108px;
+  .case-showcase.artwork-only .case-media-stage > img {
+    width: 128px;
+    height: 128px;
   }
 
-  .case-hero img {
-    width: 78px;
+  .case-media-thumbnails {
+    gap: 6px;
   }
 
   .case-facts {
@@ -2282,6 +2461,10 @@ h3 {
 
   .case-actions {
     display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .case-primary-actions {
     grid-template-columns: 1fr;
   }
 
