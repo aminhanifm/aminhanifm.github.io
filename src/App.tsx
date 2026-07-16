@@ -489,7 +489,17 @@ function ProjectDetailsDrawer({
 
         <div className={hasGameplayGallery ? 'case-showcase has-gallery' : 'case-showcase artwork-only'}>
           <div className="case-media-stage">
+            {hasGameplayGallery ? (
+              <img
+                className="case-media-backdrop"
+                key={`${currentMedia.src}-backdrop`}
+                src={currentMedia.src}
+                alt=""
+                aria-hidden="true"
+              />
+            ) : null}
             <img
+              className="case-media-foreground"
               key={currentMedia.src}
               src={currentMedia.src}
               alt={currentMedia.alt}
