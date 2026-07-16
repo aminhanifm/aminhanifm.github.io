@@ -916,25 +916,6 @@ h3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
   align-items: start;
-  animation: filter-grid-in 280ms var(--motion-ease) both;
-}
-
-@supports (view-transition-name: project-card) {
-  ::view-transition-group(*) {
-    animation-duration: 380ms;
-    animation-timing-function: var(--motion-ease);
-  }
-
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-    mix-blend-mode: normal;
-  }
-
-  ::view-transition-old(*),
-  ::view-transition-new(*) {
-    mix-blend-mode: normal;
-  }
 }
 
 .project-toolbar {
@@ -1034,8 +1015,7 @@ h3 {
     background-color 300ms ease,
     border-color 180ms ease,
     color 300ms ease,
-    box-shadow 220ms ease,
-    transform 220ms var(--motion-ease);
+    box-shadow 220ms ease;
 }
 
 .project-card[data-link-kind='play'] {
@@ -1109,7 +1089,6 @@ h3 {
 .project-card:focus-within {
   border-color: color-mix(in srgb, var(--project-accent) 58%, var(--line));
   box-shadow: var(--soft-shadow);
-  transform: translateY(-3px);
 }
 
 .project-card:hover::before,
@@ -1638,21 +1617,12 @@ h3 {
   justify-items: end;
 }
 
-.case-drawer-layer.is-closing {
-  pointer-events: none;
-}
-
 .drawer-backdrop {
   position: absolute;
   inset: 0;
   width: 100%;
   background: var(--overlay);
   backdrop-filter: blur(10px);
-  animation: fade-in 180ms ease both;
-}
-
-.case-drawer-layer.is-closing .drawer-backdrop {
-  animation: fade-out 220ms ease both;
 }
 
 .case-drawer {
@@ -1668,19 +1638,7 @@ h3 {
   border-radius: 8px;
   background: var(--surface);
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
-  animation: drawer-in 260ms var(--motion-ease) both;
-}
-
-.case-drawer-layer.is-closing .case-drawer {
-  animation: drawer-out 220ms ease both;
-}
-
-.case-drawer-content.browse-next {
-  animation: drawer-content-next 280ms var(--motion-ease) both;
-}
-
-.case-drawer-content.browse-previous {
-  animation: drawer-content-previous 280ms var(--motion-ease) both;
+  will-change: transform, opacity;
 }
 
 .case-header {
@@ -1768,16 +1726,23 @@ h3 {
   box-shadow: var(--shadow);
 }
 
-.case-media-stage > .case-media-foreground {
+.case-media-frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.case-media-frame > .case-media-foreground {
   position: relative;
   z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: contain;
-  animation: case-media-in 260ms var(--motion-ease) both;
 }
 
-.case-media-stage > .case-media-backdrop {
+.case-media-frame > .case-media-backdrop {
   position: absolute;
   inset: -18px;
   width: calc(100% + 36px);
@@ -1790,11 +1755,14 @@ h3 {
 
 .case-showcase.artwork-only .case-media-stage {
   min-height: 250px;
+}
+
+.case-showcase.artwork-only .case-media-frame {
   display: grid;
   place-items: center;
 }
 
-.case-showcase.artwork-only .case-media-stage > .case-media-foreground {
+.case-showcase.artwork-only .case-media-frame > .case-media-foreground {
   width: 168px;
   height: 168px;
   object-fit: contain;
@@ -2034,60 +2002,6 @@ h3 {
   box-shadow: none;
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-}
-
-@keyframes fade-out {
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes drawer-in {
-  from {
-    opacity: 0;
-    transform: translateX(22px) scale(0.985);
-  }
-}
-
-@keyframes drawer-out {
-  to {
-    opacity: 0;
-    transform: translateX(28px) scale(0.985);
-  }
-}
-
-@keyframes drawer-content-next {
-  from {
-    opacity: 0;
-    transform: translateX(18px);
-  }
-}
-
-@keyframes drawer-content-previous {
-  from {
-    opacity: 0;
-    transform: translateX(-18px);
-  }
-}
-
-@keyframes case-media-in {
-  from {
-    opacity: 0.45;
-    transform: scale(0.985);
-  }
-}
-
-@keyframes filter-grid-in {
-  from {
-    opacity: 0.72;
-    transform: translateY(8px);
-  }
-}
-
 @keyframes hero-grid-pan {
   from {
     background-position:
@@ -2163,11 +2077,6 @@ h3 {
     transform: none;
   }
 
-  .drawer-backdrop,
-  .case-drawer,
-  .case-drawer-content,
-  .case-media-stage > img,
-  .project-grid,
   .intro::before,
   .profile-panel::after,
   .hero-project-strip span,
@@ -2457,7 +2366,7 @@ h3 {
     min-height: 210px;
   }
 
-  .case-showcase.artwork-only .case-media-stage > .case-media-foreground {
+  .case-showcase.artwork-only .case-media-frame > .case-media-foreground {
     width: 128px;
     height: 128px;
   }

@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
-import { flushSync } from 'react-dom';
+import { forwardRef, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
+import { AnimatePresence, LazyMotion, LayoutGroup, MotionConfig, type Variants } from 'motion/react';
+import * as m from 'motion/react-m';
 import {
   FaApple,
   FaCheck,
@@ -46,11 +47,6 @@ type ProjectBrowseDirection = 'previous' | 'next';
 
 type RevealStyle = CSSProperties & {
   '--reveal-index'?: number;
-  viewTransitionName?: string;
-};
-
-type ViewTransitionDocument = Document & {
-  startViewTransition?: (update: () => void) => unknown;
 };
 
 type PortfolioHistoryState = {
@@ -58,7 +54,53 @@ type PortfolioHistoryState = {
 };
 
 const PROJECT_QUERY_PARAM = 'project';
-const DRAWER_EXIT_DURATION = 220;
+const loadMotionFeatures = () => import('./motionFeatures').then((module) => module.default);
+
+const drawerLayerVariants: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.025,
+    },
+  },
+};
+
+const drawerBackdropVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.2, ease: 'easeOut' } },
+};
+
+const drawerPanelVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    x: 42,
+    scale: 0.985,
+    transition: { duration: 0.22, ease: [0.4, 0, 1, 1] },
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    scale: 1,
+    transition: { type: 'spring', stiffness: 360, damping: 34, mass: 0.82 },
+  },
+};
+
+const drawerContentVariants: Variants = {
+  enter: (direction: ProjectBrowseDirection | null) => ({
+    opacity: 0,
+    x: direction === 'previous' ? -24 : direction === 'next' ? 24 : 0,
+  }),
+  center: {
+    opacity: 1,
+    x: 0,
+    transition: { type: 'spring', stiffness: 420, damping: 38, mass: 0.72 },
+  },
+  exit: (direction: ProjectBrowseDirection | null) => ({
+    opacity: 0,
+    x: direction === 'previous' ? 18 : direction === 'next' ? -18 : 0,
+    transition: { duration: 0.14, ease: 'easeIn' },
+  }),
+};
 
 const projectFilters: Array<{ id: ProjectFilterId; label: string }> = [
   { id: 'all', label: 'All' },
@@ -86,16 +128,6 @@ function projectSlug(project: Project) {
     .replace(/&/g, ' and ')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-|-$/g, '');
-}
-
-function projectCardStyle(project: Project, index: number, compact: boolean): RevealStyle {
-  const style = revealStyle(index % 6);
-
-  if (!compact) {
-    style.viewTransitionName = `project-${projectSlug(project)}`;
-  }
-
-  return style;
 }
 
 function projectFromLocation() {
@@ -290,26 +322,40 @@ function trackProjectLinkClick(project: Project, source: ProjectDetailSource) {
   });
 }
 
-function ProjectCard({
+type ProjectCardProps = {
+  project: Project;
+  compact?: boolean;
+  index?: number;
+  onOpen: (project: Project, trigger: HTMLButtonElement) => void;
+};
+
+const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(function ProjectCard({
   project,
   compact = false,
   index = 0,
   onOpen,
-}: {
-  project: Project;
-  compact?: boolean;
-  index?: number;
-  onOpen: (project: Project) => void;
-}) {
+}, ref) {
   const trackingSource: ProjectDetailSource = compact ? 'featured_work' : 'project_library';
+  const revealDelay = compact ? (index % 6) * 0.055 : 0;
 
   return (
-    <article
+    <m.article
+      ref={ref}
+      layout={compact ? undefined : 'position'}
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      exit={compact ? undefined : { opacity: 0, y: 6, transition: { duration: 0.16, ease: 'easeOut' } }}
+      whileHover={{ y: -3 }}
+      whileFocus={{ y: -3 }}
+      transition={{
+        layout: { type: 'spring', stiffness: 420, damping: 38, mass: 0.72 },
+        opacity: { duration: 0.22, delay: revealDelay },
+        y: { type: 'spring', stiffness: 420, damping: 34, mass: 0.68, delay: revealDelay },
+      }}
       className={compact ? 'project-card featured-card' : 'project-card library-card'}
       data-link-kind={project.linkKind}
       data-project-slug={projectSlug(project)}
-      data-reveal="card"
-      style={projectCardStyle(project, index, compact)}
       tabIndex={compact ? undefined : 0}
     >
       <div className="project-media" aria-hidden="true">
@@ -351,26 +397,24 @@ function ProjectCard({
             {iconForLink(project.linkKind)}
             <span>{labelForLink(project.linkKind)}</span>
           </a>
-          <button className="detail-button" type="button" onClick={() => onOpen(project)} aria-label={`Open project details for ${project.title}`} title="Project details">
+          <button className="detail-button" type="button" onClick={(event) => onOpen(project, event.currentTarget)} aria-label={`Open project details for ${project.title}`} title="Project details">
             <FaInfoCircle aria-hidden="true" />
           </button>
         </div>
       </div>
-    </article>
+    </m.article>
   );
-}
+});
 
 function ProjectDetailsDrawer({
   project,
   projectList,
-  closing,
   browseDirection,
   onClose,
   onSelectProject,
 }: {
-  project: Project | null;
+  project: Project;
   projectList: Project[];
-  closing: boolean;
   browseDirection: ProjectBrowseDirection | null;
   onClose: (method: ProjectDetailCloseMethod) => void;
   onSelectProject: (project: Project, direction: ProjectBrowseDirection) => void;
@@ -382,8 +426,6 @@ function ProjectDetailsDrawer({
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    if (!project) return undefined;
-
     setActiveMediaIndex(0);
     setCopied(false);
     if (drawerRef.current) drawerRef.current.scrollTop = 0;
@@ -398,8 +440,6 @@ function ProjectDetailsDrawer({
   }, [project?.title]);
 
   useEffect(() => {
-    if (!project || closing) return undefined;
-
     const drawer = drawerRef.current;
     if (!drawer) return undefined;
 
@@ -426,13 +466,11 @@ function ProjectDetailsDrawer({
 
     drawer.addEventListener('keydown', trapFocus);
     return () => drawer.removeEventListener('keydown', trapFocus);
-  }, [closing, project]);
+  }, [project]);
 
   useEffect(() => () => {
     if (copyTimerRef.current !== null) window.clearTimeout(copyTimerRef.current);
   }, []);
-
-  if (!project) return null;
 
   const projectIndex = projectList.findIndex((item) => item.title === project.title);
   const projectPosition = projectIndex >= 0 ? projectIndex + 1 : 1;
@@ -464,17 +502,29 @@ function ProjectDetailsDrawer({
   };
 
   return (
-    <div className={closing ? 'case-drawer-layer is-closing' : 'case-drawer-layer'}>
-      <button className="drawer-backdrop" type="button" onClick={() => onClose('backdrop')} aria-hidden="true" tabIndex={-1} disabled={closing} />
-      <aside className="case-drawer" role="dialog" aria-modal="true" aria-labelledby="case-drawer-title" ref={drawerRef}>
-        <button className="icon-button case-close-button" type="button" onClick={() => onClose('button')} aria-label="Close project details" ref={closeButtonRef} disabled={closing}>
+    <m.div
+      className="case-drawer-layer"
+      variants={drawerLayerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+    >
+      <m.button className="drawer-backdrop" variants={drawerBackdropVariants} type="button" onClick={() => onClose('backdrop')} aria-hidden="true" tabIndex={-1} />
+      <m.aside className="case-drawer" variants={drawerPanelVariants} role="dialog" aria-modal="true" aria-labelledby="case-drawer-title" ref={drawerRef}>
+        <button className="icon-button case-close-button" type="button" onClick={() => onClose('button')} aria-label="Close project details" ref={closeButtonRef}>
           <FaTimes aria-hidden="true" />
         </button>
 
-        <div
-          className={`case-drawer-content browse-${browseDirection ?? 'none'}`}
-          key={project.title}
-        >
+        <AnimatePresence initial={false} mode="wait" custom={browseDirection}>
+          <m.div
+            className="case-drawer-content"
+            key={project.title}
+            custom={browseDirection}
+            variants={drawerContentVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+          >
         <header className="case-header">
           <div>
             <p className="eyebrow">Project {projectPosition} of {projectList.length}</p>
@@ -489,24 +539,33 @@ function ProjectDetailsDrawer({
 
         <div className={hasGameplayGallery ? 'case-showcase has-gallery' : 'case-showcase artwork-only'}>
           <div className="case-media-stage">
-            {hasGameplayGallery ? (
-              <img
-                className="case-media-backdrop"
-                key={`${currentMedia.src}-backdrop`}
-                src={currentMedia.src}
-                alt=""
-                aria-hidden="true"
-              />
-            ) : null}
-            <img
-              className="case-media-foreground"
-              key={currentMedia.src}
-              src={currentMedia.src}
-              alt={currentMedia.alt}
-              onError={(event) => {
-                event.currentTarget.src = '/ah-mark.svg';
-              }}
-            />
+            <AnimatePresence initial={false} mode="wait">
+              <m.div
+                className="case-media-frame"
+                key={currentMedia.src}
+                initial={{ opacity: 0, scale: 0.985 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.995 }}
+                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {hasGameplayGallery ? (
+                  <img
+                    className="case-media-backdrop"
+                    src={currentMedia.src}
+                    alt=""
+                    aria-hidden="true"
+                  />
+                ) : null}
+                <img
+                  className="case-media-foreground"
+                  src={currentMedia.src}
+                  alt={currentMedia.alt}
+                  onError={(event) => {
+                    event.currentTarget.src = '/ah-mark.svg';
+                  }}
+                />
+              </m.div>
+            </AnimatePresence>
             <div className="case-media-meta" aria-hidden="true">
               <span>{hasGameplayGallery ? 'Gameplay gallery' : 'Project artwork'}</span>
               <strong>{currentMediaIndex + 1} / {mediaItems.length}</strong>
@@ -605,7 +664,7 @@ function ProjectDetailsDrawer({
               className="nav-project-button"
               type="button"
               onClick={() => previousProject && onSelectProject(previousProject, 'previous')}
-              disabled={closing || !previousProject}
+              disabled={!previousProject}
               aria-label={previousProject ? `Previous project: ${previousProject.title}` : 'No previous project'}
             >
               <FaChevronLeft aria-hidden="true" />
@@ -618,7 +677,7 @@ function ProjectDetailsDrawer({
               className="nav-project-button"
               type="button"
               onClick={() => nextProject && onSelectProject(nextProject, 'next')}
-              disabled={closing || !nextProject}
+              disabled={!nextProject}
               aria-label={nextProject ? `Next project: ${nextProject.title}` : 'No next project'}
             >
               <span>
@@ -629,9 +688,10 @@ function ProjectDetailsDrawer({
             </button>
           </div>
         </div>
-        </div>
-      </aside>
-    </div>
+          </m.div>
+        </AnimatePresence>
+      </m.aside>
+    </m.div>
   );
 }
 
@@ -644,7 +704,6 @@ function App() {
   const [drawerBrowseDirection, setDrawerBrowseDirection] = useState<ProjectBrowseDirection | null>(null);
   const selectedProjectRef = useRef<Project | null>(selectedProject);
   const isDrawerClosingRef = useRef(false);
-  const closeTimerRef = useRef<number | null>(null);
   const pendingCloseMethodRef = useRef<ProjectDetailCloseMethod | null>(null);
   const lastFocusedElementRef = useRef<HTMLElement | null>(null);
   const activeSection = useActiveSection(navSectionIds);
@@ -658,12 +717,26 @@ function App() {
 
   selectedProjectRef.current = selectedProject;
 
-  const cancelDrawerClose = useCallback(() => {
-    if (closeTimerRef.current !== null) {
-      window.clearTimeout(closeTimerRef.current);
-      closeTimerRef.current = null;
-    }
+  useEffect(() => {
+    if (selectedProject || isDrawerClosing) return undefined;
 
+    const focusTarget = lastFocusedElementRef.current;
+    if (!focusTarget) return undefined;
+
+    lastFocusedElementRef.current = null;
+    const focusTimer = window.setTimeout(() => {
+      if (focusTarget.isConnected) focusTarget.focus({ preventScroll: true });
+    }, 0);
+
+    return () => window.clearTimeout(focusTimer);
+  }, [isDrawerClosing, selectedProject]);
+
+  const cancelDrawerClose = useCallback(() => {
+    isDrawerClosingRef.current = false;
+    setIsDrawerClosing(false);
+  }, []);
+
+  const finishDrawerClose = useCallback(() => {
     isDrawerClosingRef.current = false;
     setIsDrawerClosing(false);
   }, []);
@@ -679,31 +752,21 @@ function App() {
 
     isDrawerClosingRef.current = true;
     setIsDrawerClosing(true);
-    closeTimerRef.current = window.setTimeout(() => {
-      closeTimerRef.current = null;
-      selectedProjectRef.current = null;
-      setSelectedProject(null);
-      setDrawerBrowseDirection(null);
-      isDrawerClosingRef.current = false;
-      setIsDrawerClosing(false);
-
-      const focusTarget = lastFocusedElementRef.current;
-      lastFocusedElementRef.current = null;
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(() => focusTarget?.focus({ preventScroll: true }));
-      });
-    }, DRAWER_EXIT_DURATION);
+    selectedProjectRef.current = null;
+    setSelectedProject(null);
+    setDrawerBrowseDirection(null);
   }, []);
 
-  const openProjectDetails = (project: Project, projectList: Project[], source: ProjectDetailSource) => {
+  const openProjectDetails = (project: Project, projectList: Project[], source: ProjectDetailSource, trigger?: HTMLElement) => {
     trackEvent('project_detail_open', {
       project_title: project.title,
       project_year: project.year,
       source,
     });
 
-    if (!selectedProjectRef.current && document.activeElement instanceof HTMLElement) {
-      lastFocusedElementRef.current = document.activeElement;
+    if (!selectedProjectRef.current) {
+      lastFocusedElementRef.current = trigger
+        ?? (document.activeElement instanceof HTMLElement ? document.activeElement : null);
     }
 
     cancelDrawerClose();
@@ -756,17 +819,7 @@ function App() {
     });
 
     if (filterId === activeFilter) return;
-
-    const transitionDocument = document as ViewTransitionDocument;
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (transitionDocument.startViewTransition && !prefersReducedMotion) {
-      transitionDocument.startViewTransition(() => {
-        flushSync(() => setActiveFilter(filterId));
-      });
-    } else {
-      setActiveFilter(filterId);
-    }
+    setActiveFilter(filterId);
   };
 
   const switchTheme = () => {
@@ -810,12 +863,9 @@ function App() {
     return () => window.removeEventListener('popstate', onPopState);
   }, [beginDrawerClose, cancelDrawerClose]);
 
-  useEffect(() => () => {
-    if (closeTimerRef.current !== null) window.clearTimeout(closeTimerRef.current);
-  }, []);
-
   useEffect(() => {
-    if (!selectedProject) return undefined;
+    const drawerLayerActive = Boolean(selectedProject) || isDrawerClosing;
+    if (!drawerLayerActive) return undefined;
 
     const previousOverflow = document.body.style.overflow;
     const inertElements = Array.from(document.querySelectorAll<HTMLElement>('.site-header, main'));
@@ -834,10 +884,12 @@ function App() {
       inertElements.forEach((element) => element.removeAttribute('inert'));
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [closeProjectDetails, selectedProject]);
+  }, [closeProjectDetails, isDrawerClosing, selectedProject]);
 
   return (
-    <div className="site-shell">
+    <MotionConfig reducedMotion="user">
+      <LazyMotion features={loadMotionFeatures} strict>
+        <div className="site-shell">
       <header className="site-header">
         <div className="topbar section-shell">
           <a
@@ -993,7 +1045,7 @@ function App() {
                 project={project}
                 compact
                 index={index}
-                onOpen={(projectToOpen) => openProjectDetails(projectToOpen, featuredProjects, 'featured_work')}
+                onOpen={(projectToOpen, trigger) => openProjectDetails(projectToOpen, featuredProjects, 'featured_work', trigger)}
               />
             ))}
           </div>
@@ -1024,16 +1076,20 @@ function App() {
               ))}
             </div>
           </div>
-          <div className="project-grid" key={activeFilter}>
-            {filteredProjects.map((project, index) => (
-              <ProjectCard
-                key={`${activeFilter}-${project.title}`}
-                project={project}
-                index={index}
-                onOpen={(projectToOpen) => openProjectDetails(projectToOpen, filteredProjects, 'project_library')}
-              />
-            ))}
-          </div>
+          <LayoutGroup id="project-library">
+            <m.div className="project-grid" layout>
+              <AnimatePresence mode="popLayout">
+                {filteredProjects.map((project, index) => (
+                  <ProjectCard
+                    key={project.title}
+                    project={project}
+                    index={index}
+                    onOpen={(projectToOpen, trigger) => openProjectDetails(projectToOpen, filteredProjects, 'project_library', trigger)}
+                  />
+                ))}
+              </AnimatePresence>
+            </m.div>
+          </LayoutGroup>
         </section>
 
         <section className="section-shell experience-section" id="experience">
@@ -1156,15 +1212,21 @@ function App() {
           </div>
         </section>
       </main>
-      <ProjectDetailsDrawer
-        project={selectedProject}
-        projectList={drawerProjectList}
-        closing={isDrawerClosing}
-        browseDirection={drawerBrowseDirection}
-        onClose={closeProjectDetails}
-        onSelectProject={selectProjectFromDrawer}
-      />
-    </div>
+          <AnimatePresence onExitComplete={finishDrawerClose}>
+            {selectedProject ? (
+              <ProjectDetailsDrawer
+                key="project-details-drawer"
+                project={selectedProject}
+                projectList={drawerProjectList}
+                browseDirection={drawerBrowseDirection}
+                onClose={closeProjectDetails}
+                onSelectProject={selectProjectFromDrawer}
+              />
+            ) : null}
+          </AnimatePresence>
+        </div>
+      </LazyMotion>
+    </MotionConfig>
   );
 }
 
