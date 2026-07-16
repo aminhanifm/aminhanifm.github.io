@@ -61,6 +61,18 @@ For local testing, create a local `.env.local` file with:
 VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
+To opt out a personal browser or device, visit:
+
+```txt
+https://aminhanifm.github.io/?analytics=off
+```
+
+The site stores the opt-out in that browser's local storage and removes the query parameter from the address bar. To turn analytics back on for that browser, visit:
+
+```txt
+https://aminhanifm.github.io/?analytics=on
+```
+
 Custom events are sent for primary portfolio actions:
 
 - `resume_click`

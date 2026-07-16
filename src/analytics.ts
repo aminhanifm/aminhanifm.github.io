@@ -1,4 +1,5 @@
 const GA_MEASUREMENT_ID = import.meta.env.VITE_GA_MEASUREMENT_ID?.trim();
+const ANALYTICS_OPT_OUT_KEY = 'aminhanifm.analyticsOptOut';
 
 type GtagCommand = 'config' | 'event' | 'js' | 'set';
 type AnalyticsEventValue = string | number | boolean;
@@ -10,13 +11,26 @@ type GtagArguments =
 
 declare global {
   interface Window {
+    __aminAnalyticsOptedOut?: boolean;
     dataLayer?: GtagArguments[];
     gtag?: (...args: GtagArguments) => void;
   }
 }
 
+function isAnalyticsOptedOut() {
+  if (window.__aminAnalyticsOptedOut === true) {
+    return true;
+  }
+
+  try {
+    return window.localStorage.getItem(ANALYTICS_OPT_OUT_KEY) === 'true';
+  } catch (error) {
+    return false;
+  }
+}
+
 export function initGoogleAnalytics() {
-  if (!GA_MEASUREMENT_ID || window.gtag) {
+  if (!GA_MEASUREMENT_ID || window.gtag || isAnalyticsOptedOut()) {
     return;
   }
 
@@ -39,7 +53,7 @@ export function initGoogleAnalytics() {
 }
 
 export function trackEvent(eventName: string, params: AnalyticsEventParams = {}) {
-  if (!window.gtag) {
+  if (!window.gtag || isAnalyticsOptedOut()) {
     return;
   }
 
