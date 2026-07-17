@@ -42,6 +42,7 @@ App and game privacy policies use stable directory-based URLs so they work on
 GitHub Pages without client-side routing:
 
 - Policy directory: `/privacy/`
+- TillTally: `/privacy/tilltally/`
 - LaterPin: `/privacy/laterpin/`
 
 Add future policies under `public/privacy/<app-slug>/index.html`, link them from
