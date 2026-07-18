@@ -1217,7 +1217,7 @@ h3 {
 .library-card:hover .project-details,
 .library-card:focus .project-details,
 .library-card:focus-within .project-details {
-  max-height: 320px;
+  max-height: 480px;
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
