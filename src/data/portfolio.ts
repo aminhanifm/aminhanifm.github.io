@@ -3,6 +3,8 @@
 export interface ProjectMedia {
   src: string;
   alt: string;
+  kind?: 'image' | 'video';
+  poster?: string;
 }
 
 export interface Project {
@@ -124,6 +126,11 @@ export const projects: Project[] = [
       'A cute merge puzzle inspired by Suika-style play, using cat-themed fruits and escalating score pressure.',
     role: 'Handled most development work, especially programming and gameplay mechanics.',
     tags: ['Unity', 'Puzzle', 'Casual', 'Mobile'],
+    gallery: [
+      { src: '/images/projects/gallery/catmelon-01.jpg', alt: 'Catmelon home screen with the cat collection artwork' },
+      { src: '/images/projects/gallery/catmelon-02.jpg', alt: 'Catmelon merge board at the start of a game' },
+      { src: '/images/projects/gallery/catmelon-03.jpg', alt: 'Catmelon active merge puzzle with several cats in the container' },
+    ],
   },
   {
     title: 'Taxland',
@@ -205,6 +212,11 @@ export const projects: Project[] = [
       'An endless city runner with character cosmetics, collectible coins, power-ups, and obstacle timing.',
     role: 'Handled design, programming, gameplay mechanics, and implementation polish.',
     tags: ['Unity', 'Runner', 'Mobile', 'Casual'],
+    gallery: [
+      { src: '/images/projects/gallery/downtown-rush-01.jpg', alt: 'Downtown Rush home screen on a city street' },
+      { src: '/images/projects/gallery/downtown-rush-02.jpg', alt: 'Downtown Rush character running along the center lane' },
+      { src: '/images/projects/gallery/downtown-rush-03.jpg', alt: 'Downtown Rush score screen with city obstacles in view' },
+    ],
   },
   {
     title: 'Collecto Frenzy 3D',
@@ -219,6 +231,11 @@ export const projects: Project[] = [
       'A 3D object-matching game where players rotate the board, collect sets, and manage limited tray space.',
     role: 'Handled game design, programming, and gameplay mechanics from prototype through delivery.',
     tags: ['Unity', '3D', 'Casual', 'Systems'],
+    gallery: [
+      { src: '/images/projects/gallery/collecto-frenzy-3d-01.jpg', alt: 'Collecto Frenzy 3D home screen' },
+      { src: '/images/projects/gallery/collecto-frenzy-3d-02.jpg', alt: 'Collecto Frenzy 3D level with target objects and power-ups' },
+      { src: '/images/projects/gallery/collecto-frenzy-3d-03.jpg', alt: 'Collecto Frenzy 3D level result screen' },
+    ],
   },
   {
     title: 'Brickball Mania',
@@ -232,6 +249,11 @@ export const projects: Project[] = [
       'A compact arcade game focused on collecting balls, clearing levels, and handling escalating obstacle patterns.',
     role: 'Handled all aspects of development, including gameplay design, programming, and mechanics.',
     tags: ['Unity', 'Arcade', 'Mobile', 'Casual'],
+    gallery: [
+      { src: '/images/projects/gallery/brickball-mania-01.jpg', alt: 'Brickball Mania illustrated level map' },
+      { src: '/images/projects/gallery/brickball-mania-02.jpg', alt: 'Brickball Mania level one block layout' },
+      { src: '/images/projects/gallery/brickball-mania-03.jpg', alt: 'Brickball Mania balls ricocheting between numbered blocks' },
+    ],
   },
   {
     title: 'Goya Universe',
@@ -287,6 +309,12 @@ export const projects: Project[] = [
     role: 'Created game design, art, story, core gameplay, and dialogue database.',
     tags: ['Education', 'Pixel Art', 'Simulation', 'Award'],
     gallery: [
+      {
+        src: '/videos/projects/taxsim-gameplay.mp4',
+        poster: '/videos/projects/taxsim-gameplay.jpg',
+        kind: 'video',
+        alt: 'TaxSim animated gameplay showing the tax office simulation',
+      },
       { src: '/images/projects/gallery/taxsim-01.png', alt: 'TaxSim dialogue with a visitor at the tax service counter' },
       { src: '/images/projects/gallery/taxsim-02.png', alt: 'TaxSim word-arrangement learning mini game' },
       { src: '/images/projects/gallery/taxsim-03.png', alt: 'TaxSim tax payment completion at the service desk' },
@@ -305,6 +333,12 @@ export const projects: Project[] = [
     role: 'Created level design, story, art, UI/UX, and core gameplay.',
     tags: ['RPG', 'Culture', 'Puzzle', 'Award'],
     gallery: [
+      {
+        src: '/videos/projects/adventure-of-hanacaraka-gameplay.mp4',
+        poster: '/videos/projects/adventure-of-hanacaraka-gameplay.jpg',
+        kind: 'video',
+        alt: 'Adventure of Hanacaraka animated combat gameplay',
+      },
       { src: '/images/projects/gallery/adventure-of-hanacaraka-01.jpg', alt: 'Adventure of Hanacaraka title screen' },
       { src: '/images/projects/gallery/adventure-of-hanacaraka-02.jpg', alt: 'Hanacaraka letter-learning interface and character attributes' },
       { src: '/images/projects/gallery/adventure-of-hanacaraka-03.jpg', alt: 'Adventure of Hanacaraka world map and character preparation screen' },
@@ -353,6 +387,14 @@ export const projects: Project[] = [
       'A business simulation about managing orders, income, upgrades, and day-to-day dropshipping pressure.',
     role: 'Created game design, core gameplay, and item database systems.',
     tags: ['Simulation', 'JavaScript', 'Python', 'Award'],
+    gallery: [
+      {
+        src: '/videos/projects/life-of-a-dropshipper-gameplay.mp4',
+        poster: '/videos/projects/life-of-a-dropshipper-gameplay.jpg',
+        kind: 'video',
+        alt: 'Life of a Dropshipper animated business simulation gameplay',
+      },
+    ],
   },
   {
     title: 'Mysticalipse Dungeon',
@@ -366,6 +408,14 @@ export const projects: Project[] = [
       'A dungeon adventure about collecting Mystic Crystals, fighting monsters, looting, and solving stage puzzles.',
     role: 'Created game and level design, gameplay systems, and item databases.',
     tags: ['Roguelite', 'Dungeon', 'Puzzle', 'Award'],
+    gallery: [
+      {
+        src: '/videos/projects/mysticalipse-dungeon-gameplay.mp4',
+        poster: '/videos/projects/mysticalipse-dungeon-gameplay.jpg',
+        kind: 'video',
+        alt: 'Mysticalipse Dungeon animated boss combat gameplay',
+      },
+    ],
   },
   {
     title: 'Isolated Forest',
@@ -380,6 +430,12 @@ export const projects: Project[] = [
     role: 'Created game design, core gameplay, item systems, and crafting database.',
     tags: ['Survival', 'Crafting', 'Horror', 'Award'],
     gallery: [
+      {
+        src: '/videos/projects/isolated-forest-gameplay.mp4',
+        poster: '/videos/projects/isolated-forest-gameplay.jpg',
+        kind: 'video',
+        alt: 'Isolated Forest animated crafting and survival gameplay',
+      },
       { src: '/images/projects/gallery/isolated-forest-01.jpg', alt: 'Isolated Forest top-down exploration with the survival HUD' },
     ],
   },
@@ -415,6 +471,12 @@ export const projects: Project[] = [
     role: 'Created design, art, gameplay, and Firebase leaderboard services.',
     tags: ['Education', 'Casual', 'Firebase', 'Web'],
     gallery: [
+      {
+        src: '/videos/projects/the-covid-hero-gameplay.mp4',
+        poster: '/videos/projects/the-covid-hero-gameplay.jpg',
+        kind: 'video',
+        alt: 'The Covid Hero animated one-touch mobile gameplay',
+      },
       { src: '/images/projects/gallery/the-covid-hero-01.jpg', alt: 'The Covid Hero title screen in a mobile phone frame' },
       { src: '/images/projects/gallery/the-covid-hero-02.jpg', alt: 'The Covid Hero one-touch gameplay screen' },
       { src: '/images/projects/gallery/the-covid-hero-03.jpg', alt: 'The Covid Hero leaderboard screen' },
@@ -433,6 +495,14 @@ export const projects: Project[] = [
     role: 'Created design, art, core gameplay, IAP, Firebase, and Facebook SDK integration.',
     tags: ['Culture', 'Mobile', 'Firebase', 'Award'],
     note: 'Legacy Play Store link restored; APK update pending if the listing is unavailable.',
+    gallery: [
+      {
+        src: '/videos/projects/hide-n-seek-nusantara-gameplay.mp4',
+        poster: '/videos/projects/hide-n-seek-nusantara-gameplay.jpg',
+        kind: 'video',
+        alt: 'Hide N Seek Nusantara animated gameplay at Museum Angkut',
+      },
+    ],
   },
 ];
 

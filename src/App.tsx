@@ -18,6 +18,8 @@ import {
   FaLink,
   FaMapMarkerAlt,
   FaMoon,
+  FaPause,
+  FaPlay,
   FaSun,
   FaTimes,
   FaTrophy,
@@ -421,9 +423,11 @@ function ProjectDetailsDrawer({
 }) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLElement>(null);
+  const mediaVideoRef = useRef<HTMLVideoElement>(null);
   const copyTimerRef = useRef<number | null>(null);
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
   const [copied, setCopied] = useState(false);
+  const [isMediaPlaying, setIsMediaPlaying] = useState(false);
 
   useEffect(() => {
     setActiveMediaIndex(0);
@@ -484,6 +488,20 @@ function ProjectDetailsDrawer({
   const currentMediaIndex = Math.min(activeMediaIndex, mediaItems.length - 1);
   const currentMedia = mediaItems[currentMediaIndex];
   const hasGameplayGallery = Boolean(project.gallery?.length);
+  const isVideoMedia = currentMedia.kind === 'video';
+  const prefersReducedMotion = typeof window !== 'undefined'
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const toggleMediaPlayback = () => {
+    const video = mediaVideoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      void video.play();
+    } else {
+      video.pause();
+    }
+  };
 
   const copyProjectLink = async () => {
     try {
@@ -548,26 +566,54 @@ function ProjectDetailsDrawer({
                 exit={{ opacity: 0, scale: 0.995 }}
                 transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
               >
-                {hasGameplayGallery ? (
+                {hasGameplayGallery && (!isVideoMedia || currentMedia.poster) ? (
                   <img
                     className="case-media-backdrop"
-                    src={currentMedia.src}
+                    src={isVideoMedia ? currentMedia.poster : currentMedia.src}
                     alt=""
                     aria-hidden="true"
                   />
                 ) : null}
-                <img
-                  className="case-media-foreground"
-                  src={currentMedia.src}
-                  alt={currentMedia.alt}
-                  onError={(event) => {
-                    event.currentTarget.src = '/ah-mark.svg';
-                  }}
-                />
+                {isVideoMedia ? (
+                  <video
+                    ref={mediaVideoRef}
+                    className="case-media-foreground"
+                    src={currentMedia.src}
+                    poster={currentMedia.poster}
+                    aria-label={currentMedia.alt}
+                    autoPlay={!prefersReducedMotion}
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    onPlay={() => setIsMediaPlaying(true)}
+                    onPause={() => setIsMediaPlaying(false)}
+                  />
+                ) : (
+                  <img
+                    className="case-media-foreground"
+                    src={currentMedia.src}
+                    alt={currentMedia.alt}
+                    onError={(event) => {
+                      event.currentTarget.src = '/ah-mark.svg';
+                    }}
+                  />
+                )}
+                {isVideoMedia ? (
+                  <button
+                    className="case-media-toggle"
+                    type="button"
+                    onClick={toggleMediaPlayback}
+                    aria-label={isMediaPlaying ? 'Pause gameplay preview' : 'Play gameplay preview'}
+                    title={isMediaPlaying ? 'Pause preview' : 'Play preview'}
+                  >
+                    {isMediaPlaying ? <FaPause aria-hidden="true" /> : <FaPlay aria-hidden="true" />}
+                  </button>
+                ) : null}
               </m.div>
             </AnimatePresence>
             <div className="case-media-meta" aria-hidden="true">
-              <span>{hasGameplayGallery ? 'Gameplay gallery' : 'Project artwork'}</span>
+              <span>{isVideoMedia ? 'Animated gameplay' : hasGameplayGallery ? 'Gameplay gallery' : 'Project artwork'}</span>
               <strong>{currentMediaIndex + 1} / {mediaItems.length}</strong>
             </div>
           </div>
@@ -580,17 +626,24 @@ function ProjectDetailsDrawer({
                   type="button"
                   key={media.src}
                   onClick={() => setActiveMediaIndex(index)}
-                  aria-label={`Show ${project.title} screenshot ${index + 1}`}
+                  aria-label={media.kind === 'video'
+                    ? `Play ${project.title} gameplay preview`
+                    : `Show ${project.title} screenshot ${index + 1}`}
                   aria-pressed={index === currentMediaIndex}
                 >
                   <img
-                    src={media.src}
+                    src={media.kind === 'video' ? media.poster ?? project.imageUrl : media.src}
                     alt=""
                     loading="lazy"
                     onError={(event) => {
                       event.currentTarget.src = '/ah-mark.svg';
                     }}
                   />
+                  {media.kind === 'video' ? (
+                    <span className="case-media-thumbnail-kind" aria-hidden="true">
+                      <FaPlay />
+                    </span>
+                  ) : null}
                 </button>
               ))}
             </div>

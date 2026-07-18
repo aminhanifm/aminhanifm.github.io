@@ -1737,6 +1737,7 @@ h3 {
 .case-media-frame > .case-media-foreground {
   position: relative;
   z-index: 1;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -1751,6 +1752,33 @@ h3 {
   filter: blur(18px) saturate(0.78) brightness(0.58);
   opacity: 0.72;
   transform: scale(1.04);
+}
+
+.case-media-toggle {
+  position: absolute;
+  z-index: 3;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(5, 12, 20, 0.76);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+  transition:
+    background-color 180ms ease,
+    transform 180ms var(--motion-ease);
+}
+
+.case-media-toggle:hover,
+.case-media-toggle:focus-visible {
+  background: rgba(5, 12, 20, 0.92);
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+  transform: translateY(-1px);
 }
 
 .case-showcase.artwork-only .case-media-stage {
@@ -1790,12 +1818,13 @@ h3 {
 
 .case-media-thumbnails {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
   gap: 8px;
   margin-top: 8px;
 }
 
 .case-media-thumbnails button {
+  position: relative;
   min-width: 0;
   overflow: hidden;
   padding: 3px;
@@ -1829,6 +1858,27 @@ h3 {
   object-fit: contain;
   border-radius: 5px;
   background: var(--subtle);
+}
+
+.case-media-thumbnail-kind {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(5, 12, 20, 0.8);
+  color: #ffffff;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.case-media-thumbnail-kind svg {
+  width: 11px;
+  height: 11px;
+  margin-left: 1px;
 }
 
 .case-overview {
