@@ -286,6 +286,11 @@ export const projects: Project[] = [
       'A pixel-art tax education game that teaches Indonesian tax concepts through simulation and mini games.',
     role: 'Created game design, art, story, core gameplay, and dialogue database.',
     tags: ['Education', 'Pixel Art', 'Simulation', 'Award'],
+    gallery: [
+      { src: '/images/projects/gallery/taxsim-01.png', alt: 'TaxSim dialogue with a visitor at the tax service counter' },
+      { src: '/images/projects/gallery/taxsim-02.png', alt: 'TaxSim word-arrangement learning mini game' },
+      { src: '/images/projects/gallery/taxsim-03.png', alt: 'TaxSim tax payment completion at the service desk' },
+    ],
   },
   {
     title: 'Adventure of Hanacaraka',
@@ -299,6 +304,11 @@ export const projects: Project[] = [
       'A cultural adventure RPG about controlling two characters, solving puzzles, and collecting Hanacaraka letters.',
     role: 'Created level design, story, art, UI/UX, and core gameplay.',
     tags: ['RPG', 'Culture', 'Puzzle', 'Award'],
+    gallery: [
+      { src: '/images/projects/gallery/adventure-of-hanacaraka-01.jpg', alt: 'Adventure of Hanacaraka title screen' },
+      { src: '/images/projects/gallery/adventure-of-hanacaraka-02.jpg', alt: 'Hanacaraka letter-learning interface and character attributes' },
+      { src: '/images/projects/gallery/adventure-of-hanacaraka-03.jpg', alt: 'Adventure of Hanacaraka world map and character preparation screen' },
+    ],
   },
   {
     title: 'Yudi si Anak Magang Housekeeping',
@@ -325,6 +335,11 @@ export const projects: Project[] = [
       'A multiplayer side-scroller where players race toward dreams while disrupting opponents with card actions.',
     role: 'Created game design, art, core gameplay, and Photon networking.',
     tags: ['Multiplayer', 'Photon', 'Platformer', 'Cards'],
+    gallery: [
+      { src: '/images/projects/gallery/sleep-gravity-01.jpg', alt: 'Sleep Gravity card selection screen' },
+      { src: '/images/projects/gallery/sleep-gravity-02.jpg', alt: 'Sleep Gravity match setup and map selection screen' },
+      { src: '/images/projects/gallery/sleep-gravity-03.jpg', alt: 'Sleep Gravity side-scrolling multiplayer gameplay' },
+    ],
   },
   {
     title: 'Life of a Dropshipper',
@@ -364,6 +379,9 @@ export const projects: Project[] = [
       'A survival game with gathering, crafting, farming, and night danger in a haunted forest setting.',
     role: 'Created game design, core gameplay, item systems, and crafting database.',
     tags: ['Survival', 'Crafting', 'Horror', 'Award'],
+    gallery: [
+      { src: '/images/projects/gallery/isolated-forest-01.jpg', alt: 'Isolated Forest top-down exploration with the survival HUD' },
+    ],
   },
   {
     title: 'Tag Runner',
@@ -378,6 +396,11 @@ export const projects: Project[] = [
     role: 'Created design, gameplay, and Photon multiplayer backend services.',
     tags: ['Multiplayer', 'Photon', 'Platformer', 'Mobile'],
     note: 'Legacy Play Store link restored; APK update pending if the listing is unavailable.',
+    gallery: [
+      { src: '/images/projects/gallery/tag-runner-01.jpg', alt: 'Tag Runner multiplayer lobby' },
+      { src: '/images/projects/gallery/tag-runner-02.jpg', alt: 'Tag Runner matchmaking and room settings' },
+      { src: '/images/projects/gallery/tag-runner-03.jpg', alt: 'Tag Runner platforming arena with mobile controls' },
+    ],
   },
   {
     title: 'The Covid Hero',
@@ -391,6 +414,11 @@ export const projects: Project[] = [
       'A one-hand casual game made as entertainment and education during the coronavirus outbreak.',
     role: 'Created design, art, gameplay, and Firebase leaderboard services.',
     tags: ['Education', 'Casual', 'Firebase', 'Web'],
+    gallery: [
+      { src: '/images/projects/gallery/the-covid-hero-01.jpg', alt: 'The Covid Hero title screen in a mobile phone frame' },
+      { src: '/images/projects/gallery/the-covid-hero-02.jpg', alt: 'The Covid Hero one-touch gameplay screen' },
+      { src: '/images/projects/gallery/the-covid-hero-03.jpg', alt: 'The Covid Hero leaderboard screen' },
+    ],
   },
   {
     title: 'Hide N Seek Nusantara',

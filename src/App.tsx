@@ -572,7 +572,7 @@ function ProjectDetailsDrawer({
             </div>
           </div>
 
-          {hasGameplayGallery ? (
+          {hasGameplayGallery && mediaItems.length > 1 ? (
             <div className="case-media-thumbnails" aria-label={`${project.title} gameplay gallery`}>
               {mediaItems.map((media, index) => (
                 <button
