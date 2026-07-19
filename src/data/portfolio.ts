@@ -57,7 +57,7 @@ export const projects: Project[] = [
     year: '2022',
     genre: 'Tactical Shooter',
     platforms: ['Android'],
-    imageUrl: '/images/projects/heisters.png',
+    imageUrl: '/images/projects/heisters.webp',
     link: 'https://play.google.com/store/apps/details?id=com.uniXcorp.Heisters',
     linkKind: 'play',
     featured: true,
@@ -67,9 +67,9 @@ export const projects: Project[] = [
       'Built core gameplay and third-party services, then managed delivery across programming, art, and design tasks.',
     tags: ['Unity', 'Gameplay', 'IAP', 'Analytics'],
     gallery: [
-      { src: '/images/projects/gallery/heisters-01.jpg', alt: 'Heisters combat gameplay during a base raid' },
-      { src: '/images/projects/gallery/heisters-02.jpg', alt: 'Heisters enemy selection screen before a raid' },
-      { src: '/images/projects/gallery/heisters-03.jpg', alt: 'Heisters crew and weapon management screen' },
+      { src: '/images/projects/gallery/heisters-01.webp', alt: 'Heisters combat gameplay during a base raid' },
+      { src: '/images/projects/gallery/heisters-02.webp', alt: 'Heisters enemy selection screen before a raid' },
+      { src: '/images/projects/gallery/heisters-03.webp', alt: 'Heisters crew and weapon management screen' },
     ],
   },
   {
@@ -77,7 +77,7 @@ export const projects: Project[] = [
     year: '2025',
     genre: 'Life Simulation',
     platforms: ['Android'],
-    imageUrl: '/images/projects/ojol-life-food-delivery-game.png',
+    imageUrl: '/images/projects/ojol-life-food-delivery-game.webp',
     link: 'https://play.google.com/store/apps/details?id=com.maleo.ojollife',
     linkKind: 'play',
     featured: true,
@@ -87,9 +87,9 @@ export const projects: Project[] = [
       'Developed main gameplay systems including orders, customization, fuel, stamina, and the first game design.',
     tags: ['Unity', 'Simulation', 'Systems', 'Mobile'],
     gallery: [
-      { src: '/images/projects/gallery/ojol-life-01.jpg', alt: 'Ojol Life riders exploring the city together' },
-      { src: '/images/projects/gallery/ojol-life-02.jpg', alt: 'Ojol Life passenger interaction and city traffic gameplay' },
-      { src: '/images/projects/gallery/ojol-life-03.jpg', alt: 'Ojol Life delivery and vehicle variety' },
+      { src: '/images/projects/gallery/ojol-life-01.webp', alt: 'Ojol Life riders exploring the city together' },
+      { src: '/images/projects/gallery/ojol-life-02.webp', alt: 'Ojol Life passenger interaction and city traffic gameplay' },
+      { src: '/images/projects/gallery/ojol-life-03.webp', alt: 'Ojol Life delivery and vehicle variety' },
     ],
   },
   {
@@ -108,9 +108,9 @@ export const projects: Project[] = [
       'Created core gameplay and third-party services while managing tasks for the small team.',
     tags: ['Unity', 'Management', 'Ads', 'IAP'],
     gallery: [
-      { src: '/images/projects/gallery/dragon-ranch-01.jpg', alt: 'Dragon Ranch farm overview and character progression' },
-      { src: '/images/projects/gallery/dragon-ranch-02.jpg', alt: 'Dragon Ranch crop fields and dragon collection objective' },
-      { src: '/images/projects/gallery/dragon-ranch-03.jpg', alt: 'Dragon Ranch crop building and dragon care gameplay' },
+      { src: '/images/projects/gallery/dragon-ranch-01.webp', alt: 'Dragon Ranch farm overview and character progression' },
+      { src: '/images/projects/gallery/dragon-ranch-02.webp', alt: 'Dragon Ranch crop fields and dragon collection objective' },
+      { src: '/images/projects/gallery/dragon-ranch-03.webp', alt: 'Dragon Ranch crop building and dragon care gameplay' },
     ],
   },
   {
@@ -118,7 +118,7 @@ export const projects: Project[] = [
     year: '2024',
     genre: 'Casual Puzzle',
     platforms: ['Android'],
-    imageUrl: '/images/projects/catmelon-kitty-merge-fever.png',
+    imageUrl: '/images/projects/catmelon-kitty-merge-fever.webp',
     link: 'https://drive.google.com/file/d/153Zfy7d8Ltkg2QTY1tBVhmjJkbO0VHes/view?usp=drive_link',
     linkKind: 'drive',
     featured: true,
@@ -127,9 +127,9 @@ export const projects: Project[] = [
     role: 'Handled most development work, especially programming and gameplay mechanics.',
     tags: ['Unity', 'Puzzle', 'Casual', 'Mobile'],
     gallery: [
-      { src: '/images/projects/gallery/catmelon-01.jpg', alt: 'Catmelon home screen with the cat collection artwork' },
-      { src: '/images/projects/gallery/catmelon-02.jpg', alt: 'Catmelon merge board at the start of a game' },
-      { src: '/images/projects/gallery/catmelon-03.jpg', alt: 'Catmelon active merge puzzle with several cats in the container' },
+      { src: '/images/projects/gallery/catmelon-01.webp', alt: 'Catmelon home screen with the cat collection artwork' },
+      { src: '/images/projects/gallery/catmelon-02.webp', alt: 'Catmelon merge board at the start of a game' },
+      { src: '/images/projects/gallery/catmelon-03.webp', alt: 'Catmelon active merge puzzle with several cats in the container' },
     ],
   },
   {
@@ -137,7 +137,7 @@ export const projects: Project[] = [
     year: '2024',
     genre: 'Educational Simulation',
     platforms: ['Web'],
-    imageUrl: '/images/projects/taxland.png',
+    imageUrl: '/images/projects/taxland.webp',
     link: 'https://drive.google.com/file/d/1ySA0Bt6hdgTqGVZXnn4VMBDXJfqzMsut/view?usp=sharing',
     linkKind: 'drive',
     description:
@@ -173,9 +173,9 @@ export const projects: Project[] = [
     tags: ['Unity', 'iOS', 'Android', 'Physics', 'Arcade'],
     note: 'Formerly released on iOS; an archived Android build is available for download.',
     gallery: [
-      { src: '/images/projects/gallery/swoosh-ball-01.jpg', alt: 'Swoosh Ball home screen on the outdoor basketball court' },
-      { src: '/images/projects/gallery/swoosh-ball-02.jpg', alt: 'Swoosh Ball avatar customization screen' },
-      { src: '/images/projects/gallery/swoosh-ball-03.jpg', alt: 'Swoosh Ball swipe-shot gameplay at the hoop' },
+      { src: '/images/projects/gallery/swoosh-ball-01.webp', alt: 'Swoosh Ball home screen on the outdoor basketball court' },
+      { src: '/images/projects/gallery/swoosh-ball-02.webp', alt: 'Swoosh Ball avatar customization screen' },
+      { src: '/images/projects/gallery/swoosh-ball-03.webp', alt: 'Swoosh Ball swipe-shot gameplay at the hoop' },
     ],
   },
   {
@@ -193,9 +193,9 @@ export const projects: Project[] = [
     tags: ['Unity', '3D', 'Platformer', 'iOS', 'Android'],
     note: 'Formerly released on iOS; an archived Android build is available for download.',
     gallery: [
-      { src: '/images/projects/gallery/jump-and-boom-01.jpg', alt: 'Jump and Boom game setup with difficulty and environment options' },
-      { src: '/images/projects/gallery/jump-and-boom-02.jpg', alt: 'Jump and Boom avatar customization screen' },
-      { src: '/images/projects/gallery/jump-and-boom-03.jpg', alt: 'Jump and Boom third-person gameplay in the space arena' },
+      { src: '/images/projects/gallery/jump-and-boom-01.webp', alt: 'Jump and Boom game setup with difficulty and environment options' },
+      { src: '/images/projects/gallery/jump-and-boom-02.webp', alt: 'Jump and Boom avatar customization screen' },
+      { src: '/images/projects/gallery/jump-and-boom-03.webp', alt: 'Jump and Boom third-person gameplay in the space arena' },
     ],
   },
   {
@@ -213,9 +213,9 @@ export const projects: Project[] = [
     tags: ['Unity', 'Puzzle', 'Leaderboard', 'iOS', 'Android'],
     note: 'Formerly released on iOS; an archived Android build is available for download.',
     gallery: [
-      { src: '/images/projects/gallery/puzzling-polygons-01.jpg', alt: 'Puzzling Polygons title and player profile screen' },
-      { src: '/images/projects/gallery/puzzling-polygons-02.jpg', alt: 'Puzzling Polygons beginner level selection grid' },
-      { src: '/images/projects/gallery/puzzling-polygons-03.jpg', alt: 'Puzzling Polygons timed hexagon puzzle gameplay' },
+      { src: '/images/projects/gallery/puzzling-polygons-01.webp', alt: 'Puzzling Polygons title and player profile screen' },
+      { src: '/images/projects/gallery/puzzling-polygons-02.webp', alt: 'Puzzling Polygons beginner level selection grid' },
+      { src: '/images/projects/gallery/puzzling-polygons-03.webp', alt: 'Puzzling Polygons timed hexagon puzzle gameplay' },
     ],
   },
   {
@@ -223,7 +223,7 @@ export const projects: Project[] = [
     year: '2024',
     genre: 'Casual Runner',
     platforms: ['Android'],
-    imageUrl: '/images/projects/downtown-rush.png',
+    imageUrl: '/images/projects/downtown-rush.webp',
     link: 'https://drive.google.com/file/d/1urNKIZpdSL-N0IwHgRUDV0RcRLXKxPBW/view?usp=sharing',
     linkKind: 'drive',
     description:
@@ -231,9 +231,9 @@ export const projects: Project[] = [
     role: 'Handled design, programming, gameplay mechanics, and implementation polish.',
     tags: ['Unity', 'Runner', 'Mobile', 'Casual'],
     gallery: [
-      { src: '/images/projects/gallery/downtown-rush-01.jpg', alt: 'Downtown Rush home screen on a city street' },
-      { src: '/images/projects/gallery/downtown-rush-02.jpg', alt: 'Downtown Rush character running along the center lane' },
-      { src: '/images/projects/gallery/downtown-rush-03.jpg', alt: 'Downtown Rush score screen with city obstacles in view' },
+      { src: '/images/projects/gallery/downtown-rush-01.webp', alt: 'Downtown Rush home screen on a city street' },
+      { src: '/images/projects/gallery/downtown-rush-02.webp', alt: 'Downtown Rush character running along the center lane' },
+      { src: '/images/projects/gallery/downtown-rush-03.webp', alt: 'Downtown Rush score screen with city obstacles in view' },
     ],
   },
   {
@@ -241,7 +241,7 @@ export const projects: Project[] = [
     year: '2024',
     genre: 'Casual 3D',
     platforms: ['Android'],
-    imageUrl: '/images/projects/collecto-frenzy-3d.png',
+    imageUrl: '/images/projects/collecto-frenzy-3d.webp',
     link: 'https://drive.google.com/file/d/1uwHRye2zn1skRkvnuB63mj4IHYvobxzN/view?usp=drive_link',
     linkKind: 'drive',
     featured: true,
@@ -250,9 +250,9 @@ export const projects: Project[] = [
     role: 'Handled game design, programming, and gameplay mechanics from prototype through delivery.',
     tags: ['Unity', '3D', 'Casual', 'Systems'],
     gallery: [
-      { src: '/images/projects/gallery/collecto-frenzy-3d-01.jpg', alt: 'Collecto Frenzy 3D home screen' },
-      { src: '/images/projects/gallery/collecto-frenzy-3d-02.jpg', alt: 'Collecto Frenzy 3D level with target objects and power-ups' },
-      { src: '/images/projects/gallery/collecto-frenzy-3d-03.jpg', alt: 'Collecto Frenzy 3D level result screen' },
+      { src: '/images/projects/gallery/collecto-frenzy-3d-01.webp', alt: 'Collecto Frenzy 3D home screen' },
+      { src: '/images/projects/gallery/collecto-frenzy-3d-02.webp', alt: 'Collecto Frenzy 3D level with target objects and power-ups' },
+      { src: '/images/projects/gallery/collecto-frenzy-3d-03.webp', alt: 'Collecto Frenzy 3D level result screen' },
     ],
   },
   {
@@ -260,7 +260,7 @@ export const projects: Project[] = [
     year: '2024',
     genre: 'Casual Arcade',
     platforms: ['Android'],
-    imageUrl: '/images/projects/brickball-mania.png',
+    imageUrl: '/images/projects/brickball-mania.webp',
     link: 'https://drive.google.com/file/d/1S4ZOBXIomyNhVQOpoFm5W4yPCZiFJdeF/view?usp=sharing',
     linkKind: 'drive',
     description:
@@ -268,9 +268,9 @@ export const projects: Project[] = [
     role: 'Handled all aspects of development, including gameplay design, programming, and mechanics.',
     tags: ['Unity', 'Arcade', 'Mobile', 'Casual'],
     gallery: [
-      { src: '/images/projects/gallery/brickball-mania-01.jpg', alt: 'Brickball Mania illustrated level map' },
-      { src: '/images/projects/gallery/brickball-mania-02.jpg', alt: 'Brickball Mania level one block layout' },
-      { src: '/images/projects/gallery/brickball-mania-03.jpg', alt: 'Brickball Mania balls ricocheting between numbered blocks' },
+      { src: '/images/projects/gallery/brickball-mania-01.webp', alt: 'Brickball Mania illustrated level map' },
+      { src: '/images/projects/gallery/brickball-mania-02.webp', alt: 'Brickball Mania level one block layout' },
+      { src: '/images/projects/gallery/brickball-mania-03.webp', alt: 'Brickball Mania balls ricocheting between numbered blocks' },
     ],
   },
   {
@@ -278,7 +278,7 @@ export const projects: Project[] = [
     year: '2023',
     genre: 'Web3 Virtual World',
     platforms: ['Web'],
-    imageUrl: '/images/projects/goya-universe.jpg',
+    imageUrl: '/images/projects/goya-universe.webp',
     link: 'https://drive.google.com/file/d/1QaVAEBM0Lh84UhaIfu1FDI5vGrKkkuRG/view?usp=drive_link',
     linkKind: 'drive',
     featured: true,
@@ -319,7 +319,7 @@ export const projects: Project[] = [
     year: '2021',
     genre: 'Educational Simulation',
     platforms: ['PC', 'Web'],
-    imageUrl: '/images/projects/taxsim.png',
+    imageUrl: '/images/projects/taxsim.webp',
     link: 'https://amin-hanif.itch.io/taxsim',
     linkKind: 'itch',
     description:
@@ -333,9 +333,9 @@ export const projects: Project[] = [
         kind: 'video',
         alt: 'TaxSim animated gameplay showing the tax office simulation',
       },
-      { src: '/images/projects/gallery/taxsim-01.png', alt: 'TaxSim dialogue with a visitor at the tax service counter' },
-      { src: '/images/projects/gallery/taxsim-02.png', alt: 'TaxSim word-arrangement learning mini game' },
-      { src: '/images/projects/gallery/taxsim-03.png', alt: 'TaxSim tax payment completion at the service desk' },
+      { src: '/images/projects/gallery/taxsim-01.webp', alt: 'TaxSim dialogue with a visitor at the tax service counter' },
+      { src: '/images/projects/gallery/taxsim-02.webp', alt: 'TaxSim word-arrangement learning mini game' },
+      { src: '/images/projects/gallery/taxsim-03.webp', alt: 'TaxSim tax payment completion at the service desk' },
     ],
   },
   {
@@ -343,7 +343,7 @@ export const projects: Project[] = [
     year: '2021',
     genre: 'Adventure RPG',
     platforms: ['PC', 'Web'],
-    imageUrl: '/images/projects/adventure-of-hanacaraka.png',
+    imageUrl: '/images/projects/adventure-of-hanacaraka.webp',
     link: 'https://amin-hanif.itch.io/aoh',
     linkKind: 'itch',
     description:
@@ -357,9 +357,9 @@ export const projects: Project[] = [
         kind: 'video',
         alt: 'Adventure of Hanacaraka animated combat gameplay',
       },
-      { src: '/images/projects/gallery/adventure-of-hanacaraka-01.jpg', alt: 'Adventure of Hanacaraka title screen' },
-      { src: '/images/projects/gallery/adventure-of-hanacaraka-02.jpg', alt: 'Hanacaraka letter-learning interface and character attributes' },
-      { src: '/images/projects/gallery/adventure-of-hanacaraka-03.jpg', alt: 'Adventure of Hanacaraka world map and character preparation screen' },
+      { src: '/images/projects/gallery/adventure-of-hanacaraka-01.webp', alt: 'Adventure of Hanacaraka title screen' },
+      { src: '/images/projects/gallery/adventure-of-hanacaraka-02.webp', alt: 'Hanacaraka letter-learning interface and character attributes' },
+      { src: '/images/projects/gallery/adventure-of-hanacaraka-03.webp', alt: 'Adventure of Hanacaraka world map and character preparation screen' },
     ],
   },
   {
@@ -367,7 +367,7 @@ export const projects: Project[] = [
     year: '2022',
     genre: 'Simulation',
     platforms: ['PC'],
-    imageUrl: '/images/projects/yudi-si-anak-magang-housekeeping.png',
+    imageUrl: '/images/projects/yudi-si-anak-magang-housekeeping.webp',
     link: 'https://drive.google.com/file/d/1d1KUP7KZ8Qd6PSE8ExllBzg7LhZ3IUEn/view?usp=share_link',
     linkKind: 'drive',
     description:
@@ -375,9 +375,9 @@ export const projects: Project[] = [
     role: 'Created game design, art, story, gameplay, and dialogue database.',
     tags: ['Simulation', 'Education', 'Narrative', 'Award'],
     gallery: [
-      { src: '/images/projects/gallery/yudi-housekeeping-01.jpg', alt: 'Yudi si Anak Magang Housekeeping title screen' },
-      { src: '/images/projects/gallery/yudi-housekeeping-02.jpg', alt: 'Hotel housekeeping tutorial dialogue with the manager' },
-      { src: '/images/projects/gallery/yudi-housekeeping-03.jpg', alt: 'Yudi navigating the hotel during a Day 2 housekeeping objective' },
+      { src: '/images/projects/gallery/yudi-housekeeping-01.webp', alt: 'Yudi si Anak Magang Housekeeping title screen' },
+      { src: '/images/projects/gallery/yudi-housekeeping-02.webp', alt: 'Hotel housekeeping tutorial dialogue with the manager' },
+      { src: '/images/projects/gallery/yudi-housekeeping-03.webp', alt: 'Yudi navigating the hotel during a Day 2 housekeeping objective' },
     ],
   },
   {
@@ -385,7 +385,7 @@ export const projects: Project[] = [
     year: '2022',
     genre: 'Multiplayer Platformer',
     platforms: ['Android', 'PC', 'Web'],
-    imageUrl: '/images/projects/sleep-gravity.png',
+    imageUrl: '/images/projects/sleep-gravity.webp',
     link: 'https://unixcorp.itch.io/sleep-gravity',
     linkKind: 'itch',
     description:
@@ -393,9 +393,9 @@ export const projects: Project[] = [
     role: 'Created game design, art, core gameplay, and Photon networking.',
     tags: ['Multiplayer', 'Photon', 'Platformer', 'Cards'],
     gallery: [
-      { src: '/images/projects/gallery/sleep-gravity-01.jpg', alt: 'Sleep Gravity card selection screen' },
-      { src: '/images/projects/gallery/sleep-gravity-02.jpg', alt: 'Sleep Gravity match setup and map selection screen' },
-      { src: '/images/projects/gallery/sleep-gravity-03.jpg', alt: 'Sleep Gravity side-scrolling multiplayer gameplay' },
+      { src: '/images/projects/gallery/sleep-gravity-01.webp', alt: 'Sleep Gravity card selection screen' },
+      { src: '/images/projects/gallery/sleep-gravity-02.webp', alt: 'Sleep Gravity match setup and map selection screen' },
+      { src: '/images/projects/gallery/sleep-gravity-03.webp', alt: 'Sleep Gravity side-scrolling multiplayer gameplay' },
     ],
   },
   {
@@ -403,7 +403,7 @@ export const projects: Project[] = [
     year: '2020',
     genre: 'Simulation',
     platforms: ['PC'],
-    imageUrl: '/images/projects/life-of-a-dropshipper.png',
+    imageUrl: '/images/projects/life-of-a-dropshipper.webp',
     link: 'https://drive.google.com/drive/folders/1dbIn3c8PiSNC_FVIzIU-zGDvRcEW0z38?usp=sharing',
     linkKind: 'drive',
     description:
@@ -424,7 +424,7 @@ export const projects: Project[] = [
     year: '2020',
     genre: 'Roguelite',
     platforms: ['Android', 'PC'],
-    imageUrl: '/images/projects/mysticalipse-dungeon.png',
+    imageUrl: '/images/projects/mysticalipse-dungeon.webp',
     link: 'https://drive.google.com/drive/folders/1XDNVrY3BjNq0WMhC1UcTEqSd3ARiN7aV?usp=share_link',
     linkKind: 'drive',
     description:
@@ -445,7 +445,7 @@ export const projects: Project[] = [
     year: '2020',
     genre: 'Survival Horror',
     platforms: ['PC', 'Web'],
-    imageUrl: '/images/projects/isolated-forest.png',
+    imageUrl: '/images/projects/isolated-forest.webp',
     link: 'https://amin-hanif.itch.io/isolated-forest',
     linkKind: 'itch',
     description:
@@ -459,7 +459,7 @@ export const projects: Project[] = [
         kind: 'video',
         alt: 'Isolated Forest animated crafting and survival gameplay',
       },
-      { src: '/images/projects/gallery/isolated-forest-01.jpg', alt: 'Isolated Forest top-down exploration with the survival HUD' },
+      { src: '/images/projects/gallery/isolated-forest-01.webp', alt: 'Isolated Forest top-down exploration with the survival HUD' },
     ],
   },
   {
@@ -467,7 +467,7 @@ export const projects: Project[] = [
     year: '2020',
     genre: 'Multiplayer Platformer',
     platforms: ['Android', 'PC', 'Web'],
-    imageUrl: '/images/projects/tag-runner.png',
+    imageUrl: '/images/projects/tag-runner.webp',
     link: 'https://play.google.com/store/apps/details?id=com.unixcorp.tagrunner',
     linkKind: 'play',
     description:
@@ -476,9 +476,9 @@ export const projects: Project[] = [
     tags: ['Multiplayer', 'Photon', 'Platformer', 'Mobile'],
     note: 'Legacy Play Store link restored; APK update pending if the listing is unavailable.',
     gallery: [
-      { src: '/images/projects/gallery/tag-runner-01.jpg', alt: 'Tag Runner multiplayer lobby' },
-      { src: '/images/projects/gallery/tag-runner-02.jpg', alt: 'Tag Runner matchmaking and room settings' },
-      { src: '/images/projects/gallery/tag-runner-03.jpg', alt: 'Tag Runner platforming arena with mobile controls' },
+      { src: '/images/projects/gallery/tag-runner-01.webp', alt: 'Tag Runner multiplayer lobby' },
+      { src: '/images/projects/gallery/tag-runner-02.webp', alt: 'Tag Runner matchmaking and room settings' },
+      { src: '/images/projects/gallery/tag-runner-03.webp', alt: 'Tag Runner platforming arena with mobile controls' },
     ],
   },
   {
@@ -486,7 +486,7 @@ export const projects: Project[] = [
     year: '2020',
     genre: 'Educational Casual',
     platforms: ['PC', 'Web'],
-    imageUrl: '/images/projects/the-covid-hero.png',
+    imageUrl: '/images/projects/the-covid-hero.webp',
     link: 'https://amin-hanif.itch.io/the-covid-hero',
     linkKind: 'itch',
     description:
@@ -500,9 +500,9 @@ export const projects: Project[] = [
         kind: 'video',
         alt: 'The Covid Hero animated one-touch mobile gameplay',
       },
-      { src: '/images/projects/gallery/the-covid-hero-01.jpg', alt: 'The Covid Hero title screen in a mobile phone frame' },
-      { src: '/images/projects/gallery/the-covid-hero-02.jpg', alt: 'The Covid Hero one-touch gameplay screen' },
-      { src: '/images/projects/gallery/the-covid-hero-03.jpg', alt: 'The Covid Hero leaderboard screen' },
+      { src: '/images/projects/gallery/the-covid-hero-01.webp', alt: 'The Covid Hero title screen in a mobile phone frame' },
+      { src: '/images/projects/gallery/the-covid-hero-02.webp', alt: 'The Covid Hero one-touch gameplay screen' },
+      { src: '/images/projects/gallery/the-covid-hero-03.webp', alt: 'The Covid Hero leaderboard screen' },
     ],
   },
   {
@@ -510,7 +510,7 @@ export const projects: Project[] = [
     year: '2018',
     genre: 'Cultural Simulation',
     platforms: ['Android'],
-    imageUrl: '/images/projects/hide-n-seek-nusantara.png',
+    imageUrl: '/images/projects/hide-n-seek-nusantara.webp',
     link: 'https://play.google.com/store/apps/details?id=com.unixcorp.hidenseeknusantara',
     linkKind: 'play',
     description:
@@ -616,4 +616,3 @@ export const awards = [
   '2nd Place - Cisewu & Timun Mas, SEAMEO School Network Game Development Online Training 2017',
   '3rd Place - Pangeran Diponegoro, GEMAS Digital Game Competition 2016',
 ];
-

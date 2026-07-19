@@ -210,10 +210,10 @@ def build():
         stat_x += stat_width + stat_gap
 
     projects = [
-        ROOT / "public" / "images" / "projects" / "heisters.png",
-        ROOT / "public" / "images" / "projects" / "ojol-life-food-delivery-game.png",
+        ROOT / "public" / "images" / "projects" / "heisters.webp",
+        ROOT / "public" / "images" / "projects" / "ojol-life-food-delivery-game.webp",
         ROOT / "public" / "images" / "projects" / "dragon-ranch.webp",
-        ROOT / "public" / "images" / "projects" / "catmelon-kitty-merge-fever.png",
+        ROOT / "public" / "images" / "projects" / "catmelon-kitty-merge-fever.webp",
     ]
     tile_size = 128
     grid_gap_x = 24
