@@ -483,6 +483,14 @@ export const projects: Project[] = [
       'A cultural management game about running a Javanese food stall, managing ingredients, and paying rent within 30 days.',
     role: 'Created the game design, storyline, economy loop, and core gameplay.',
     tags: ['Simulation', 'Culture', 'Economy', 'Management'],
+    gallery: [
+      {
+        src: '/videos/projects/javanese-cuisine-gameplay.mp4',
+        poster: '/videos/projects/javanese-cuisine-gameplay.jpg',
+        kind: 'video',
+        alt: 'Javanese Cuisine animated food-stall management gameplay',
+      },
+    ],
   },
   {
     title: 'Kompleks Lalu Lintas',
@@ -496,6 +504,14 @@ export const projects: Project[] = [
       'A traffic-rule learning simulation that combines guided exploration with puzzles, trivia, and educational mini games.',
     role: 'Created game design, art, story, core gameplay, and the dialogue database.',
     tags: ['Simulation', 'Education', 'Traffic', 'Mini Games'],
+    gallery: [
+      {
+        src: '/videos/projects/kompleks-lalu-lintas-gameplay.mp4',
+        poster: '/videos/projects/kompleks-lalu-lintas-gameplay.jpg',
+        kind: 'video',
+        alt: 'Kompleks Lalu Lintas animated exploration and traffic education gameplay',
+      },
+    ],
   },
   {
     title: 'Adventure of Hanacaraka',
