@@ -166,13 +166,14 @@ def build():
     name = "Amin Hanif"
     title = "Unity Game Developer"
     role = "Technical Initiative Lead"
+    body_line = "Games, Android products, and technical leadership."
     text_x = 318
     max_name_width = 718 - text_x - 44
 
     name_font = fit_font(draw, name, max_name_width, 64, 54, "bold")
     title_font = load_font(32, "semibold")
     role_font = load_font(27)
-    body_font = load_font(30)
+    body_font = fit_font(draw, body_line, 570, 30, 24, "regular")
     body_font_2 = load_font(28)
     stat_number_font = load_font(31, "bold")
     stat_label_font = load_font(21)
@@ -182,10 +183,10 @@ def build():
     draw.text((scaled(text_x), scaled(220)), title, fill=(78, 213, 199, 255), font=title_font)
     draw.text((scaled(text_x), scaled(270)), role, fill=(166, 176, 191, 255), font=role_font)
 
-    draw.text((scaled(106), scaled(356)), "Mobile, PC, web, AR, and simulation games.", fill=(224, 231, 240, 255), font=body_font)
+    draw.text((scaled(106), scaled(356)), body_line, fill=(224, 231, 240, 255), font=body_font)
     draw.text((scaled(106), scaled(401)), "Prototype to release.", fill=(224, 231, 240, 255), font=body_font_2)
 
-    stats = [("7+", "Years"), ("20+", "Games"), ("10+", "Awards")]
+    stats = [("7+", "Years"), ("30+", "Projects"), ("10+", "Awards")]
     stat_x = 106
     stat_width = 170
     stat_gap = 14

@@ -979,6 +979,18 @@ h3 {
   font-size: 12px;
 }
 
+.filter-button.is-portfolio-filter {
+  min-width: 96px;
+  justify-content: space-between;
+  border-color: color-mix(in srgb, var(--teal) 34%, var(--line));
+  background: color-mix(in srgb, var(--green-soft) 62%, var(--button-ghost-bg));
+  color: var(--strong-text);
+}
+
+.filter-button.is-portfolio-filter + .filter-button:not(.is-portfolio-filter) {
+  margin-left: 6px;
+}
+
 .filter-button:hover,
 .filter-button:focus-visible,
 .filter-button.is-active {
@@ -991,6 +1003,19 @@ h3 {
 
 .filter-button.is-active {
   box-shadow: inset 0 0 0 1px rgba(80, 216, 199, 0.18);
+}
+
+.project-status {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 11px;
+  border: 1px solid color-mix(in srgb, var(--teal) 40%, var(--line));
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--green-soft) 70%, transparent);
+  color: var(--teal);
+  font-size: 13px;
+  font-weight: 850;
 }
 
 .project-card {

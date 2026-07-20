@@ -13,12 +13,13 @@ export interface Project {
   genre: string;
   platforms: string[];
   imageUrl: string;
-  link: string;
+  link?: string;
   linkKind: LinkKind;
   description: string;
   role: string;
   tags: string[];
   gallery?: ProjectMedia[];
+  portfolioType?: 'game' | 'app' | 'publishing';
   featured?: boolean;
   note?: string;
 }
@@ -45,13 +46,131 @@ export const profile = {
 };
 
 export const stats = [
-  { value: '7+', label: 'Years building games' },
-  { value: '20+', label: 'Games and interactive projects' },
+  { value: '7+', label: 'Years building games and apps' },
+  { value: '30+', label: 'Games, apps, and interactive projects' },
   { value: '10+', label: 'Awards and recognitions' },
-  { value: '5', label: 'Mobile, PC, web, AR, simulation' },
+  { value: '6', label: 'Android, PC, web, iOS, AR, and Wear OS' },
 ];
 
 export const projects: Project[] = [
+  {
+    title: 'TillTally: Cash Counter',
+    year: '2026',
+    genre: 'Business Utility',
+    platforms: ['Android'],
+    imageUrl: '/images/projects/tilltally.webp',
+    linkKind: 'play',
+    portfolioType: 'app',
+    description:
+      'An offline-first cash-drawer counter for counting denominations, reconciling expected cash, and calculating deposits.',
+    role:
+      'Designed and built the native Android app end to end, including exact money calculations, Room history, CSV/PDF export, backup and restore, localization, and Play Billing.',
+    tags: ['Kotlin', 'Jetpack Compose', 'Room', 'Offline-first', 'PDF / CSV'],
+    note: 'Google Play review in progress.',
+    gallery: [
+      { src: '/images/projects/gallery/tilltally-01.webp', alt: 'TillTally cash denomination counting screen' },
+      { src: '/images/projects/gallery/tilltally-02.webp', alt: 'TillTally cash drawer reconciliation review' },
+      { src: '/images/projects/gallery/tilltally-03.webp', alt: 'TillTally closing history and variance records' },
+    ],
+  },
+  {
+    title: 'LaterPin: Remind Me Later',
+    year: '2026',
+    genre: 'Productivity App',
+    platforms: ['Android'],
+    imageUrl: '/images/projects/laterpin.webp',
+    link: 'https://play.google.com/store/apps/details?id=com.aminhanifm.laterpin',
+    linkKind: 'play',
+    portfolioType: 'app',
+    description:
+      'A privacy-focused reminder app for saving shared links and text, then resurfacing them through local notifications.',
+    role:
+      'Designed and built the native Android product end to end, including scheduling, local persistence, RTL localization, and Play Billing.',
+    tags: ['Kotlin', 'Jetpack Compose', 'Room', 'Material 3', 'Play Billing'],
+    gallery: [
+      { src: '/images/projects/gallery/laterpin-01.webp', alt: 'LaterPin upcoming reminders grouped by schedule' },
+      { src: '/images/projects/gallery/laterpin-02.webp', alt: 'LaterPin share capture and reminder scheduling flow' },
+      { src: '/images/projects/gallery/laterpin-03.webp', alt: 'LaterPin recurring reminder configuration' },
+    ],
+  },
+  {
+    title: 'Arrow Flow',
+    year: '2026',
+    genre: 'Puzzle',
+    platforms: ['Android'],
+    imageUrl: '/images/projects/arrow-flow.webp',
+    link: 'https://play.google.com/store/apps/details?id=com.aminhanifm.arrowflow',
+    linkKind: 'play',
+    description:
+      'A clean one-tap puzzle game about reading blocked paths and clearing every arrow from an evolving board.',
+    role:
+      'Built the complete Unity release, including a guaranteed-solvable procedural generator, special tiles, scoring, ads, and Play Games leaderboard support.',
+    tags: ['Unity', 'Procedural', 'Puzzle', 'AdMob', 'Play Games'],
+    gallery: [
+      { src: '/images/projects/gallery/arrow-flow-01.webp', alt: 'Arrow Flow board-clearing puzzle gameplay' },
+      { src: '/images/projects/gallery/arrow-flow-02.webp', alt: 'Arrow Flow directional path puzzle' },
+      { src: '/images/projects/gallery/arrow-flow-03.webp', alt: 'Arrow Flow special tile mechanics' },
+    ],
+  },
+  {
+    title: 'Ding!',
+    year: '2026',
+    genre: 'Casual Timing',
+    platforms: ['Android'],
+    imageUrl: '/images/projects/ding.webp',
+    link: 'https://play.google.com/store/apps/details?id=com.aminhanifm.ding',
+    linkKind: 'play',
+    description:
+      'A portrait one-tap elevator timing game where precise stops build combos while misses cost hearts.',
+    role:
+      'Designed and built the full Unity game, including deterministic stop evaluation, progression, feedback, ads, and leaderboard integration.',
+    tags: ['Unity', 'Casual', 'Game Feel', 'AdMob', 'Play Games'],
+    gallery: [
+      { src: '/images/projects/gallery/ding-01.webp', alt: 'Ding one-tap elevator timing gameplay' },
+      { src: '/images/projects/gallery/ding-02.webp', alt: 'Ding perfect stop result and scoring' },
+      { src: '/images/projects/gallery/ding-03.webp', alt: 'Ding combo and progression gameplay' },
+    ],
+  },
+  {
+    title: 'Block Garden',
+    year: '2026',
+    genre: 'Cozy Puzzle',
+    platforms: ['Android'],
+    imageUrl: '/images/projects/block-garden.webp',
+    link: 'https://play.google.com/store/apps/details?id=com.aminhanifm.blockgarden',
+    linkKind: 'play',
+    description:
+      'A calm portrait block-placement puzzle with row and column clearing, combos, and a cozy garden presentation.',
+    role:
+      'Built and published the complete Unity game, including drag-and-drop play, scoring, generated visuals, ads, and Play Games leaderboards.',
+    tags: ['Unity', 'Puzzle', 'Mobile UI', 'AdMob', 'Play Games'],
+    gallery: [
+      { src: '/images/projects/gallery/block-garden-01.webp', alt: 'Block Garden cozy block puzzle board' },
+      { src: '/images/projects/gallery/block-garden-02.webp', alt: 'Block Garden row and column clearing' },
+      { src: '/images/projects/gallery/block-garden-03.webp', alt: 'Block Garden combo scoring' },
+    ],
+  },
+  {
+    title: 'Watch Fidget',
+    year: '2026',
+    genre: 'Publishing Support',
+    platforms: ['Wear OS'],
+    imageUrl: '/images/projects/watch-fidget.webp',
+    link: 'https://play.google.com/store/apps/details?id=com.sherensaber.watchfidget',
+    linkKind: 'play',
+    portfolioType: 'publishing',
+    description:
+      'A smartwatch collection of tactile mini fidgets for quick, playful Wear OS interactions.',
+    role:
+      'Managed Google Play release preparation and publication for the project.',
+    tags: ['Google Play', 'Wear OS', 'Release', 'Publishing'],
+    note: 'Included specifically for my Google Play publishing contribution.',
+    gallery: [
+      { src: '/images/projects/gallery/watch-fidget-01.webp', alt: 'Watch Fidget spinner interaction on Wear OS' },
+      { src: '/images/projects/gallery/watch-fidget-02.webp', alt: 'Watch Fidget pop-it interaction on Wear OS' },
+      { src: '/images/projects/gallery/watch-fidget-03.webp', alt: 'Watch Fidget slime interaction on Wear OS' },
+    ],
+  },
   {
     title: 'Heisters',
     year: '2022',
@@ -114,6 +233,19 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: 'Animal Chase',
+    year: '2023',
+    genre: 'Hyper Casual',
+    platforms: ['Android'],
+    imageUrl: '/images/projects/animal-chase.webp',
+    link: 'https://play.google.com/store/apps/details?id=com.unixcorp.animalchase',
+    linkKind: 'play',
+    description:
+      'A compact forest chase game about avoiding hunters and traps while collecting coins to unlock animal skins.',
+    role: 'Created level design, core gameplay, analytics, ads, and in-app purchase systems.',
+    tags: ['Unity', 'Casual', 'Mobile', 'Ads', 'IAP'],
+  },
+  {
     title: 'Catmelon: Kitty Merge Fever',
     year: '2024',
     genre: 'Casual Puzzle',
@@ -150,7 +282,7 @@ export const projects: Project[] = [
     year: '2023',
     genre: 'Augmented Reality',
     platforms: ['Mobile', 'PC'],
-    imageUrl: '/images/projects/krispy-kreme-ar-game.svg',
+    imageUrl: '/images/projects/krispy-kreme-ar-game.webp',
     link: 'https://drive.google.com/file/d/1SQ7MBLer7ONgzqdSg1ai3xg4kafvAWE2/view?usp=drive_link',
     linkKind: 'drive',
     description:
@@ -293,7 +425,7 @@ export const projects: Project[] = [
     year: '2023',
     genre: 'Augmented Reality',
     platforms: ['Mobile', 'PC'],
-    imageUrl: '/images/projects/krispy-kreme-ar-game.svg',
+    imageUrl: '/images/projects/kfc-ar-game.webp',
     link: 'https://drive.google.com/file/d/1l4veG-OZHedKNyJSdiLnZlvUmr1-Bgy5/view?usp=sharing',
     linkKind: 'drive',
     description:
@@ -306,9 +438,10 @@ export const projects: Project[] = [
     year: '2023',
     genre: 'AR Utility',
     platforms: ['Mobile'],
-    imageUrl: '/images/projects/krispy-kreme-ar-game.svg',
+    imageUrl: '/images/projects/furniture-ar.webp',
     link: 'https://drive.google.com/file/d/1kIDeO71JEw7gvmI9KHu0GCjX1aUBHuD3/view?usp=sharing',
     linkKind: 'drive',
+    portfolioType: 'app',
     description:
       'An AR app for placing, rotating, and scaling virtual furniture in real-world spaces.',
     role: 'Handled development and interaction implementation.',
@@ -337,6 +470,32 @@ export const projects: Project[] = [
       { src: '/images/projects/gallery/taxsim-02.webp', alt: 'TaxSim word-arrangement learning mini game' },
       { src: '/images/projects/gallery/taxsim-03.webp', alt: 'TaxSim tax payment completion at the service desk' },
     ],
+  },
+  {
+    title: 'Javanese Cuisine',
+    year: '2021',
+    genre: 'Cultural Simulation',
+    platforms: ['PC'],
+    imageUrl: '/images/projects/javanese-cuisine.webp',
+    link: 'https://drive.google.com/file/d/1KjzrO6ocj1siLeuNpgQLRMburaqBmjfZ/view?usp=share_link',
+    linkKind: 'drive',
+    description:
+      'A cultural management game about running a Javanese food stall, managing ingredients, and paying rent within 30 days.',
+    role: 'Created the game design, storyline, economy loop, and core gameplay.',
+    tags: ['Simulation', 'Culture', 'Economy', 'Management'],
+  },
+  {
+    title: 'Kompleks Lalu Lintas',
+    year: '2021',
+    genre: 'Educational Simulation',
+    platforms: ['Android', 'PC'],
+    imageUrl: '/images/projects/kompleks-lalu-lintas.webp',
+    link: 'https://drive.google.com/drive/folders/1AMHhhM1Q3oBhgp78PJohZQLzJc7wIAPO?usp=share_link',
+    linkKind: 'drive',
+    description:
+      'A traffic-rule learning simulation that combines guided exploration with puzzles, trivia, and educational mini games.',
+    role: 'Created game design, art, story, core gameplay, and the dialogue database.',
+    tags: ['Simulation', 'Education', 'Traffic', 'Mini Games'],
   },
   {
     title: 'Adventure of Hanacaraka',

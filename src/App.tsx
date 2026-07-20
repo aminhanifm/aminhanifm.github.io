@@ -42,7 +42,7 @@ const navSectionIds = navItems.map((item) => item.id);
 const heroPreviewProjects = featuredProjects.slice(0, 4);
 
 type Theme = 'dark' | 'light';
-type ProjectFilterId = 'all' | 'featured' | 'mobile' | 'pc-web' | 'ar' | 'simulation' | 'leadership';
+type ProjectFilterId = 'games' | 'apps' | 'featured' | 'mobile' | 'pc-web' | 'ar' | 'simulation' | 'leadership' | 'all';
 type ProjectDetailSource = 'featured_work' | 'project_library' | 'project_detail_drawer';
 type ProjectDetailCloseMethod = 'backdrop' | 'button' | 'escape' | 'browser_back';
 type ProjectBrowseDirection = 'previous' | 'next';
@@ -105,13 +105,15 @@ const drawerContentVariants: Variants = {
 };
 
 const projectFilters: Array<{ id: ProjectFilterId; label: string }> = [
-  { id: 'all', label: 'All' },
+  { id: 'games', label: 'Games' },
+  { id: 'apps', label: 'Apps' },
   { id: 'featured', label: 'Featured' },
   { id: 'mobile', label: 'Mobile' },
   { id: 'pc-web', label: 'PC / Web' },
   { id: 'ar', label: 'AR' },
   { id: 'simulation', label: 'Simulation' },
   { id: 'leadership', label: 'Leadership' },
+  { id: 'all', label: 'All' },
 ];
 
 function getInitialTheme(): Theme {
@@ -265,7 +267,9 @@ function useActiveSection(sectionIds: string[]) {
 
 function matchesProjectFilter(project: Project, filter: ProjectFilterId) {
   if (filter === 'all') return true;
+  if (filter === 'games') return project.portfolioType !== 'app' && project.portfolioType !== 'publishing';
   if (filter === 'featured') return Boolean(project.featured);
+  if (filter === 'apps') return project.portfolioType === 'app' || project.portfolioType === 'publishing';
 
   const platforms = project.platforms.map((platform) => platform.toLowerCase());
   const tags = project.tags.map((tag) => tag.toLowerCase());
@@ -273,7 +277,7 @@ function matchesProjectFilter(project: Project, filter: ProjectFilterId) {
   const role = project.role.toLowerCase();
 
   if (filter === 'mobile') {
-    return platforms.some((platform) => ['android', 'ios', 'mobile'].includes(platform)) || tags.includes('mobile');
+    return platforms.some((platform) => ['android', 'ios', 'mobile', 'wear os'].includes(platform)) || tags.includes('mobile');
   }
 
   if (filter === 'pc-web') {
@@ -388,17 +392,21 @@ const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(function ProjectCa
           {project.note ? <p className="project-note">{project.note}</p> : null}
         </div>
         <div className="project-actions">
-          <a
-            className="icon-link"
-            href={project.link}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`${labelForLink(project.linkKind)} link for ${project.title}`}
-            onClick={() => trackProjectLinkClick(project, trackingSource)}
-          >
-            {iconForLink(project.linkKind)}
-            <span>{labelForLink(project.linkKind)}</span>
-          </a>
+          {project.link ? (
+            <a
+              className="icon-link"
+              href={project.link}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${labelForLink(project.linkKind)} link for ${project.title}`}
+              onClick={() => trackProjectLinkClick(project, trackingSource)}
+            >
+              {iconForLink(project.linkKind)}
+              <span>{labelForLink(project.linkKind)}</span>
+            </a>
+          ) : (
+            <span className="project-status">In review</span>
+          )}
           <button className="detail-button" type="button" onClick={(event) => onOpen(project, event.currentTarget)} aria-label={`Open project details for ${project.title}`} title="Project details">
             <FaInfoCircle aria-hidden="true" />
           </button>
@@ -488,6 +496,8 @@ function ProjectDetailsDrawer({
   const currentMediaIndex = Math.min(activeMediaIndex, mediaItems.length - 1);
   const currentMedia = mediaItems[currentMediaIndex];
   const hasGameplayGallery = Boolean(project.gallery?.length);
+  const isAppPortfolio = project.portfolioType === 'app' || project.portfolioType === 'publishing';
+  const galleryLabel = isAppPortfolio ? 'App gallery' : 'Gameplay gallery';
   const isVideoMedia = currentMedia.kind === 'video';
   const prefersReducedMotion = typeof window !== 'undefined'
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -613,13 +623,13 @@ function ProjectDetailsDrawer({
               </m.div>
             </AnimatePresence>
             <div className="case-media-meta" aria-hidden="true">
-              <span>{isVideoMedia ? 'Animated gameplay' : hasGameplayGallery ? 'Gameplay gallery' : 'Project artwork'}</span>
+              <span>{isVideoMedia ? (isAppPortfolio ? 'Animated preview' : 'Animated gameplay') : hasGameplayGallery ? galleryLabel : 'Project artwork'}</span>
               <strong>{currentMediaIndex + 1} / {mediaItems.length}</strong>
             </div>
           </div>
 
           {hasGameplayGallery && mediaItems.length > 1 ? (
-            <div className="case-media-thumbnails" aria-label={`${project.title} gameplay gallery`}>
+            <div className="case-media-thumbnails" aria-label={`${project.title} ${galleryLabel.toLowerCase()}`}>
               {mediaItems.map((media, index) => (
                 <button
                   className={index === currentMediaIndex ? 'is-active' : undefined}
@@ -670,7 +680,7 @@ function ProjectDetailsDrawer({
           </div>
           <div>
             <span>Link</span>
-            <strong>{labelForLink(project.linkKind)}</strong>
+            <strong>{project.link ? labelForLink(project.linkKind) : 'In review'}</strong>
           </div>
         </div>
 
@@ -696,17 +706,19 @@ function ProjectDetailsDrawer({
 
         <div className="case-actions">
           <div className="case-primary-actions">
-            <a
-              className="button primary"
-              href={project.link}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`Open ${labelForLink(project.linkKind)} for ${project.title}`}
-              onClick={() => trackProjectLinkClick(project, 'project_detail_drawer')}
-            >
-              {iconForLink(project.linkKind)}
-              {labelForLink(project.linkKind)}
-            </a>
+            {project.link ? (
+              <a
+                className="button primary"
+                href={project.link}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open ${labelForLink(project.linkKind)} for ${project.title}`}
+                onClick={() => trackProjectLinkClick(project, 'project_detail_drawer')}
+              >
+                {iconForLink(project.linkKind)}
+                {labelForLink(project.linkKind)}
+              </a>
+            ) : null}
             <button className="button ghost" type="button" onClick={() => void copyProjectLink()} aria-live="polite">
               {copied ? <FaCheck aria-hidden="true" /> : <FaLink aria-hidden="true" />}
               {copied ? 'Copied' : 'Copy link'}
@@ -750,7 +762,7 @@ function ProjectDetailsDrawer({
 
 function App() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
-  const [activeFilter, setActiveFilter] = useState<ProjectFilterId>('all');
+  const [activeFilter, setActiveFilter] = useState<ProjectFilterId>('games');
   const [selectedProject, setSelectedProject] = useState<Project | null>(() => projectFromLocation());
   const [drawerProjectList, setDrawerProjectList] = useState<Project[]>(projects);
   const [isDrawerClosing, setIsDrawerClosing] = useState(false);
@@ -986,8 +998,8 @@ function App() {
             <p className="eyebrow">Unity Game Developer | Technical Initiative Lead</p>
             <h1>Amin Hanif</h1>
             <p className="lead">
-              I build mobile, PC, web, AR, and simulation games from prototype through release,
-              combining hands-on Unity development with technical planning, review, and production support.
+              I build games and focused Android products from prototype through release, combining hands-on
+              Unity and native development with technical planning, review, and production support.
             </p>
             <p className="availability-pill">
               <span aria-hidden="true" />
@@ -1089,7 +1101,7 @@ function App() {
         <section className="section-shell">
           <div className="section-heading" data-reveal="section">
             <p className="eyebrow">Featured Work</p>
-            <h2>Featured games across studio, indie, and contract work.</h2>
+            <h2>Featured games and products across studio, indie, and contract work.</h2>
           </div>
           <div className="featured-grid">
             {featuredProjects.map((project, index) => (
@@ -1106,18 +1118,24 @@ function App() {
 
         <section className="section-shell projects-section" id="projects">
           <div className="section-heading" data-reveal="section">
-            <p className="eyebrow">Project Library</p>
-            <h2>Mobile, web, PC, AR, Web3, and simulation projects.</h2>
+            <p className="eyebrow">Games & Apps</p>
+            <h2>Game releases and focused Android products, organized as separate portfolios.</h2>
           </div>
           <div className="project-toolbar" data-reveal="item" style={revealStyle(0)}>
             <div className="filter-heading" aria-live="polite">
               <FaFilter aria-hidden="true" />
-              <span>{filteredProjects.length} of {projects.length} projects</span>
+              <span>
+                {activeFilter === 'games'
+                  ? `Game Portfolio - ${filteredProjects.length} projects`
+                  : activeFilter === 'apps'
+                    ? `App Portfolio - ${filteredProjects.length} projects`
+                    : `${filteredProjects.length} of ${projects.length} projects`}
+              </span>
             </div>
             <div className="filter-group" aria-label="Filter projects">
               {projectFilterOptions.map((filter) => (
                 <button
-                  className={activeFilter === filter.id ? 'filter-button is-active' : 'filter-button'}
+                  className={`filter-button${activeFilter === filter.id ? ' is-active' : ''}${filter.id === 'games' || filter.id === 'apps' ? ' is-portfolio-filter' : ''}`}
                   type="button"
                   key={filter.id}
                   onClick={() => selectProjectFilter(filter.id)}
