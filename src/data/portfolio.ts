@@ -100,7 +100,7 @@ export const projects: Project[] = [
     year: '2026',
     genre: 'Data Quality Tool',
     platforms: ['Web'],
-    imageUrl: '/images/projects/csv-health-overview.png',
+    imageUrl: '/images/projects/csv-health-overview.jpg',
     link: 'https://aminhanifm.github.io/projects/csv-health/',
     linkKind: 'web',
     linkLabel: 'Live demo',
@@ -114,7 +114,7 @@ export const projects: Project[] = [
     tags: ['React', 'TypeScript', 'Data quality', 'Privacy', 'Open source'],
     gallery: [
       {
-        src: '/images/projects/csv-health-overview.png',
+        src: '/images/projects/csv-health-overview.jpg',
         alt: 'CSV Health sample dataset overview with statistics and quality indicators',
       },
     ],
