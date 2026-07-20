@@ -120,6 +120,30 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: 'RepoReady',
+    year: '2026',
+    genre: 'Developer Tool',
+    platforms: ['Web'],
+    imageUrl: '/images/projects/repo-ready-social.png',
+    link: 'https://aminhanifm.github.io/projects/repo-ready/',
+    linkKind: 'web',
+    linkLabel: 'Live app',
+    sourceLink: 'https://github.com/aminhanifm/RepoReady',
+    portfolioType: 'app',
+    featured: true,
+    description:
+      'Evidence-based public repository auditing with readiness scores, scan coverage, check-level evidence, and prioritized improvements.',
+    role:
+      'Built the static React and strict TypeScript application, deterministic 24-rule scoring engine, resilient GitHub API collection, accessible report interface, and Markdown/JSON exports.',
+    tags: ['React', 'TypeScript', 'GitHub API', 'Accessibility', 'Open source'],
+    gallery: [
+      {
+        src: '/images/projects/repo-ready-social.png',
+        alt: 'RepoReady evidence-based repository readiness report preview',
+      },
+    ],
+  },
+  {
     title: 'Arrow Flow',
     year: '2026',
     genre: 'Puzzle',
