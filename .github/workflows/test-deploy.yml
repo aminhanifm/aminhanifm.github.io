@@ -18,6 +18,13 @@ jobs:
           ref: main
           path: csv-health
 
+      - name: Checkout RepoReady
+        uses: actions/checkout@v4
+        with:
+          repository: aminhanifm/RepoReady
+          ref: main
+          path: repo-ready
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
@@ -26,6 +33,7 @@ jobs:
           cache-dependency-path: |
             package-lock.json
             csv-health/package-lock.json
+            repo-ready/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -56,3 +64,21 @@ jobs:
           mkdir -p dist/projects/csv-health
           cp -R csv-health/dist/. dist/projects/csv-health/
           test -f dist/projects/csv-health/index.html
+
+      - name: Install RepoReady dependencies
+        working-directory: repo-ready
+        run: npm ci
+
+      - name: Audit RepoReady production dependencies
+        working-directory: repo-ready
+        run: npm audit --omit=dev
+
+      - name: Build RepoReady
+        working-directory: repo-ready
+        run: npm run build -- --base=/projects/repo-ready/
+
+      - name: Add RepoReady to site
+        run: |
+          mkdir -p dist/projects/repo-ready
+          cp -R repo-ready/dist/. dist/projects/repo-ready/
+          test -f dist/projects/repo-ready/index.html
