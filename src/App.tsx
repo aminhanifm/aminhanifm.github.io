@@ -318,12 +318,16 @@ function labelForLink(kind: LinkKind) {
   return 'Open link';
 }
 
+function labelForProjectLink(project: Project) {
+  return project.linkLabel ?? labelForLink(project.linkKind);
+}
+
 function trackProjectLinkClick(project: Project, source: ProjectDetailSource) {
   trackEvent('project_link_click', {
     project_title: project.title,
     project_year: project.year,
     link_kind: project.linkKind,
-    link_label: labelForLink(project.linkKind),
+    link_label: labelForProjectLink(project),
     source,
   });
 }
@@ -391,22 +395,36 @@ const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(function ProjectCa
           </div>
           {project.note ? <p className="project-note">{project.note}</p> : null}
         </div>
-        <div className="project-actions">
+        <div
+          className={project.sourceLink ? 'project-actions project-actions--has-source' : 'project-actions'}
+        >
           {project.link ? (
             <a
               className="icon-link"
               href={project.link}
               target="_blank"
               rel="noreferrer"
-              aria-label={`${labelForLink(project.linkKind)} link for ${project.title}`}
+              aria-label={`${labelForProjectLink(project)} for ${project.title}`}
               onClick={() => trackProjectLinkClick(project, trackingSource)}
             >
               {iconForLink(project.linkKind)}
-              <span>{labelForLink(project.linkKind)}</span>
+              <span>{labelForProjectLink(project)}</span>
             </a>
           ) : (
             <span className="project-status">In review</span>
           )}
+          {project.sourceLink ? (
+            <a
+              className="icon-link icon-link--source"
+              href={project.sourceLink}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Source code for ${project.title}`}
+            >
+              <FaGithub aria-hidden="true" />
+              <span>Source</span>
+            </a>
+          ) : null}
           <button className="detail-button" type="button" onClick={(event) => onOpen(project, event.currentTarget)} aria-label={`Open project details for ${project.title}`} title="Project details">
             <FaInfoCircle aria-hidden="true" />
           </button>
@@ -680,7 +698,7 @@ function ProjectDetailsDrawer({
           </div>
           <div>
             <span>Link</span>
-            <strong>{project.link ? labelForLink(project.linkKind) : 'In review'}</strong>
+            <strong>{project.link ? labelForProjectLink(project) : 'In review'}</strong>
           </div>
         </div>
 
@@ -712,11 +730,23 @@ function ProjectDetailsDrawer({
                 href={project.link}
                 target="_blank"
                 rel="noreferrer"
-                aria-label={`Open ${labelForLink(project.linkKind)} for ${project.title}`}
+                aria-label={`Open ${labelForProjectLink(project)} for ${project.title}`}
                 onClick={() => trackProjectLinkClick(project, 'project_detail_drawer')}
               >
                 {iconForLink(project.linkKind)}
-                {labelForLink(project.linkKind)}
+                {labelForProjectLink(project)}
+              </a>
+            ) : null}
+            {project.sourceLink ? (
+              <a
+                className="button ghost"
+                href={project.sourceLink}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Open source code for ${project.title}`}
+              >
+                <FaGithub aria-hidden="true" />
+                Source code
               </a>
             ) : null}
             <button className="button ghost" type="button" onClick={() => void copyProjectLink()} aria-live="polite">

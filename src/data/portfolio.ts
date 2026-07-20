@@ -15,6 +15,8 @@ export interface Project {
   imageUrl: string;
   link?: string;
   linkKind: LinkKind;
+  linkLabel?: string;
+  sourceLink?: string;
   description: string;
   role: string;
   tags: string[];
@@ -91,6 +93,30 @@ export const projects: Project[] = [
       { src: '/images/projects/gallery/laterpin-01.webp', alt: 'LaterPin upcoming reminders grouped by schedule' },
       { src: '/images/projects/gallery/laterpin-02.webp', alt: 'LaterPin share capture and reminder scheduling flow' },
       { src: '/images/projects/gallery/laterpin-03.webp', alt: 'LaterPin recurring reminder configuration' },
+    ],
+  },
+  {
+    title: 'CSV Health',
+    year: '2026',
+    genre: 'Data Quality Tool',
+    platforms: ['Web'],
+    imageUrl: '/images/projects/csv-health-overview.png',
+    link: 'https://aminhanifm.github.io/projects/csv-health/',
+    linkKind: 'web',
+    linkLabel: 'Live demo',
+    sourceLink: 'https://github.com/aminhanifm/CSV-Health',
+    portfolioType: 'app',
+    featured: true,
+    description:
+      'Privacy-first CSV profiling that detects missing values, duplicates, type inconsistencies, invalid dates, and unusual numerical values without uploading the file.',
+    role:
+      'Built the static React and strict TypeScript application, deterministic profiling pipeline, privacy-conscious exports, responsive interface, and automated quality gates.',
+    tags: ['React', 'TypeScript', 'Data quality', 'Privacy', 'Open source'],
+    gallery: [
+      {
+        src: '/images/projects/csv-health-overview.png',
+        alt: 'CSV Health sample dataset overview with statistics and quality indicators',
+      },
     ],
   },
   {

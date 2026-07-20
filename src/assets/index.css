@@ -1357,6 +1357,16 @@ h3 {
   padding-top: 4px;
 }
 
+.project-actions--has-source .icon-link {
+  flex: 1 1 0;
+}
+
+.icon-link--source {
+  border: 1px solid var(--line);
+  background: var(--button-ghost-bg);
+  color: var(--text);
+}
+
 .detail-button {
   flex: 0 0 38px;
   width: 38px;
