@@ -21,11 +21,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Checkout CSV Health
+        uses: actions/checkout@v4
+        with:
+          repository: aminhanifm/CSV-Health
+          ref: main
+          path: csv-health
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
           cache: 'npm'
+          cache-dependency-path: |
+            package-lock.json
+            csv-health/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -37,6 +47,19 @@ jobs:
         env:
           VITE_GA_MEASUREMENT_ID: ${{ vars.VITE_GA_MEASUREMENT_ID }}
         run: npm run build
+
+      - name: Install CSV Health dependencies
+        working-directory: csv-health
+        run: npm ci
+
+      - name: Build CSV Health
+        working-directory: csv-health
+        run: npm run build -- --base=/projects/csv-health/
+
+      - name: Add CSV Health to site
+        run: |
+          mkdir -p dist/projects/csv-health
+          cp -R csv-health/dist/. dist/projects/csv-health/
 
       - name: Configure Pages
         uses: actions/configure-pages@v6
