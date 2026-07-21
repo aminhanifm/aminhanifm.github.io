@@ -165,6 +165,29 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: 'IssueSafe',
+    year: '2026',
+    genre: 'Developer Tool',
+    platforms: ['Web', 'CLI'],
+    imageUrl: '/images/projects/issuesafe-social.svg',
+    link: 'https://aminhanifm.github.io/projects/IssueSafe/',
+    linkKind: 'web',
+    linkLabel: 'Live demo',
+    sourceLink: 'https://github.com/aminhanifm/IssueSafe',
+    portfolioType: 'app',
+    description:
+      'Sanitize developer logs and create shareable bug reports without uploading anything.',
+    role:
+      'Built the strict TypeScript redaction engine, React review interface, Node CLI, privacy-first local workflow, and cross-platform unit, package, accessibility, and browser test coverage.',
+    tags: ['React', 'TypeScript', 'CLI', 'Privacy', 'Testing', 'Open source'],
+    gallery: [
+      {
+        src: '/images/projects/issuesafe-social.svg',
+        alt: 'IssueSafe local log sanitization and review workflow preview',
+      },
+    ],
+  },
+  {
     title: 'Arrow Flow',
     year: '2026',
     genre: 'Puzzle',
