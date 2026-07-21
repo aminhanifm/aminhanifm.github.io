@@ -144,6 +144,30 @@ export const projects: Project[] = [
     ],
   },
   {
+    title: 'EnvParity',
+    year: '2026',
+    genre: 'Developer Tool',
+    platforms: ['Web', 'CLI', 'GitHub Actions'],
+    imageUrl: '/images/projects/envparity-preview.svg',
+    link: 'https://aminhanifm.github.io/projects/EnvParity/',
+    linkKind: 'web',
+    linkLabel: 'Live demo',
+    sourceLink: 'https://github.com/aminhanifm/EnvParity',
+    portfolioType: 'app',
+    featured: true,
+    description:
+      'Static analysis for environment-variable parity across source code and .env.example, with actionable findings and machine-readable reports.',
+    role:
+      'Built the strict TypeScript CLI, Node 24 GitHub Action, AST-based JavaScript and TypeScript analysis, Python extraction, browser demo, and automated quality gates.',
+    tags: ['TypeScript', 'CLI', 'GitHub Actions', 'Static analysis', 'Open source'],
+    gallery: [
+      {
+        src: '/images/projects/envparity-preview.svg',
+        alt: 'EnvParity environment-variable analysis report preview',
+      },
+    ],
+  },
+  {
     title: 'Arrow Flow',
     year: '2026',
     genre: 'Puzzle',
