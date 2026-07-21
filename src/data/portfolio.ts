@@ -106,7 +106,6 @@ export const projects: Project[] = [
     linkLabel: 'Live demo',
     sourceLink: 'https://github.com/aminhanifm/CSV-Health',
     portfolioType: 'app',
-    featured: true,
     description:
       'Privacy-first CSV profiling that detects missing values, duplicates, type inconsistencies, invalid dates, and unusual numerical values without uploading the file.',
     role:
@@ -130,7 +129,6 @@ export const projects: Project[] = [
     linkLabel: 'Live app',
     sourceLink: 'https://github.com/aminhanifm/RepoReady',
     portfolioType: 'app',
-    featured: true,
     description:
       'Evidence-based public repository auditing with readiness scores, scan coverage, check-level evidence, and prioritized improvements.',
     role:
@@ -154,7 +152,6 @@ export const projects: Project[] = [
     linkLabel: 'Live demo',
     sourceLink: 'https://github.com/aminhanifm/EnvParity',
     portfolioType: 'app',
-    featured: true,
     description:
       'Static analysis for environment-variable parity across source code and .env.example, with actionable findings and machine-readable reports.',
     role:
