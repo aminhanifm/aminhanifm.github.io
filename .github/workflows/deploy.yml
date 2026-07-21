@@ -35,6 +35,13 @@ jobs:
           ref: main
           path: repo-ready
 
+      - name: Checkout EnvParity
+        uses: actions/checkout@v4
+        with:
+          repository: aminhanifm/EnvParity
+          ref: main
+          path: envparity
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
@@ -44,6 +51,7 @@ jobs:
             package-lock.json
             csv-health/package-lock.json
             repo-ready/package-lock.json
+            envparity/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -81,6 +89,19 @@ jobs:
         run: |
           mkdir -p dist/projects/repo-ready
           cp -R repo-ready/dist/. dist/projects/repo-ready/
+
+      - name: Install EnvParity dependencies
+        working-directory: envparity
+        run: npm ci
+
+      - name: Build EnvParity demo
+        working-directory: envparity
+        run: npm run build:demo -- --base=/projects/EnvParity/
+
+      - name: Add EnvParity to site
+        run: |
+          mkdir -p dist/projects/EnvParity
+          cp -R envparity/demo-dist/. dist/projects/EnvParity/
 
       - name: Configure Pages
         uses: actions/configure-pages@v6
