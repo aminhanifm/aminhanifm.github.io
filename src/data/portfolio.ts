@@ -61,6 +61,7 @@ export const projects: Project[] = [
     genre: 'Business Utility',
     platforms: ['Android'],
     imageUrl: '/images/projects/tilltally.webp',
+    link: 'https://play.google.com/store/apps/details?id=com.aminhanifm.tilltally',
     linkKind: 'play',
     portfolioType: 'app',
     description:
@@ -68,7 +69,6 @@ export const projects: Project[] = [
     role:
       'Designed and built the native Android app end to end, including exact money calculations, Room history, CSV/PDF export, backup and restore, localization, and Play Billing.',
     tags: ['Kotlin', 'Jetpack Compose', 'Room', 'Offline-first', 'PDF / CSV'],
-    note: 'Google Play review in progress.',
     gallery: [
       { src: '/images/projects/gallery/tilltally-01.webp', alt: 'TillTally cash denomination counting screen' },
       { src: '/images/projects/gallery/tilltally-02.webp', alt: 'TillTally cash drawer reconciliation review' },
