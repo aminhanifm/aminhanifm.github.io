@@ -11,6 +11,8 @@
   },
   "scripts": {
     "dev": "vite",
+    "inject:analytics": "node scripts/inject-site-analytics.mjs dist",
+    "verify:analytics": "node scripts/inject-site-analytics.mjs dist --check",
     "sync:docs": "node scripts/sync-docs.mjs",
     "verify:docs": "node scripts/sync-docs.mjs --check",
     "build": "npm run verify:docs && tsc && vite build",

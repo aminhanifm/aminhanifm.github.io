@@ -124,6 +124,13 @@ jobs:
           mkdir -p dist/projects/IssueSafe
           cp -R issuesafe/demo-dist/. dist/projects/IssueSafe/
 
+      - name: Add analytics to nested and privacy pages
+        env:
+          VITE_GA_MEASUREMENT_ID: ${{ vars.VITE_GA_MEASUREMENT_ID }}
+        run: |
+          npm run inject:analytics
+          npm run verify:analytics
+
       - name: Configure Pages
         uses: actions/configure-pages@v6
 

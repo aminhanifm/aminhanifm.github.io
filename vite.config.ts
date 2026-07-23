@@ -52,7 +52,11 @@ function googleAnalyticsPlugin(): Plugin {
           window.history.replaceState(null, document.title, nextUrl);
         }
 
-        window.__aminAnalyticsOptedOut = getOptOut();
+        window.__aminAnalyticsOptedOut = analyticsMode === 'off'
+          ? true
+          : analyticsMode === 'on'
+            ? false
+            : getOptOut();
         window['ga-disable-' + measurementId] = window.__aminAnalyticsOptedOut;
       })();
     </script>
@@ -60,11 +64,22 @@ function googleAnalyticsPlugin(): Plugin {
     <script>
       if (!window.__aminAnalyticsOptedOut) {
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', ${escapedMeasurementId}, {
+        window.gtag = window.gtag || function(){window.dataLayer.push(arguments);}
+        window.gtag('consent', 'default', {
+          analytics_storage: 'granted',
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied'
+        });
+        window.gtag('set', 'ads_data_redaction', true);
+        window.gtag('js', new Date());
+        window.gtag('config', ${escapedMeasurementId}, {
+          allow_ad_personalization_signals: false,
+          allow_google_signals: false,
+          anonymize_ip: true,
           page_title: document.title,
-          page_path: window.location.pathname + window.location.search + window.location.hash
+          page_path: window.location.pathname + window.location.search,
+          site_area: 'portfolio'
         });
       }
     </script>`;

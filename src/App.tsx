@@ -332,6 +332,14 @@ function trackProjectLinkClick(project: Project, source: ProjectDetailSource) {
   });
 }
 
+function trackProjectSourceClick(project: Project, source: ProjectDetailSource) {
+  trackEvent('project_source_click', {
+    project_title: project.title,
+    project_year: project.year,
+    source,
+  });
+}
+
 type ProjectCardProps = {
   project: Project;
   compact?: boolean;
@@ -420,6 +428,7 @@ const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(function ProjectCa
               target="_blank"
               rel="noreferrer"
               aria-label={`Source code for ${project.title}`}
+              onClick={() => trackProjectSourceClick(project, trackingSource)}
             >
               <FaGithub aria-hidden="true" />
               <span>Source</span>
@@ -524,6 +533,13 @@ function ProjectDetailsDrawer({
     const video = mediaVideoRef.current;
     if (!video) return;
 
+    trackEvent('project_media_control', {
+      project_title: project.title,
+      media_index: currentMediaIndex + 1,
+      media_type: 'video',
+      action: video.paused ? 'play' : 'pause',
+    });
+
     if (video.paused) {
       void video.play();
     } else {
@@ -538,6 +554,11 @@ function ProjectDetailsDrawer({
       trackEvent('project_share_copy', {
         project_title: project.title,
         project_year: project.year,
+      });
+      trackEvent('share', {
+        method: 'clipboard',
+        content_type: 'project',
+        item_id: projectSlug(project),
       });
 
       if (copyTimerRef.current !== null) window.clearTimeout(copyTimerRef.current);
@@ -653,7 +674,14 @@ function ProjectDetailsDrawer({
                   className={index === currentMediaIndex ? 'is-active' : undefined}
                   type="button"
                   key={media.src}
-                  onClick={() => setActiveMediaIndex(index)}
+                  onClick={() => {
+                    setActiveMediaIndex(index);
+                    trackEvent('project_media_select', {
+                      project_title: project.title,
+                      media_index: index + 1,
+                      media_type: media.kind === 'video' ? 'video' : 'image',
+                    });
+                  }}
                   aria-label={media.kind === 'video'
                     ? `Play ${project.title} gameplay preview`
                     : `Show ${project.title} screenshot ${index + 1}`}
@@ -744,6 +772,7 @@ function ProjectDetailsDrawer({
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`Open source code for ${project.title}`}
+                onClick={() => trackProjectSourceClick(project, 'project_detail_drawer')}
               >
                 <FaGithub aria-hidden="true" />
                 Source code
@@ -1023,7 +1052,7 @@ function App() {
       </header>
 
       <main id="top">
-        <section className="intro section-shell">
+        <section className="intro section-shell" data-analytics-section="hero">
           <div className="intro-copy" data-reveal="hero" style={revealStyle(0)}>
             <p className="eyebrow">Unity Game Developer | Technical Initiative Lead</p>
             <h1>Amin Hanif</h1>
@@ -1095,7 +1124,7 @@ function App() {
           </aside>
         </section>
 
-        <section className="stats-band" aria-label="Portfolio statistics">
+        <section className="stats-band" aria-label="Portfolio statistics" data-analytics-section="portfolio_stats">
           <div className="stats-grid section-shell">
             {stats.map((item, index) => (
               <div className="stat-item" data-reveal="item" style={revealStyle(index)} key={item.label}>
@@ -1106,7 +1135,7 @@ function App() {
           </div>
         </section>
 
-        <section className="section-shell current-work" id="work">
+        <section className="section-shell current-work" id="work" data-analytics-section="current_work">
           <div className="section-heading" data-reveal="section">
             <p className="eyebrow">Current Work</p>
             <h2>Current roles across technical leadership and shipped mobile game systems.</h2>
@@ -1128,7 +1157,7 @@ function App() {
           </div>
         </section>
 
-        <section className="section-shell">
+        <section className="section-shell" data-analytics-section="featured_work">
           <div className="section-heading" data-reveal="section">
             <p className="eyebrow">Featured Work</p>
             <h2>Featured games and products across studio, indie, and contract work.</h2>
@@ -1146,7 +1175,7 @@ function App() {
           </div>
         </section>
 
-        <section className="section-shell projects-section" id="projects">
+        <section className="section-shell projects-section" id="projects" data-analytics-section="project_library">
           <div className="section-heading" data-reveal="section">
             <p className="eyebrow">Games & Apps</p>
             <h2>Game releases and focused Android products, organized as separate portfolios.</h2>
@@ -1193,7 +1222,7 @@ function App() {
           </LayoutGroup>
         </section>
 
-        <section className="section-shell experience-section" id="experience">
+        <section className="section-shell experience-section" id="experience" data-analytics-section="experience">
           <div className="section-heading" data-reveal="section">
             <p className="eyebrow">Experience</p>
             <h2>Recent roles across initiative leadership, studio work, and indie production.</h2>
@@ -1218,7 +1247,7 @@ function App() {
           </div>
         </section>
 
-        <section className="section-shell proof-section">
+        <section className="section-shell proof-section" data-analytics-section="skills_and_recognition">
           <div className="skills-panel" data-reveal="card" style={revealStyle(0)}>
             <p className="eyebrow">Core Stack</p>
             <h2>Unity-first, production-minded.</h2>
@@ -1276,7 +1305,7 @@ function App() {
           </div>
         </section>
 
-        <section className="section-shell contact-section" id="contact" data-reveal="section">
+        <section className="section-shell contact-section" id="contact" data-reveal="section" data-analytics-section="contact">
           <div>
             <p className="eyebrow">Contact</p>
             <h2>Open to remote game development opportunities.</h2>
