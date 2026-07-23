@@ -1,4 +1,6 @@
 import { forwardRef, useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Fuse from 'fuse.js';
 import { AnimatePresence, LazyMotion, LayoutGroup, MotionConfig, type Variants } from 'motion/react';
 import * as m from 'motion/react-m';
 import {
@@ -20,6 +22,8 @@ import {
   FaMoon,
   FaPause,
   FaPlay,
+  FaSearch,
+  FaShareAlt,
   FaSun,
   FaTimes,
   FaTrophy,
@@ -57,6 +61,19 @@ type PortfolioHistoryState = {
 
 const PROJECT_QUERY_PARAM = 'project';
 const loadMotionFeatures = () => import('./motionFeatures').then((module) => module.default);
+const projectSearchOptions = {
+  threshold: 0.32,
+  ignoreLocation: true,
+  minMatchCharLength: 2,
+  keys: [
+    { name: 'title', weight: 0.34 },
+    { name: 'genre', weight: 0.14 },
+    { name: 'platforms', weight: 0.14 },
+    { name: 'tags', weight: 0.16 },
+    { name: 'role', weight: 0.12 },
+    { name: 'description', weight: 0.1 },
+  ],
+};
 
 const drawerLayerVariants: Variants = {
   hidden: {},
@@ -458,15 +475,25 @@ function ProjectDetailsDrawer({
 }) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLElement>(null);
-  const mediaVideoRef = useRef<HTMLVideoElement>(null);
+  const mediaVideoRefs = useRef<Array<HTMLVideoElement | null>>([]);
   const copyTimerRef = useRef<number | null>(null);
+  const activeMediaIndexRef = useRef(0);
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
   const [copied, setCopied] = useState(false);
   const [isMediaPlaying, setIsMediaPlaying] = useState(false);
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: 'center',
+    containScroll: 'trimSnaps',
+    duration: 24,
+    loop: false,
+    watchDrag: true,
+  });
 
   useEffect(() => {
+    activeMediaIndexRef.current = 0;
     setActiveMediaIndex(0);
     setCopied(false);
+    setIsMediaPlaying(false);
     if (drawerRef.current) drawerRef.current.scrollTop = 0;
 
     const focusFrame = window.requestAnimationFrame(() => {
@@ -517,20 +544,72 @@ function ProjectDetailsDrawer({
   const hasNextProject = projectIndex >= 0 && projectIndex < projectList.length - 1;
   const previousProject = hasPreviousProject ? projectList[projectIndex - 1] : null;
   const nextProject = hasNextProject ? projectList[projectIndex + 1] : null;
-  const mediaItems = project.gallery?.length
-    ? project.gallery
-    : [{ src: project.imageUrl, alt: `${project.title} project artwork` }];
+  const mediaItems = useMemo(
+    () => project.gallery?.length
+      ? project.gallery
+      : [{ src: project.imageUrl, alt: `${project.title} project artwork` }],
+    [project],
+  );
   const currentMediaIndex = Math.min(activeMediaIndex, mediaItems.length - 1);
-  const currentMedia = mediaItems[currentMediaIndex];
   const hasGameplayGallery = Boolean(project.gallery?.length);
   const isAppPortfolio = project.portfolioType === 'app' || project.portfolioType === 'publishing';
   const galleryLabel = isAppPortfolio ? 'App gallery' : 'Gameplay gallery';
-  const isVideoMedia = currentMedia.kind === 'video';
   const prefersReducedMotion = typeof window !== 'undefined'
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nativeShare = (navigator as unknown as {
+    share?: (data: ShareData) => Promise<void>;
+  }).share;
+  const canShareNatively = typeof nativeShare === 'function';
+
+  const handleMediaSelect = useCallback(() => {
+    if (!emblaApi) return;
+
+    const nextIndex = emblaApi.selectedScrollSnap();
+    if (nextIndex === activeMediaIndexRef.current) return;
+
+    activeMediaIndexRef.current = nextIndex;
+    setActiveMediaIndex(nextIndex);
+    trackEvent('project_media_select', {
+      project_title: project.title,
+      media_index: nextIndex + 1,
+      media_type: mediaItems[nextIndex]?.kind === 'video' ? 'video' : 'image',
+      interaction: 'carousel',
+    });
+  }, [emblaApi, mediaItems, project.title]);
+
+  useEffect(() => {
+    if (!emblaApi) return undefined;
+
+    emblaApi.on('select', handleMediaSelect);
+    return () => {
+      emblaApi.off('select', handleMediaSelect);
+    };
+  }, [emblaApi, handleMediaSelect]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    emblaApi.reInit();
+    emblaApi.scrollTo(0, true);
+    activeMediaIndexRef.current = 0;
+    setActiveMediaIndex(0);
+  }, [emblaApi, project.title]);
+
+  useEffect(() => {
+    setIsMediaPlaying(false);
+    mediaVideoRefs.current.forEach((video, index) => {
+      if (!video) return;
+
+      if (index === currentMediaIndex && !prefersReducedMotion) {
+        void video.play().catch(() => undefined);
+      } else {
+        video.pause();
+      }
+    });
+  }, [currentMediaIndex, prefersReducedMotion, project.title]);
 
   const toggleMediaPlayback = () => {
-    const video = mediaVideoRef.current;
+    const video = mediaVideoRefs.current[currentMediaIndex];
     if (!video) return;
 
     trackEvent('project_media_control', {
@@ -566,6 +645,34 @@ function ProjectDetailsDrawer({
     } catch {
       setCopied(false);
     }
+  };
+
+  const shareProject = async () => {
+    const shareData = {
+      title: `${project.title} | Amin Hanif`,
+      text: project.description,
+      url: createProjectUrl(project),
+    };
+
+    if (canShareNatively) {
+      try {
+        await nativeShare.call(navigator, shareData);
+        trackEvent('project_share_native', {
+          project_title: project.title,
+          project_year: project.year,
+        });
+        trackEvent('share', {
+          method: 'native',
+          content_type: 'project',
+          item_id: projectSlug(project),
+        });
+        return;
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') return;
+      }
+    }
+
+    await copyProjectLink();
   };
 
   return (
@@ -605,66 +712,107 @@ function ProjectDetailsDrawer({
         </header>
 
         <div className={hasGameplayGallery ? 'case-showcase has-gallery' : 'case-showcase artwork-only'}>
-          <div className="case-media-stage">
-            <AnimatePresence initial={false} mode="wait">
-              <m.div
-                className="case-media-frame"
-                key={currentMedia.src}
-                initial={{ opacity: 0, scale: 0.985 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.995 }}
-                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {hasGameplayGallery && (!isVideoMedia || currentMedia.poster) ? (
-                  <img
-                    className="case-media-backdrop"
-                    src={isVideoMedia ? currentMedia.poster : currentMedia.src}
-                    alt=""
-                    aria-hidden="true"
-                  />
-                ) : null}
-                {isVideoMedia ? (
-                  <video
-                    ref={mediaVideoRef}
-                    className="case-media-foreground"
-                    src={currentMedia.src}
-                    poster={currentMedia.poster}
-                    aria-label={currentMedia.alt}
-                    autoPlay={!prefersReducedMotion}
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    onPlay={() => setIsMediaPlaying(true)}
-                    onPause={() => setIsMediaPlaying(false)}
-                  />
-                ) : (
-                  <img
-                    className="case-media-foreground"
-                    src={currentMedia.src}
-                    alt={currentMedia.alt}
-                    onError={(event) => {
-                      event.currentTarget.src = '/ah-mark.svg';
-                    }}
-                  />
-                )}
-                {isVideoMedia ? (
-                  <button
-                    className="case-media-toggle"
-                    type="button"
-                    onClick={toggleMediaPlayback}
-                    aria-label={isMediaPlaying ? 'Pause gameplay preview' : 'Play gameplay preview'}
-                    title={isMediaPlaying ? 'Pause preview' : 'Play preview'}
-                  >
-                    {isMediaPlaying ? <FaPause aria-hidden="true" /> : <FaPlay aria-hidden="true" />}
-                  </button>
-                ) : null}
-              </m.div>
-            </AnimatePresence>
-            <div className="case-media-meta" aria-hidden="true">
-              <span>{isVideoMedia ? (isAppPortfolio ? 'Animated preview' : 'Animated gameplay') : hasGameplayGallery ? galleryLabel : 'Project artwork'}</span>
-              <strong>{currentMediaIndex + 1} / {mediaItems.length}</strong>
+          <div className="case-media-carousel">
+            <div className="case-media-viewport" ref={emblaRef}>
+              <div className="case-media-container">
+                {mediaItems.map((media, index) => {
+                  const mediaIsVideo = media.kind === 'video';
+
+                  return (
+                    <div
+                      className="case-media-slide"
+                      key={media.src}
+                      aria-hidden={index !== currentMediaIndex}
+                    >
+                      <div className="case-media-stage">
+                        <div className="case-media-frame">
+                          {hasGameplayGallery && (!mediaIsVideo || media.poster) ? (
+                            <img
+                              className="case-media-backdrop"
+                              src={mediaIsVideo ? media.poster : media.src}
+                              alt=""
+                              aria-hidden="true"
+                            />
+                          ) : null}
+                          {mediaIsVideo ? (
+                            <video
+                              ref={(element) => {
+                                mediaVideoRefs.current[index] = element;
+                              }}
+                              className="case-media-foreground"
+                              src={media.src}
+                              poster={media.poster}
+                              aria-label={media.alt}
+                              autoPlay={index === currentMediaIndex && !prefersReducedMotion}
+                              muted
+                              loop
+                              playsInline
+                              preload="metadata"
+                              onPlay={() => {
+                                if (index === activeMediaIndexRef.current) setIsMediaPlaying(true);
+                              }}
+                              onPause={() => {
+                                if (index === activeMediaIndexRef.current) setIsMediaPlaying(false);
+                              }}
+                            />
+                          ) : (
+                            <img
+                              className="case-media-foreground"
+                              src={media.src}
+                              alt={media.alt}
+                              draggable={false}
+                              onError={(event) => {
+                                event.currentTarget.src = '/ah-mark.svg';
+                              }}
+                            />
+                          )}
+                          {mediaIsVideo ? (
+                            <button
+                              className="case-media-toggle"
+                              type="button"
+                              onClick={toggleMediaPlayback}
+                              tabIndex={index === currentMediaIndex ? 0 : -1}
+                              aria-label={isMediaPlaying ? 'Pause gameplay preview' : 'Play gameplay preview'}
+                              title={isMediaPlaying ? 'Pause preview' : 'Play preview'}
+                            >
+                              {isMediaPlaying ? <FaPause aria-hidden="true" /> : <FaPlay aria-hidden="true" />}
+                            </button>
+                          ) : null}
+                        </div>
+                        <div className="case-media-meta" aria-hidden="true">
+                          <span>{mediaIsVideo ? (isAppPortfolio ? 'Animated preview' : 'Animated gameplay') : hasGameplayGallery ? galleryLabel : 'Project artwork'}</span>
+                          <strong>{index + 1} / {mediaItems.length}</strong>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
+            {mediaItems.length > 1 ? (
+              <>
+                <button
+                  className="case-carousel-button is-previous"
+                  type="button"
+                  onClick={() => emblaApi?.scrollPrev()}
+                  disabled={currentMediaIndex === 0}
+                  aria-label={`Previous ${galleryLabel.toLowerCase()} image`}
+                  title="Previous image"
+                >
+                  <FaChevronLeft aria-hidden="true" />
+                </button>
+                <button
+                  className="case-carousel-button is-next"
+                  type="button"
+                  onClick={() => emblaApi?.scrollNext()}
+                  disabled={currentMediaIndex === mediaItems.length - 1}
+                  aria-label={`Next ${galleryLabel.toLowerCase()} image`}
+                  title="Next image"
+                >
+                  <FaChevronRight aria-hidden="true" />
+                </button>
+              </>
+            ) : null}
           </div>
 
           {hasGameplayGallery && mediaItems.length > 1 ? (
@@ -675,12 +823,7 @@ function ProjectDetailsDrawer({
                   type="button"
                   key={media.src}
                   onClick={() => {
-                    setActiveMediaIndex(index);
-                    trackEvent('project_media_select', {
-                      project_title: project.title,
-                      media_index: index + 1,
-                      media_type: media.kind === 'video' ? 'video' : 'image',
-                    });
+                    emblaApi?.scrollTo(index);
                   }}
                   aria-label={media.kind === 'video'
                     ? `Play ${project.title} gameplay preview`
@@ -778,9 +921,13 @@ function ProjectDetailsDrawer({
                 Source code
               </a>
             ) : null}
-            <button className="button ghost" type="button" onClick={() => void copyProjectLink()} aria-live="polite">
-              {copied ? <FaCheck aria-hidden="true" /> : <FaLink aria-hidden="true" />}
-              {copied ? 'Copied' : 'Copy link'}
+            <button className="button ghost" type="button" onClick={() => void shareProject()} aria-live="polite">
+              {copied
+                ? <FaCheck aria-hidden="true" />
+                : canShareNatively
+                  ? <FaShareAlt aria-hidden="true" />
+                  : <FaLink aria-hidden="true" />}
+              {copied ? 'Copied' : canShareNatively ? 'Share project' : 'Copy link'}
             </button>
           </div>
           <div className="drawer-nav" aria-label="Browse project details">
@@ -822,6 +969,7 @@ function ProjectDetailsDrawer({
 function App() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
   const [activeFilter, setActiveFilter] = useState<ProjectFilterId>('games');
+  const [projectSearchQuery, setProjectSearchQuery] = useState('');
   const [selectedProject, setSelectedProject] = useState<Project | null>(() => projectFromLocation());
   const [drawerProjectList, setDrawerProjectList] = useState<Project[]>(projects);
   const [isDrawerClosing, setIsDrawerClosing] = useState(false);
@@ -832,12 +980,31 @@ function App() {
   const lastFocusedElementRef = useRef<HTMLElement | null>(null);
   const activeSection = useActiveSection(navSectionIds);
   const nextTheme = theme === 'dark' ? 'light' : 'dark';
-  const filteredProjects = useMemo(
-    () => projects.filter((project) => matchesProjectFilter(project, activeFilter)),
-    [activeFilter],
-  );
+  const normalizedProjectSearch = projectSearchQuery.trim();
+  const filteredProjects = useMemo(() => {
+    const projectsInFilter = projects.filter((project) => matchesProjectFilter(project, activeFilter));
+    if (!normalizedProjectSearch) return projectsInFilter;
 
-  useRevealMotion(activeFilter);
+    return new Fuse(projectsInFilter, projectSearchOptions)
+      .search(normalizedProjectSearch)
+      .map((result) => result.item);
+  }, [activeFilter, normalizedProjectSearch]);
+
+  useRevealMotion(`${activeFilter}:${normalizedProjectSearch}`);
+
+  useEffect(() => {
+    if (!normalizedProjectSearch) return undefined;
+
+    const analyticsTimer = window.setTimeout(() => {
+      trackEvent('project_search', {
+        filter_id: activeFilter,
+        query_length: normalizedProjectSearch.length,
+        result_count: filteredProjects.length,
+      });
+    }, 650);
+
+    return () => window.clearTimeout(analyticsTimer);
+  }, [activeFilter, filteredProjects.length, normalizedProjectSearch]);
 
   selectedProjectRef.current = selectedProject;
 
@@ -1181,15 +1348,40 @@ function App() {
             <h2>Game releases and focused Android products, organized as separate portfolios.</h2>
           </div>
           <div className="project-toolbar" data-reveal="item" style={revealStyle(0)}>
-            <div className="filter-heading" aria-live="polite">
-              <FaFilter aria-hidden="true" />
-              <span>
-                {activeFilter === 'games'
-                  ? `Game Portfolio - ${filteredProjects.length} projects`
-                  : activeFilter === 'apps'
-                    ? `App Portfolio - ${filteredProjects.length} projects`
-                    : `${filteredProjects.length} of ${projects.length} projects`}
-              </span>
+            <div className="project-toolbar-header">
+              <div className="filter-heading" aria-live="polite">
+                <FaFilter aria-hidden="true" />
+                <span>
+                  {normalizedProjectSearch
+                    ? `${filteredProjects.length} ${filteredProjects.length === 1 ? 'match' : 'matches'} in ${projectFilterOptions.find((filter) => filter.id === activeFilter)?.label ?? 'projects'}`
+                    : activeFilter === 'games'
+                      ? `Game Portfolio - ${filteredProjects.length} projects`
+                      : activeFilter === 'apps'
+                        ? `App Portfolio - ${filteredProjects.length} projects`
+                        : `${filteredProjects.length} of ${projects.length} projects`}
+                </span>
+              </div>
+              <div className="project-search">
+                <FaSearch aria-hidden="true" />
+                <input
+                  type="search"
+                  value={projectSearchQuery}
+                  onChange={(event) => setProjectSearchQuery(event.currentTarget.value)}
+                  placeholder="Search projects"
+                  aria-label="Search projects by title, platform, genre, technology, or role"
+                  autoComplete="off"
+                />
+                {projectSearchQuery ? (
+                  <button
+                    type="button"
+                    onClick={() => setProjectSearchQuery('')}
+                    aria-label="Clear project search"
+                    title="Clear search"
+                  >
+                    <FaTimes aria-hidden="true" />
+                  </button>
+                ) : null}
+              </div>
             </div>
             <div className="filter-group" aria-label="Filter projects">
               {projectFilterOptions.map((filter) => (
@@ -1209,14 +1401,33 @@ function App() {
           <LayoutGroup id="project-library">
             <m.div className="project-grid" layout>
               <AnimatePresence mode="popLayout">
-                {filteredProjects.map((project, index) => (
-                  <ProjectCard
-                    key={project.title}
-                    project={project}
-                    index={index}
-                    onOpen={(projectToOpen, trigger) => openProjectDetails(projectToOpen, filteredProjects, 'project_library', trigger)}
-                  />
-                ))}
+                {filteredProjects.length ? (
+                  filteredProjects.map((project, index) => (
+                    <ProjectCard
+                      key={project.title}
+                      project={project}
+                      index={index}
+                      onOpen={(projectToOpen, trigger) => openProjectDetails(projectToOpen, filteredProjects, 'project_library', trigger)}
+                    />
+                  ))
+                ) : (
+                  <m.div
+                    className="project-empty-state"
+                    key="project-empty-state"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 4 }}
+                  >
+                    <FaSearch aria-hidden="true" />
+                    <div>
+                      <h3>No matching projects</h3>
+                      <p>Try another search or clear it to browse the full {projectFilterOptions.find((filter) => filter.id === activeFilter)?.label.toLowerCase()} collection.</p>
+                    </div>
+                    <button className="button ghost" type="button" onClick={() => setProjectSearchQuery('')}>
+                      Clear search
+                    </button>
+                  </m.div>
+                )}
               </AnimatePresence>
             </m.div>
           </LayoutGroup>
