@@ -45,6 +45,7 @@ GitHub Pages without client-side routing:
 - TillTally: `/privacy/tilltally/`
 - LaterPin: `/privacy/laterpin/`
 - Loose Ends: `/privacy/loose-ends/`
+- WordJig: `/privacy/wordjig/`
 
 Add future policies under `public/privacy/<app-slug>/index.html`, link them from
 `public/privacy/index.html`, and add their canonical URL to `public/sitemap.xml`.
