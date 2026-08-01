@@ -1,0 +1,16 @@
+order_id,customer_region,order_date,category,quantity,unit_price,fulfilled,notes
+ORD-1001,North,2026-01-03,Office,2,12.50,true,
+ORD-1002,West,2026-01-04,Kitchen,1,44.00,true,Gift wrap
+ORD-1003,South,01/06/2026,Office,3,8.75,false,Backordered
+ORD-1004,North,2026-01-07,Garden,1,125.00,true,
+ORD-1005,East,2026-01-08,Kitchen,,19.99,true,
+ORD-1006,West,2026-13-09,Office,5,6.25,false,Check date
+ORD-1007,North,2026-01-10,Garden,1,999.00,true,Large commercial order
+ORD-1008,South,2026-01-11,Office,2,12.50,true,
+ORD-1008,South,2026-01-11,Office,2,12.50,true,
+ORD-1010,East,2026-01-13,Kitchen,2,44.00,unknown,
+,,,,,,,
+ORD-1012,North,2026-01-15,Office,4,8.75,true,
+ORD-1013,West,2026-01-16,Garden,1,125.00,false,Delayed
+ORD-1014,East,2026-01-17,Kitchen,2,19.99,true,
+ORD-1015,South,2026-01-18,Office,3,6.25,true,

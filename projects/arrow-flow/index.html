@@ -1,0 +1,2276 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/ah-mark.svg" />
+    <link rel="canonical" href="https://aminhanifm.github.io/projects/arrow-flow/" />
+    <link rel="preload" as="image" href="/images/projects/gallery/arrow-flow-01.webp" fetchpriority="high" />
+    <link rel="stylesheet" href="/project-page.css" />
+    <title>Arrow Flow Unity Puzzle Game | Amin Hanif</title>
+    <meta name="description" content="Arrow Flow is a published Unity puzzle game with guaranteed-solvable procedural boards, special tiles, AdMob, scoring, and Play Games leaderboards." />
+    <meta name="author" content="Amin Hanif" />
+    <meta name="keywords" content="Unity puzzle game, procedural generation, solvable puzzle generator, AdMob, Google Play Games" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#081018" />
+    <meta property="og:site_name" content="Amin Hanif Portfolio" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Arrow Flow Unity Puzzle Game | Amin Hanif" />
+    <meta property="og:description" content="Arrow Flow is a published Unity puzzle game with guaranteed-solvable procedural boards, special tiles, AdMob, scoring, and Play Games leaderboards." />
+    <meta property="og:url" content="https://aminhanifm.github.io/projects/arrow-flow/" />
+    <meta property="og:image" content="https://aminhanifm.github.io/images/projects/gallery/arrow-flow-01.webp" />
+    <meta property="og:image:alt" content="Arrow Flow board-clearing puzzle gameplay" />
+    <meta property="article:published_time" content="2026-01-01" />
+    <meta property="article:modified_time" content="2026-07-23" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Arrow Flow Unity Puzzle Game | Amin Hanif" />
+    <meta name="twitter:description" content="Arrow Flow is a published Unity puzzle game with guaranteed-solvable procedural boards, special tiles, AdMob, scoring, and Play Games leaderboards." />
+    <meta name="twitter:image" content="https://aminhanifm.github.io/images/projects/gallery/arrow-flow-01.webp" />
+    <script>
+      (function () {
+        try {
+          var theme = window.localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch (error) {}
+      })();
+    </script>
+    <script>
+      window.__aminLocaleConfig = {
+  "defaultLocale": "en",
+  "storageKey": "aminhanifm.language",
+  "locales": [
+    {
+      "code": "en",
+      "shortLabel": "EN",
+      "nativeName": "English",
+      "englishName": "English",
+      "direction": "ltr"
+    },
+    {
+      "code": "id",
+      "shortLabel": "ID",
+      "nativeName": "Bahasa Indonesia",
+      "englishName": "Indonesian",
+      "direction": "ltr"
+    },
+    {
+      "code": "ar",
+      "shortLabel": "AR",
+      "nativeName": "العربية",
+      "englishName": "Arabic",
+      "direction": "rtl"
+    },
+    {
+      "code": "ja",
+      "shortLabel": "JA",
+      "nativeName": "日本語",
+      "englishName": "Japanese",
+      "direction": "ltr"
+    },
+    {
+      "code": "ko",
+      "shortLabel": "KO",
+      "nativeName": "한국어",
+      "englishName": "Korean",
+      "direction": "ltr"
+    },
+    {
+      "code": "es",
+      "shortLabel": "ES",
+      "nativeName": "Español",
+      "englishName": "Spanish",
+      "direction": "ltr"
+    }
+  ],
+  "messages": {
+    "en": {
+      "brand": {
+        "role": "Game Developer",
+        "homeLabel": "Amin Hanif home"
+      },
+      "nav": {
+        "primary": "Primary navigation",
+        "mobile": "Mobile navigation",
+        "work": "Work",
+        "projects": "Projects",
+        "experience": "Experience",
+        "contact": "Contact",
+        "portfolio": "Portfolio",
+        "open": "Open navigation menu",
+        "close": "Close navigation menu"
+      },
+      "theme": {
+        "light": "Light",
+        "dark": "Dark",
+        "switchToLight": "Switch to light mode",
+        "switchToDark": "Switch to dark mode"
+      },
+      "language": {
+        "label": "Language",
+        "select": "Select language"
+      },
+      "hero": {
+        "eyebrow": "Unity Game Developer | Technical Initiative Lead",
+        "lead": "I build games and focused Android products from prototype through release, combining hands-on Unity and native development with technical planning, review, and production support.",
+        "available": "Available for work",
+        "primaryLinks": "Primary links",
+        "resume": "Resume",
+        "portfolio": "Portfolio",
+        "githubProfile": "GitHub profile",
+        "profileSummary": "Profile summary",
+        "featuredGameplay": "Featured gameplay selector",
+        "showGameplay": "Show {{title}} gameplay"
+      },
+      "stats": {
+        "label": "Portfolio statistics"
+      },
+      "work": {
+        "eyebrow": "Current Work",
+        "title": "What I'm working on now."
+      },
+      "pixel": {
+        "eyebrow": "Pixel Worlds",
+        "title": "Selected pixel games.",
+        "summary": "Adventure, combat, survival, and multiplayer.",
+        "sceneLabel": "Pixel world project scene",
+        "openDetails": "Open {{title}} details",
+        "show": "Show {{title}}"
+      },
+      "featured": {
+        "eyebrow": "Featured Work",
+        "title": "Featured releases.",
+        "reelLabel": "Featured release reel"
+      },
+      "projects": {
+        "eyebrow": "Games & Apps",
+        "title": "Browse all projects.",
+        "portfolioLabel": "Project portfolio",
+        "games": "Games",
+        "apps": "Apps",
+        "all": "All projects",
+        "allType": "All {{type}}",
+        "featured": "Featured",
+        "mobile": "Mobile",
+        "pcWeb": "PC / Web",
+        "ar": "AR",
+        "simulation": "Simulation",
+        "leadership": "Leadership",
+        "filterType": "Filter {{type}}",
+        "clearFilter": "Clear project filter",
+        "clearFilterTitle": "Clear filter",
+        "openSearch": "Search projects",
+        "closeSearch": "Close project search",
+        "searchTitle": "Search projects",
+        "searchLabel": "Search projects by title, platform, genre, technology, or role",
+        "clearSearch": "Clear project search",
+        "clearSearchTitle": "Clear search",
+        "shown_one": "{{count}} project shown",
+        "shown_other": "{{count}} projects shown",
+        "noMatches": "No matching projects",
+        "tryAnother": "Try another search or reset the current filter.",
+        "reset": "Reset"
+      },
+      "shelf": {
+        "browse": "{{count}} projects. Use arrow keys or drag to browse.",
+        "openDetailsFor": "Open details for {{title}}",
+        "select": "Select {{title}}",
+        "openDetails": "Open project details",
+        "previous": "Previous project",
+        "next": "Next project",
+        "tags": "{{title}} tags",
+        "inReview": "In review",
+        "source": "Source",
+        "sourceFor": "Source code for {{title}}",
+        "detailsFor": "Open project details for {{title}}",
+        "details": "Project details"
+      },
+      "drawer": {
+        "close": "Close project details",
+        "position": "Project {{position}} of {{count}}",
+        "quickFacts": "{{title}} quick facts",
+        "appGallery": "App gallery",
+        "gameplayGallery": "Gameplay gallery",
+        "projectArtwork": "Project artwork",
+        "animatedPreview": "Animated preview",
+        "animatedGameplay": "Animated gameplay",
+        "previousImage": "Previous {{gallery}} image",
+        "nextImage": "Next {{gallery}} image",
+        "previousImageTitle": "Previous image",
+        "nextImageTitle": "Next image",
+        "playGameplay": "Play {{title}} gameplay preview",
+        "showScreenshot": "Show {{title}} screenshot {{position}}",
+        "pauseGameplay": "Pause gameplay preview",
+        "playGameplayControl": "Play gameplay preview",
+        "pausePreview": "Pause preview",
+        "playPreview": "Play preview",
+        "overview": "Overview",
+        "facts": "{{title}} project facts",
+        "year": "Year",
+        "genre": "Genre",
+        "platforms": "Platforms",
+        "link": "Link",
+        "myRole": "My Role",
+        "systems": "Systems",
+        "tags": "{{title}} tags",
+        "openLink": "Open {{label}} for {{title}}",
+        "openSource": "Open source code for {{title}}",
+        "sourceCode": "Source code",
+        "moreDetails": "More details",
+        "copied": "Copied",
+        "share": "Share project",
+        "copy": "Copy link",
+        "browse": "Browse project details",
+        "previousProject": "Previous project: {{title}}",
+        "noPrevious": "No previous project",
+        "previous": "Previous",
+        "start": "Start",
+        "nextProject": "Next project: {{title}}",
+        "noNext": "No next project",
+        "next": "Next",
+        "end": "End"
+      },
+      "links": {
+        "play": "Play Store",
+        "appstore": "App Store",
+        "itch": "itch.io",
+        "drive": "Google Drive",
+        "github": "GitHub",
+        "web": "Open link"
+      },
+      "experience": {
+        "eyebrow": "Experience",
+        "title": "Where I've worked.",
+        "timeline": "Career timeline",
+        "timelineLabel": "Career timeline navigation",
+        "current": "Current",
+        "details": "View responsibilities",
+        "hideDetails": "Hide responsibilities",
+        "jumpTo": "Jump to {{company}}",
+        "responsibilities": "Responsibilities at {{company}}"
+      },
+      "skills": {
+        "eyebrow": "Core Stack",
+        "title": "Tools I use.",
+        "summary": "Grouped by day-to-day use.",
+        "groups": {
+          "game": {
+            "title": "Game Development",
+            "description": "Gameplay systems, rapid prototyping, and content production."
+          },
+          "backend": {
+            "title": "Backend & Multiplayer",
+            "description": "Multiplayer, game backends, data, and cloud services."
+          },
+          "android": {
+            "title": "Native Android",
+            "description": "Native Android apps, local data, and modern UI."
+          },
+          "web": {
+            "title": "Web & Developer Tools",
+            "description": "Web apps, developer tools, and delivery automation."
+          },
+          "leadership": {
+            "title": "Technical Leadership",
+            "description": "RFC planning, architecture, reviews, and technical decisions."
+          },
+          "production": {
+            "title": "Production & Release",
+            "description": "Performance, testing, AR, and store releases."
+          }
+        }
+      },
+      "recognition": {
+        "eyebrow": "Recognition",
+        "title": "Awards and results.",
+        "summary": "{{count}} results from {{start}} to {{end}}.",
+        "featured": "Featured results",
+        "archive": "Award archive",
+        "closeArchive": "Close award archive",
+        "showMore": "Show {{count}} more awards",
+        "showFewer": "Show fewer awards"
+      },
+      "contact": {
+        "eyebrow": "Contact",
+        "title": "Open to remote game development opportunities.",
+        "email": "Email"
+      },
+      "footer": {
+        "rights": "© 2026 Amin Hanif. All rights reserved.",
+        "navigation": "Footer navigation",
+        "terms": "Site terms",
+        "privacy": "Privacy"
+      },
+      "detail": {
+        "skip": "Skip to project details",
+        "breadcrumb": "Breadcrumb",
+        "platformsAndTech": "Project platforms and technologies",
+        "share": "Share project",
+        "projectFacts": "Project facts",
+        "coreSystems": "Core systems",
+        "eyebrow": "Project Details",
+        "title": "A closer look at the project.",
+        "summary": "The project context, my direct contribution, and the delivered result.",
+        "overview": "Overview",
+        "role": "My Role",
+        "outcome": "Outcome",
+        "roleTitle": "Implementation and production contribution.",
+        "systemsAndTech": "Project systems and technologies",
+        "galleryEyebrow": "Project Gallery",
+        "galleryTitle": "Gameplay and product views.",
+        "moreEyebrow": "More Work",
+        "moreTitle": "More project details.",
+        "mediaTitle": "Project media",
+        "openMedia": "Open {{label}} in media viewer",
+        "gameplayCaption": "{{title}} gameplay preview",
+        "appPreviewCaption": "{{title}} app preview",
+        "screenshotCaption": "{{title}} screenshot {{position}}",
+        "closeMedia": "Close media viewer",
+        "previousMedia": "Previous media",
+        "nextMedia": "Next media",
+        "counter": "{{position}} of {{count}}"
+      },
+      "directory": {
+        "skip": "Skip to project details",
+        "eyebrow": "Selected Project Details",
+        "title": "Games and apps beyond the release card.",
+        "lead": "Selected work across Unity gameplay, mobile systems, technical ownership, and native Android development.",
+        "browse": "Browse project details",
+        "viewAll": "View all projects",
+        "count": "{{count}} Selected Projects",
+        "detailsTitle": "Contributions, context, and outcomes.",
+        "detailsSummary": "Each page presents the project and my direct contribution without exposing confidential studio work.",
+        "moreDetails": "More details"
+      }
+    },
+    "id": {
+      "brand": {
+        "role": "Pengembang Game",
+        "homeLabel": "Beranda Amin Hanif"
+      },
+      "nav": {
+        "primary": "Navigasi utama",
+        "mobile": "Navigasi seluler",
+        "work": "Karya",
+        "projects": "Proyek",
+        "experience": "Pengalaman",
+        "contact": "Kontak",
+        "portfolio": "Portofolio",
+        "open": "Buka menu navigasi",
+        "close": "Tutup menu navigasi"
+      },
+      "theme": {
+        "light": "Terang",
+        "dark": "Gelap",
+        "switchToLight": "Ganti ke mode terang",
+        "switchToDark": "Ganti ke mode gelap"
+      },
+      "language": {
+        "label": "Bahasa",
+        "select": "Pilih bahasa"
+      },
+      "hero": {
+        "eyebrow": "Pengembang Game Unity | Pemimpin Inisiatif Teknis",
+        "lead": "Saya membangun game dan produk Android terfokus dari prototipe hingga rilis, menggabungkan pengembangan langsung dengan Unity dan native bersama perencanaan teknis, review, dan dukungan produksi.",
+        "available": "Tersedia untuk bekerja",
+        "primaryLinks": "Tautan utama",
+        "resume": "Resume",
+        "portfolio": "Portofolio",
+        "githubProfile": "Profil GitHub",
+        "profileSummary": "Ringkasan profil",
+        "featuredGameplay": "Pilihan gameplay unggulan",
+        "showGameplay": "Tampilkan gameplay {{title}}"
+      },
+      "stats": {
+        "label": "Statistik portofolio"
+      },
+      "work": {
+        "eyebrow": "Pekerjaan Saat Ini",
+        "title": "Yang sedang saya kerjakan."
+      },
+      "pixel": {
+        "eyebrow": "Dunia Pixel",
+        "title": "Pilihan game pixel.",
+        "summary": "Petualangan, pertempuran, survival, dan multiplayer.",
+        "sceneLabel": "Adegan proyek dunia pixel",
+        "openDetails": "Buka detail {{title}}",
+        "show": "Tampilkan {{title}}"
+      },
+      "featured": {
+        "eyebrow": "Karya Unggulan",
+        "title": "Rilis unggulan.",
+        "reelLabel": "Reel rilis unggulan"
+      },
+      "projects": {
+        "eyebrow": "Game & Aplikasi",
+        "title": "Jelajahi semua proyek.",
+        "portfolioLabel": "Portofolio proyek",
+        "games": "Game",
+        "apps": "Aplikasi",
+        "all": "Semua proyek",
+        "allType": "Semua {{type}}",
+        "featured": "Unggulan",
+        "mobile": "Seluler",
+        "pcWeb": "PC / Web",
+        "ar": "AR",
+        "simulation": "Simulasi",
+        "leadership": "Kepemimpinan",
+        "filterType": "Filter {{type}}",
+        "clearFilter": "Hapus filter proyek",
+        "clearFilterTitle": "Hapus filter",
+        "openSearch": "Cari proyek",
+        "closeSearch": "Tutup pencarian proyek",
+        "searchTitle": "Cari proyek",
+        "searchLabel": "Cari berdasarkan judul, platform, genre, teknologi, atau peran",
+        "clearSearch": "Hapus pencarian proyek",
+        "clearSearchTitle": "Hapus pencarian",
+        "shown_one": "{{count}} proyek ditampilkan",
+        "shown_other": "{{count}} proyek ditampilkan",
+        "noMatches": "Tidak ada proyek yang cocok",
+        "tryAnother": "Coba pencarian lain atau atur ulang filter saat ini.",
+        "reset": "Atur ulang"
+      },
+      "shelf": {
+        "browse": "{{count}} proyek. Gunakan tombol panah atau geser untuk menjelajah.",
+        "openDetailsFor": "Buka detail {{title}}",
+        "select": "Pilih {{title}}",
+        "openDetails": "Buka detail proyek",
+        "previous": "Proyek sebelumnya",
+        "next": "Proyek berikutnya",
+        "tags": "Tag {{title}}",
+        "inReview": "Dalam review",
+        "source": "Sumber",
+        "sourceFor": "Kode sumber {{title}}",
+        "detailsFor": "Buka detail proyek {{title}}",
+        "details": "Detail proyek"
+      },
+      "drawer": {
+        "close": "Tutup detail proyek",
+        "position": "Proyek {{position}} dari {{count}}",
+        "quickFacts": "Ringkasan {{title}}",
+        "appGallery": "Galeri aplikasi",
+        "gameplayGallery": "Galeri gameplay",
+        "projectArtwork": "Visual proyek",
+        "animatedPreview": "Pratinjau animasi",
+        "animatedGameplay": "Gameplay animasi",
+        "previousImage": "Gambar {{gallery}} sebelumnya",
+        "nextImage": "Gambar {{gallery}} berikutnya",
+        "previousImageTitle": "Gambar sebelumnya",
+        "nextImageTitle": "Gambar berikutnya",
+        "playGameplay": "Putar pratinjau gameplay {{title}}",
+        "showScreenshot": "Tampilkan tangkapan layar {{title}} ke-{{position}}",
+        "pauseGameplay": "Jeda pratinjau gameplay",
+        "playGameplayControl": "Putar pratinjau gameplay",
+        "pausePreview": "Jeda pratinjau",
+        "playPreview": "Putar pratinjau",
+        "overview": "Ringkasan",
+        "facts": "Fakta proyek {{title}}",
+        "year": "Tahun",
+        "genre": "Genre",
+        "platforms": "Platform",
+        "link": "Tautan",
+        "myRole": "Peran Saya",
+        "systems": "Sistem",
+        "tags": "Tag {{title}}",
+        "openLink": "Buka {{label}} untuk {{title}}",
+        "openSource": "Buka kode sumber {{title}}",
+        "sourceCode": "Kode sumber",
+        "moreDetails": "Detail lainnya",
+        "copied": "Disalin",
+        "share": "Bagikan proyek",
+        "copy": "Salin tautan",
+        "browse": "Jelajahi detail proyek",
+        "previousProject": "Proyek sebelumnya: {{title}}",
+        "noPrevious": "Tidak ada proyek sebelumnya",
+        "previous": "Sebelumnya",
+        "start": "Awal",
+        "nextProject": "Proyek berikutnya: {{title}}",
+        "noNext": "Tidak ada proyek berikutnya",
+        "next": "Berikutnya",
+        "end": "Akhir"
+      },
+      "links": {
+        "play": "Play Store",
+        "appstore": "App Store",
+        "itch": "itch.io",
+        "drive": "Google Drive",
+        "github": "GitHub",
+        "web": "Buka tautan"
+      },
+      "experience": {
+        "eyebrow": "Pengalaman",
+        "title": "Tempat saya bekerja.",
+        "timeline": "Linimasa karier",
+        "timelineLabel": "Navigasi linimasa karier",
+        "current": "Saat ini",
+        "details": "Lihat tanggung jawab",
+        "hideDetails": "Sembunyikan tanggung jawab",
+        "jumpTo": "Lompat ke {{company}}",
+        "responsibilities": "Tanggung jawab di {{company}}"
+      },
+      "skills": {
+        "eyebrow": "Teknologi Utama",
+        "title": "Alat yang saya gunakan.",
+        "summary": "Dikelompokkan berdasarkan penggunaan sehari-hari.",
+        "groups": {
+          "game": {
+            "title": "Pengembangan Game",
+            "description": "Sistem gameplay, prototipe cepat, dan produksi konten."
+          },
+          "backend": {
+            "title": "Backend & Multiplayer",
+            "description": "Multiplayer, backend game, data, dan layanan cloud."
+          },
+          "android": {
+            "title": "Android Native",
+            "description": "Aplikasi Android native, data lokal, dan UI modern."
+          },
+          "web": {
+            "title": "Web & Alat Pengembang",
+            "description": "Aplikasi web, alat pengembang, dan otomasi pengiriman."
+          },
+          "leadership": {
+            "title": "Kepemimpinan Teknis",
+            "description": "Perencanaan RFC, arsitektur, review, dan keputusan teknis."
+          },
+          "production": {
+            "title": "Produksi & Rilis",
+            "description": "Performa, pengujian, AR, dan rilis store."
+          }
+        }
+      },
+      "recognition": {
+        "eyebrow": "Pengakuan",
+        "title": "Penghargaan dan hasil.",
+        "summary": "{{count}} hasil dari {{start}} hingga {{end}}.",
+        "featured": "Hasil unggulan",
+        "archive": "Arsip penghargaan",
+        "closeArchive": "Tutup arsip penghargaan",
+        "showMore": "Tampilkan {{count}} penghargaan lagi",
+        "showFewer": "Tampilkan lebih sedikit"
+      },
+      "contact": {
+        "eyebrow": "Kontak",
+        "title": "Terbuka untuk peluang pengembangan game jarak jauh.",
+        "email": "Email"
+      },
+      "footer": {
+        "rights": "© 2026 Amin Hanif. Hak cipta dilindungi.",
+        "navigation": "Navigasi footer",
+        "terms": "Ketentuan situs",
+        "privacy": "Privasi"
+      },
+      "detail": {
+        "skip": "Langsung ke detail proyek",
+        "breadcrumb": "Jejak navigasi",
+        "platformsAndTech": "Platform dan teknologi proyek",
+        "share": "Bagikan proyek",
+        "projectFacts": "Fakta proyek",
+        "coreSystems": "Sistem utama",
+        "eyebrow": "Detail Proyek",
+        "title": "Melihat proyek lebih dekat.",
+        "summary": "Konteks proyek, kontribusi langsung saya, dan hasil yang dikirim.",
+        "overview": "Ringkasan",
+        "role": "Peran Saya",
+        "outcome": "Hasil",
+        "roleTitle": "Kontribusi implementasi dan produksi.",
+        "systemsAndTech": "Sistem dan teknologi proyek",
+        "galleryEyebrow": "Galeri Proyek",
+        "galleryTitle": "Tampilan gameplay dan produk.",
+        "moreEyebrow": "Karya Lainnya",
+        "moreTitle": "Detail proyek lainnya.",
+        "mediaTitle": "Media proyek",
+        "openMedia": "Buka {{label}} di penampil media",
+        "closeMedia": "Tutup penampil media",
+        "gameplayCaption": "Pratinjau gameplay {{title}}",
+        "appPreviewCaption": "Pratinjau aplikasi {{title}}",
+        "screenshotCaption": "Tangkapan layar {{title}} ke-{{position}}",
+        "previousMedia": "Media sebelumnya",
+        "nextMedia": "Media berikutnya",
+        "counter": "{{position}} dari {{count}}"
+      },
+      "directory": {
+        "skip": "Langsung ke detail proyek",
+        "eyebrow": "Detail Proyek Pilihan",
+        "title": "Game dan aplikasi di balik kartu rilis.",
+        "lead": "Karya pilihan dalam gameplay Unity, sistem seluler, kepemilikan teknis, dan pengembangan Android native.",
+        "browse": "Jelajahi detail proyek",
+        "viewAll": "Lihat semua proyek",
+        "count": "{{count}} Proyek Pilihan",
+        "detailsTitle": "Kontribusi, konteks, dan hasil.",
+        "detailsSummary": "Setiap halaman menjelaskan proyek dan kontribusi langsung saya tanpa membuka pekerjaan studio yang bersifat rahasia.",
+        "moreDetails": "Detail lainnya"
+      }
+    },
+    "ar": {
+      "brand": {
+        "role": "مطوّر ألعاب",
+        "homeLabel": "الصفحة الرئيسية لأمين حنيف"
+      },
+      "nav": {
+        "primary": "التنقل الرئيسي",
+        "mobile": "تنقل الهاتف",
+        "work": "العمل",
+        "projects": "المشاريع",
+        "experience": "الخبرة",
+        "contact": "التواصل",
+        "portfolio": "معرض الأعمال",
+        "open": "فتح قائمة التنقل",
+        "close": "إغلاق قائمة التنقل"
+      },
+      "theme": {
+        "light": "فاتح",
+        "dark": "داكن",
+        "switchToLight": "التبديل إلى الوضع الفاتح",
+        "switchToDark": "التبديل إلى الوضع الداكن"
+      },
+      "language": {
+        "label": "اللغة",
+        "select": "اختر اللغة"
+      },
+      "hero": {
+        "eyebrow": "مطوّر ألعاب Unity | قائد مبادرات تقنية",
+        "lead": "أطوّر ألعاباً ومنتجات Android مركّزة من النموذج الأولي حتى الإصدار، جامعاً بين تطوير Unity والتطوير الأصلي والتخطيط التقني والمراجعة ودعم الإنتاج.",
+        "available": "متاح للعمل",
+        "primaryLinks": "الروابط الرئيسية",
+        "resume": "السيرة الذاتية",
+        "portfolio": "معرض الأعمال",
+        "githubProfile": "ملف GitHub",
+        "profileSummary": "ملخص الملف",
+        "featuredGameplay": "اختيار أسلوب اللعب المميز",
+        "showGameplay": "عرض أسلوب لعب {{title}}"
+      },
+      "stats": {
+        "label": "إحصاءات معرض الأعمال"
+      },
+      "work": {
+        "eyebrow": "العمل الحالي",
+        "title": "ما أعمل عليه الآن."
+      },
+      "pixel": {
+        "eyebrow": "عوالم Pixel",
+        "title": "ألعاب pixel مختارة.",
+        "summary": "مغامرة وقتال وبقاء ولعب جماعي.",
+        "sceneLabel": "مشهد مشاريع عوالم pixel",
+        "openDetails": "فتح تفاصيل {{title}}",
+        "show": "عرض {{title}}"
+      },
+      "featured": {
+        "eyebrow": "أعمال مميزة",
+        "title": "إصدارات مميزة.",
+        "reelLabel": "شريط الإصدارات المميزة"
+      },
+      "projects": {
+        "eyebrow": "ألعاب وتطبيقات",
+        "title": "تصفح جميع المشاريع.",
+        "portfolioLabel": "معرض المشاريع",
+        "games": "الألعاب",
+        "apps": "التطبيقات",
+        "all": "كل المشاريع",
+        "allType": "كل {{type}}",
+        "featured": "مميزة",
+        "mobile": "الهاتف",
+        "pcWeb": "PC / الويب",
+        "ar": "AR",
+        "simulation": "محاكاة",
+        "leadership": "قيادة",
+        "filterType": "تصفية {{type}}",
+        "clearFilter": "مسح تصفية المشاريع",
+        "clearFilterTitle": "مسح التصفية",
+        "openSearch": "البحث في المشاريع",
+        "closeSearch": "إغلاق بحث المشاريع",
+        "searchTitle": "البحث في المشاريع",
+        "searchLabel": "البحث بالعنوان أو المنصة أو النوع أو التقنية أو الدور",
+        "clearSearch": "مسح بحث المشاريع",
+        "clearSearchTitle": "مسح البحث",
+        "shown_one": "مشروع واحد معروض",
+        "shown_other": "{{count}} مشاريع معروضة",
+        "noMatches": "لا توجد مشاريع مطابقة",
+        "tryAnother": "جرّب بحثاً آخر أو أعد ضبط التصفية الحالية.",
+        "reset": "إعادة ضبط"
+      },
+      "shelf": {
+        "browse": "{{count}} مشاريع. استخدم مفاتيح الأسهم أو اسحب للتصفح.",
+        "openDetailsFor": "فتح تفاصيل {{title}}",
+        "select": "اختيار {{title}}",
+        "openDetails": "فتح تفاصيل المشروع",
+        "previous": "المشروع السابق",
+        "next": "المشروع التالي",
+        "tags": "وسوم {{title}}",
+        "inReview": "قيد المراجعة",
+        "source": "المصدر",
+        "sourceFor": "الشفرة المصدرية لـ{{title}}",
+        "detailsFor": "فتح تفاصيل مشروع {{title}}",
+        "details": "تفاصيل المشروع"
+      },
+      "drawer": {
+        "close": "إغلاق تفاصيل المشروع",
+        "position": "المشروع {{position}} من {{count}}",
+        "quickFacts": "حقائق سريعة عن {{title}}",
+        "appGallery": "معرض التطبيق",
+        "gameplayGallery": "معرض أسلوب اللعب",
+        "projectArtwork": "صورة المشروع",
+        "animatedPreview": "معاينة متحركة",
+        "animatedGameplay": "أسلوب لعب متحرك",
+        "previousImage": "صورة {{gallery}} السابقة",
+        "nextImage": "صورة {{gallery}} التالية",
+        "previousImageTitle": "الصورة السابقة",
+        "nextImageTitle": "الصورة التالية",
+        "playGameplay": "تشغيل معاينة لعب {{title}}",
+        "showScreenshot": "عرض لقطة {{title}} رقم {{position}}",
+        "pauseGameplay": "إيقاف معاينة اللعب مؤقتاً",
+        "playGameplayControl": "تشغيل معاينة اللعب",
+        "pausePreview": "إيقاف المعاينة",
+        "playPreview": "تشغيل المعاينة",
+        "overview": "نظرة عامة",
+        "facts": "حقائق مشروع {{title}}",
+        "year": "السنة",
+        "genre": "النوع",
+        "platforms": "المنصات",
+        "link": "الرابط",
+        "myRole": "دوري",
+        "systems": "الأنظمة",
+        "tags": "وسوم {{title}}",
+        "openLink": "فتح {{label}} لـ{{title}}",
+        "openSource": "فتح الشفرة المصدرية لـ{{title}}",
+        "sourceCode": "الشفرة المصدرية",
+        "moreDetails": "تفاصيل أكثر",
+        "copied": "تم النسخ",
+        "share": "مشاركة المشروع",
+        "copy": "نسخ الرابط",
+        "browse": "تصفح تفاصيل المشاريع",
+        "previousProject": "المشروع السابق: {{title}}",
+        "noPrevious": "لا يوجد مشروع سابق",
+        "previous": "السابق",
+        "start": "البداية",
+        "nextProject": "المشروع التالي: {{title}}",
+        "noNext": "لا يوجد مشروع تالٍ",
+        "next": "التالي",
+        "end": "النهاية"
+      },
+      "links": {
+        "play": "Play Store",
+        "appstore": "App Store",
+        "itch": "itch.io",
+        "drive": "Google Drive",
+        "github": "GitHub",
+        "web": "فتح الرابط"
+      },
+      "experience": {
+        "eyebrow": "الخبرة",
+        "title": "أماكن عملي.",
+        "timeline": "المسار المهني",
+        "timelineLabel": "التنقل في المسار المهني",
+        "current": "الحالي",
+        "details": "عرض المسؤوليات",
+        "hideDetails": "إخفاء المسؤوليات",
+        "jumpTo": "الانتقال إلى {{company}}",
+        "responsibilities": "المسؤوليات في {{company}}"
+      },
+      "skills": {
+        "eyebrow": "الأدوات الأساسية",
+        "title": "الأدوات التي أستخدمها.",
+        "summary": "مجمعة حسب الاستخدام اليومي.",
+        "groups": {
+          "game": {
+            "title": "تطوير الألعاب",
+            "description": "أنظمة اللعب والنماذج الأولية السريعة وإنتاج المحتوى."
+          },
+          "backend": {
+            "title": "الخوادم وتعدد اللاعبين",
+            "description": "تعدد اللاعبين وخدمات الألعاب والبيانات والسحابة."
+          },
+          "android": {
+            "title": "تطوير Android الأصلي",
+            "description": "تطبيقات Android الأصلية والبيانات المحلية والواجهات الحديثة."
+          },
+          "web": {
+            "title": "الويب وأدوات المطورين",
+            "description": "تطبيقات الويب وأدوات المطورين وأتمتة النشر."
+          },
+          "leadership": {
+            "title": "القيادة التقنية",
+            "description": "تخطيط RFC والبنية والمراجعات والقرارات التقنية."
+          },
+          "production": {
+            "title": "الإنتاج والإصدار",
+            "description": "الأداء والاختبار والواقع المعزز وإصدارات المتاجر."
+          }
+        }
+      },
+      "recognition": {
+        "eyebrow": "التكريم",
+        "title": "الجوائز والنتائج.",
+        "summary": "{{count}} نتيجة من {{start}} إلى {{end}}.",
+        "featured": "نتائج مميزة",
+        "archive": "أرشيف الجوائز",
+        "closeArchive": "إغلاق أرشيف الجوائز",
+        "showMore": "عرض {{count}} جوائز إضافية",
+        "showFewer": "عرض عدد أقل"
+      },
+      "contact": {
+        "eyebrow": "التواصل",
+        "title": "متاح لفرص تطوير الألعاب عن بُعد.",
+        "email": "البريد الإلكتروني"
+      },
+      "footer": {
+        "rights": "© 2026 أمين حنيف. جميع الحقوق محفوظة.",
+        "navigation": "تنقل التذييل",
+        "terms": "شروط الموقع",
+        "privacy": "الخصوصية"
+      },
+      "detail": {
+        "skip": "الانتقال إلى تفاصيل المشروع",
+        "breadcrumb": "مسار التنقل",
+        "platformsAndTech": "منصات المشروع وتقنياته",
+        "share": "مشاركة المشروع",
+        "projectFacts": "حقائق المشروع",
+        "coreSystems": "الأنظمة الأساسية",
+        "eyebrow": "تفاصيل المشروع",
+        "title": "نظرة أقرب على المشروع.",
+        "summary": "سياق المشروع ومساهمتي المباشرة والنتيجة المسلّمة.",
+        "overview": "نظرة عامة",
+        "role": "دوري",
+        "outcome": "النتيجة",
+        "roleTitle": "المساهمة في التنفيذ والإنتاج.",
+        "systemsAndTech": "أنظمة المشروع وتقنياته",
+        "galleryEyebrow": "معرض المشروع",
+        "galleryTitle": "لقطات من اللعب والمنتج.",
+        "moreEyebrow": "أعمال أخرى",
+        "moreTitle": "تفاصيل مشاريع أخرى.",
+        "mediaTitle": "وسائط المشروع",
+        "openMedia": "فتح {{label}} في عارض الوسائط",
+        "closeMedia": "إغلاق عارض الوسائط",
+        "gameplayCaption": "معاينة أسلوب لعب {{title}}",
+        "appPreviewCaption": "معاينة تطبيق {{title}}",
+        "screenshotCaption": "لقطة {{title}} رقم {{position}}",
+        "previousMedia": "الوسائط السابقة",
+        "nextMedia": "الوسائط التالية",
+        "counter": "{{position}} من {{count}}"
+      },
+      "directory": {
+        "skip": "الانتقال إلى تفاصيل المشاريع",
+        "eyebrow": "تفاصيل مشاريع مختارة",
+        "title": "الألعاب والتطبيقات خلف بطاقة الإصدار.",
+        "lead": "أعمال مختارة في Unity وأنظمة الهاتف والملكية التقنية وتطوير Android الأصلي.",
+        "browse": "تصفح تفاصيل المشاريع",
+        "viewAll": "عرض كل المشاريع",
+        "count": "{{count}} مشروعاً مختاراً",
+        "detailsTitle": "المساهمات والسياق والنتائج.",
+        "detailsSummary": "تعرض كل صفحة المشروع ومساهمتي المباشرة دون كشف أعمال الاستوديو السرية.",
+        "moreDetails": "تفاصيل أكثر"
+      }
+    },
+    "ja": {
+      "brand": {
+        "role": "ゲーム開発者",
+        "homeLabel": "Amin Hanif ホーム"
+      },
+      "nav": {
+        "primary": "メインナビゲーション",
+        "mobile": "モバイルナビゲーション",
+        "work": "仕事",
+        "projects": "プロジェクト",
+        "experience": "経歴",
+        "contact": "お問い合わせ",
+        "portfolio": "ポートフォリオ",
+        "open": "ナビゲーションを開く",
+        "close": "ナビゲーションを閉じる"
+      },
+      "theme": {
+        "light": "ライト",
+        "dark": "ダーク",
+        "switchToLight": "ライトモードに切り替える",
+        "switchToDark": "ダークモードに切り替える"
+      },
+      "language": {
+        "label": "言語",
+        "select": "言語を選択"
+      },
+      "hero": {
+        "eyebrow": "Unityゲーム開発者 | 技術イニシアチブリード",
+        "lead": "プロトタイプからリリースまでゲームとAndroid製品を開発し、Unity・ネイティブ実装と技術計画、レビュー、制作支援を組み合わせています。",
+        "available": "仕事のご相談受付中",
+        "primaryLinks": "主要リンク",
+        "resume": "履歴書",
+        "portfolio": "ポートフォリオ",
+        "githubProfile": "GitHubプロフィール",
+        "profileSummary": "プロフィール概要",
+        "featuredGameplay": "注目ゲームプレイ選択",
+        "showGameplay": "{{title}}のゲームプレイを表示"
+      },
+      "stats": {
+        "label": "ポートフォリオ統計"
+      },
+      "work": {
+        "eyebrow": "現在の仕事",
+        "title": "現在取り組んでいること。"
+      },
+      "pixel": {
+        "eyebrow": "Pixel Worlds",
+        "title": "選りすぐりのpixelゲーム。",
+        "summary": "冒険、戦闘、サバイバル、マルチプレイ。",
+        "sceneLabel": "Pixelゲームプロジェクト",
+        "openDetails": "{{title}}の詳細を開く",
+        "show": "{{title}}を表示"
+      },
+      "featured": {
+        "eyebrow": "注目作品",
+        "title": "主なリリース。",
+        "reelLabel": "注目リリースリール"
+      },
+      "projects": {
+        "eyebrow": "ゲーム・アプリ",
+        "title": "すべてのプロジェクトを見る。",
+        "portfolioLabel": "プロジェクト一覧",
+        "games": "ゲーム",
+        "apps": "アプリ",
+        "all": "すべて",
+        "allType": "すべての{{type}}",
+        "featured": "注目",
+        "mobile": "モバイル",
+        "pcWeb": "PC / Web",
+        "ar": "AR",
+        "simulation": "シミュレーション",
+        "leadership": "リーダーシップ",
+        "filterType": "{{type}}を絞り込む",
+        "clearFilter": "フィルターを解除",
+        "clearFilterTitle": "フィルター解除",
+        "openSearch": "プロジェクトを検索",
+        "closeSearch": "検索を閉じる",
+        "searchTitle": "プロジェクトを検索",
+        "searchLabel": "タイトル、プラットフォーム、ジャンル、技術、担当で検索",
+        "clearSearch": "検索を消去",
+        "clearSearchTitle": "検索を消去",
+        "shown_one": "{{count}}件を表示",
+        "shown_other": "{{count}}件を表示",
+        "noMatches": "該当するプロジェクトがありません",
+        "tryAnother": "別の検索を試すか、フィルターをリセットしてください。",
+        "reset": "リセット"
+      },
+      "shelf": {
+        "browse": "{{count}}件のプロジェクト。矢印キーまたはドラッグで移動できます。",
+        "openDetailsFor": "{{title}}の詳細を開く",
+        "select": "{{title}}を選択",
+        "openDetails": "プロジェクト詳細を開く",
+        "previous": "前のプロジェクト",
+        "next": "次のプロジェクト",
+        "tags": "{{title}}のタグ",
+        "inReview": "審査中",
+        "source": "ソース",
+        "sourceFor": "{{title}}のソースコード",
+        "detailsFor": "{{title}}の詳細を開く",
+        "details": "プロジェクト詳細"
+      },
+      "drawer": {
+        "close": "プロジェクト詳細を閉じる",
+        "position": "{{count}}件中{{position}}件目",
+        "quickFacts": "{{title}}の概要",
+        "appGallery": "アプリギャラリー",
+        "gameplayGallery": "ゲームプレイギャラリー",
+        "projectArtwork": "プロジェクト画像",
+        "animatedPreview": "動画プレビュー",
+        "animatedGameplay": "ゲームプレイ動画",
+        "previousImage": "前の{{gallery}}画像",
+        "nextImage": "次の{{gallery}}画像",
+        "previousImageTitle": "前の画像",
+        "nextImageTitle": "次の画像",
+        "playGameplay": "{{title}}のゲームプレイを再生",
+        "showScreenshot": "{{title}}のスクリーンショット{{position}}を表示",
+        "pauseGameplay": "ゲームプレイを一時停止",
+        "playGameplayControl": "ゲームプレイを再生",
+        "pausePreview": "一時停止",
+        "playPreview": "再生",
+        "overview": "概要",
+        "facts": "{{title}}のプロジェクト情報",
+        "year": "年",
+        "genre": "ジャンル",
+        "platforms": "プラットフォーム",
+        "link": "リンク",
+        "myRole": "担当",
+        "systems": "システム",
+        "tags": "{{title}}のタグ",
+        "openLink": "{{title}}の{{label}}を開く",
+        "openSource": "{{title}}のソースコードを開く",
+        "sourceCode": "ソースコード",
+        "moreDetails": "詳細を見る",
+        "copied": "コピーしました",
+        "share": "共有",
+        "copy": "リンクをコピー",
+        "browse": "プロジェクト詳細を移動",
+        "previousProject": "前のプロジェクト: {{title}}",
+        "noPrevious": "前のプロジェクトはありません",
+        "previous": "前へ",
+        "start": "先頭",
+        "nextProject": "次のプロジェクト: {{title}}",
+        "noNext": "次のプロジェクトはありません",
+        "next": "次へ",
+        "end": "末尾"
+      },
+      "links": {
+        "play": "Play Store",
+        "appstore": "App Store",
+        "itch": "itch.io",
+        "drive": "Google Drive",
+        "github": "GitHub",
+        "web": "リンクを開く"
+      },
+      "experience": {
+        "eyebrow": "経歴",
+        "title": "これまでの勤務先。",
+        "timeline": "経歴タイムライン",
+        "timelineLabel": "経歴タイムラインのナビゲーション",
+        "current": "現在",
+        "details": "担当内容を見る",
+        "hideDetails": "担当内容を閉じる",
+        "jumpTo": "{{company}}へ移動",
+        "responsibilities": "{{company}}での担当内容"
+      },
+      "skills": {
+        "eyebrow": "コアスタック",
+        "title": "使用しているツール。",
+        "summary": "日々の用途別に整理。",
+        "groups": {
+          "game": {
+            "title": "ゲーム開発",
+            "description": "ゲームプレイシステム、迅速なプロトタイピング、コンテンツ制作。"
+          },
+          "backend": {
+            "title": "バックエンド・マルチプレイ",
+            "description": "マルチプレイ、ゲームバックエンド、データ、クラウドサービス。"
+          },
+          "android": {
+            "title": "ネイティブAndroid",
+            "description": "ネイティブAndroidアプリ、ローカルデータ、モダンUI。"
+          },
+          "web": {
+            "title": "Web・開発ツール",
+            "description": "Webアプリ、開発ツール、デリバリー自動化。"
+          },
+          "leadership": {
+            "title": "技術リーダーシップ",
+            "description": "RFC計画、設計、レビュー、技術判断。"
+          },
+          "production": {
+            "title": "制作・リリース",
+            "description": "パフォーマンス、テスト、AR、ストア公開。"
+          }
+        }
+      },
+      "recognition": {
+        "eyebrow": "受賞歴",
+        "title": "受賞・選出実績。",
+        "summary": "{{start}}年から{{end}}年までの{{count}}件。",
+        "featured": "主な実績",
+        "archive": "受賞アーカイブ",
+        "closeArchive": "受賞アーカイブを閉じる",
+        "showMore": "他{{count}}件を表示",
+        "showFewer": "表示を減らす"
+      },
+      "contact": {
+        "eyebrow": "お問い合わせ",
+        "title": "リモートのゲーム開発案件を募集しています。",
+        "email": "メール"
+      },
+      "footer": {
+        "rights": "© 2026 Amin Hanif. All rights reserved.",
+        "navigation": "フッターナビゲーション",
+        "terms": "サイト利用規約",
+        "privacy": "プライバシー"
+      },
+      "detail": {
+        "skip": "プロジェクト詳細へ移動",
+        "breadcrumb": "パンくずリスト",
+        "platformsAndTech": "プロジェクトのプラットフォームと技術",
+        "share": "プロジェクトを共有",
+        "projectFacts": "プロジェクト情報",
+        "coreSystems": "主要システム",
+        "eyebrow": "プロジェクト詳細",
+        "title": "プロジェクトを詳しく見る。",
+        "summary": "プロジェクトの背景、直接の担当、完成した成果を紹介します。",
+        "overview": "概要",
+        "role": "担当",
+        "outcome": "成果",
+        "roleTitle": "実装と制作への貢献。",
+        "systemsAndTech": "プロジェクトのシステムと技術",
+        "galleryEyebrow": "プロジェクトギャラリー",
+        "galleryTitle": "ゲームプレイと製品画面。",
+        "moreEyebrow": "その他の作品",
+        "moreTitle": "その他のプロジェクト詳細。",
+        "mediaTitle": "プロジェクトメディア",
+        "openMedia": "{{label}}をメディアビューアで開く",
+        "closeMedia": "メディアビューアを閉じる",
+        "gameplayCaption": "{{title}}のゲームプレイ",
+        "appPreviewCaption": "{{title}}のアプリ画面",
+        "screenshotCaption": "{{title}}のスクリーンショット{{position}}",
+        "previousMedia": "前のメディア",
+        "nextMedia": "次のメディア",
+        "counter": "{{count}}件中{{position}}件目"
+      },
+      "directory": {
+        "skip": "プロジェクト詳細へ移動",
+        "eyebrow": "主なプロジェクト詳細",
+        "title": "リリースカードの先にあるゲームとアプリ。",
+        "lead": "Unityゲームプレイ、モバイルシステム、技術責任、Androidネイティブ開発の主な実績です。",
+        "browse": "プロジェクト詳細を見る",
+        "viewAll": "すべてのプロジェクト",
+        "count": "主なプロジェクト{{count}}件",
+        "detailsTitle": "担当、背景、成果。",
+        "detailsSummary": "各ページでは、スタジオの機密情報を公開せずにプロジェクトと直接の担当を紹介します。",
+        "moreDetails": "詳細を見る"
+      }
+    },
+    "ko": {
+      "brand": {
+        "role": "게임 개발자",
+        "homeLabel": "Amin Hanif 홈"
+      },
+      "nav": {
+        "primary": "기본 탐색",
+        "mobile": "모바일 탐색",
+        "work": "작업",
+        "projects": "프로젝트",
+        "experience": "경력",
+        "contact": "연락처",
+        "portfolio": "포트폴리오",
+        "open": "탐색 메뉴 열기",
+        "close": "탐색 메뉴 닫기"
+      },
+      "theme": {
+        "light": "라이트",
+        "dark": "다크",
+        "switchToLight": "라이트 모드로 전환",
+        "switchToDark": "다크 모드로 전환"
+      },
+      "language": {
+        "label": "언어",
+        "select": "언어 선택"
+      },
+      "hero": {
+        "eyebrow": "Unity 게임 개발자 | 기술 이니셔티브 리드",
+        "lead": "프로토타입부터 출시까지 게임과 집중형 Android 제품을 만들며 Unity 및 네이티브 개발과 기술 계획, 검토, 제작 지원을 함께 수행합니다.",
+        "available": "업무 가능",
+        "primaryLinks": "주요 링크",
+        "resume": "이력서",
+        "portfolio": "포트폴리오",
+        "githubProfile": "GitHub 프로필",
+        "profileSummary": "프로필 요약",
+        "featuredGameplay": "주요 게임플레이 선택",
+        "showGameplay": "{{title}} 게임플레이 보기"
+      },
+      "stats": {
+        "label": "포트폴리오 통계"
+      },
+      "work": {
+        "eyebrow": "현재 업무",
+        "title": "현재 진행 중인 작업."
+      },
+      "pixel": {
+        "eyebrow": "Pixel Worlds",
+        "title": "선별한 pixel 게임.",
+        "summary": "모험, 전투, 생존과 멀티플레이.",
+        "sceneLabel": "Pixel 게임 프로젝트 장면",
+        "openDetails": "{{title}} 상세 정보 열기",
+        "show": "{{title}} 보기"
+      },
+      "featured": {
+        "eyebrow": "주요 작업",
+        "title": "주요 출시작.",
+        "reelLabel": "주요 출시작 릴"
+      },
+      "projects": {
+        "eyebrow": "게임 및 앱",
+        "title": "모든 프로젝트 둘러보기.",
+        "portfolioLabel": "프로젝트 포트폴리오",
+        "games": "게임",
+        "apps": "앱",
+        "all": "모든 프로젝트",
+        "allType": "모든 {{type}}",
+        "featured": "주요",
+        "mobile": "모바일",
+        "pcWeb": "PC / 웹",
+        "ar": "AR",
+        "simulation": "시뮬레이션",
+        "leadership": "리더십",
+        "filterType": "{{type}} 필터",
+        "clearFilter": "프로젝트 필터 지우기",
+        "clearFilterTitle": "필터 지우기",
+        "openSearch": "프로젝트 검색",
+        "closeSearch": "검색 닫기",
+        "searchTitle": "프로젝트 검색",
+        "searchLabel": "제목, 플랫폼, 장르, 기술 또는 역할로 검색",
+        "clearSearch": "검색 지우기",
+        "clearSearchTitle": "검색 지우기",
+        "shown_one": "{{count}}개 프로젝트 표시",
+        "shown_other": "{{count}}개 프로젝트 표시",
+        "noMatches": "일치하는 프로젝트 없음",
+        "tryAnother": "다른 검색을 시도하거나 현재 필터를 초기화하세요.",
+        "reset": "초기화"
+      },
+      "shelf": {
+        "browse": "{{count}}개 프로젝트. 화살표 키 또는 드래그로 탐색하세요.",
+        "openDetailsFor": "{{title}} 상세 정보 열기",
+        "select": "{{title}} 선택",
+        "openDetails": "프로젝트 상세 정보 열기",
+        "previous": "이전 프로젝트",
+        "next": "다음 프로젝트",
+        "tags": "{{title}} 태그",
+        "inReview": "검토 중",
+        "source": "소스",
+        "sourceFor": "{{title}} 소스 코드",
+        "detailsFor": "{{title}} 상세 정보 열기",
+        "details": "프로젝트 상세 정보"
+      },
+      "drawer": {
+        "close": "프로젝트 상세 정보 닫기",
+        "position": "{{count}}개 중 {{position}}번째 프로젝트",
+        "quickFacts": "{{title}} 요약",
+        "appGallery": "앱 갤러리",
+        "gameplayGallery": "게임플레이 갤러리",
+        "projectArtwork": "프로젝트 이미지",
+        "animatedPreview": "애니메이션 미리보기",
+        "animatedGameplay": "게임플레이 애니메이션",
+        "previousImage": "이전 {{gallery}} 이미지",
+        "nextImage": "다음 {{gallery}} 이미지",
+        "previousImageTitle": "이전 이미지",
+        "nextImageTitle": "다음 이미지",
+        "playGameplay": "{{title}} 게임플레이 재생",
+        "showScreenshot": "{{title}} 스크린샷 {{position}} 보기",
+        "pauseGameplay": "게임플레이 일시정지",
+        "playGameplayControl": "게임플레이 재생",
+        "pausePreview": "미리보기 일시정지",
+        "playPreview": "미리보기 재생",
+        "overview": "개요",
+        "facts": "{{title}} 프로젝트 정보",
+        "year": "연도",
+        "genre": "장르",
+        "platforms": "플랫폼",
+        "link": "링크",
+        "myRole": "내 역할",
+        "systems": "시스템",
+        "tags": "{{title}} 태그",
+        "openLink": "{{title}}의 {{label}} 열기",
+        "openSource": "{{title}} 소스 코드 열기",
+        "sourceCode": "소스 코드",
+        "moreDetails": "자세히 보기",
+        "copied": "복사됨",
+        "share": "프로젝트 공유",
+        "copy": "링크 복사",
+        "browse": "프로젝트 상세 정보 탐색",
+        "previousProject": "이전 프로젝트: {{title}}",
+        "noPrevious": "이전 프로젝트 없음",
+        "previous": "이전",
+        "start": "시작",
+        "nextProject": "다음 프로젝트: {{title}}",
+        "noNext": "다음 프로젝트 없음",
+        "next": "다음",
+        "end": "끝"
+      },
+      "links": {
+        "play": "Play Store",
+        "appstore": "App Store",
+        "itch": "itch.io",
+        "drive": "Google Drive",
+        "github": "GitHub",
+        "web": "링크 열기"
+      },
+      "experience": {
+        "eyebrow": "경력",
+        "title": "근무 경력.",
+        "timeline": "경력 타임라인",
+        "timelineLabel": "경력 타임라인 탐색",
+        "current": "현재",
+        "details": "담당 업무 보기",
+        "hideDetails": "담당 업무 닫기",
+        "jumpTo": "{{company}}로 이동",
+        "responsibilities": "{{company}}에서의 담당 업무"
+      },
+      "skills": {
+        "eyebrow": "핵심 기술",
+        "title": "사용 도구.",
+        "summary": "일상적인 사용 기준으로 분류했습니다.",
+        "groups": {
+          "game": {
+            "title": "게임 개발",
+            "description": "게임플레이 시스템, 빠른 프로토타이핑, 콘텐츠 제작."
+          },
+          "backend": {
+            "title": "백엔드 및 멀티플레이",
+            "description": "멀티플레이, 게임 백엔드, 데이터, 클라우드 서비스."
+          },
+          "android": {
+            "title": "네이티브 Android",
+            "description": "네이티브 Android 앱, 로컬 데이터, 현대적인 UI."
+          },
+          "web": {
+            "title": "웹 및 개발자 도구",
+            "description": "웹 앱, 개발자 도구, 배포 자동화."
+          },
+          "leadership": {
+            "title": "기술 리더십",
+            "description": "RFC 계획, 아키텍처, 리뷰, 기술 의사결정."
+          },
+          "production": {
+            "title": "프로덕션 및 출시",
+            "description": "성능, 테스트, AR, 스토어 출시."
+          }
+        }
+      },
+      "recognition": {
+        "eyebrow": "수상",
+        "title": "수상 및 결과.",
+        "summary": "{{start}}년부터 {{end}}년까지 {{count}}개 결과.",
+        "featured": "주요 결과",
+        "archive": "수상 기록",
+        "closeArchive": "수상 기록 닫기",
+        "showMore": "{{count}}개 수상 더 보기",
+        "showFewer": "접기"
+      },
+      "contact": {
+        "eyebrow": "연락처",
+        "title": "원격 게임 개발 기회를 찾고 있습니다.",
+        "email": "이메일"
+      },
+      "footer": {
+        "rights": "© 2026 Amin Hanif. All rights reserved.",
+        "navigation": "바닥글 탐색",
+        "terms": "사이트 이용약관",
+        "privacy": "개인정보 보호"
+      },
+      "detail": {
+        "skip": "프로젝트 상세 정보로 이동",
+        "breadcrumb": "탐색 경로",
+        "platformsAndTech": "프로젝트 플랫폼 및 기술",
+        "share": "프로젝트 공유",
+        "projectFacts": "프로젝트 정보",
+        "coreSystems": "핵심 시스템",
+        "eyebrow": "프로젝트 상세 정보",
+        "title": "프로젝트 자세히 보기.",
+        "summary": "프로젝트 배경, 직접 기여한 부분과 전달 결과를 소개합니다.",
+        "overview": "개요",
+        "role": "내 역할",
+        "outcome": "결과",
+        "roleTitle": "구현 및 제작 기여.",
+        "systemsAndTech": "프로젝트 시스템 및 기술",
+        "galleryEyebrow": "프로젝트 갤러리",
+        "galleryTitle": "게임플레이 및 제품 화면.",
+        "moreEyebrow": "다른 작업",
+        "moreTitle": "다른 프로젝트 상세 정보.",
+        "mediaTitle": "프로젝트 미디어",
+        "openMedia": "{{label}} 미디어 뷰어에서 열기",
+        "closeMedia": "미디어 뷰어 닫기",
+        "gameplayCaption": "{{title}} 게임플레이 미리보기",
+        "appPreviewCaption": "{{title}} 앱 미리보기",
+        "screenshotCaption": "{{title}} 스크린샷 {{position}}",
+        "previousMedia": "이전 미디어",
+        "nextMedia": "다음 미디어",
+        "counter": "{{count}}개 중 {{position}}번째"
+      },
+      "directory": {
+        "skip": "프로젝트 상세 정보로 이동",
+        "eyebrow": "주요 프로젝트 상세 정보",
+        "title": "출시 카드 너머의 게임과 앱.",
+        "lead": "Unity 게임플레이, 모바일 시스템, 기술 책임과 Android 네이티브 개발의 주요 작업입니다.",
+        "browse": "프로젝트 상세 정보 보기",
+        "viewAll": "모든 프로젝트 보기",
+        "count": "주요 프로젝트 {{count}}개",
+        "detailsTitle": "기여, 배경과 결과.",
+        "detailsSummary": "각 페이지는 스튜디오의 기밀 작업을 공개하지 않으면서 프로젝트와 직접 기여를 소개합니다.",
+        "moreDetails": "자세히 보기"
+      }
+    },
+    "es": {
+      "brand": {
+        "role": "Desarrollador de videojuegos",
+        "homeLabel": "Inicio de Amin Hanif"
+      },
+      "nav": {
+        "primary": "Navegación principal",
+        "mobile": "Navegación móvil",
+        "work": "Trabajo",
+        "projects": "Proyectos",
+        "experience": "Experiencia",
+        "contact": "Contacto",
+        "portfolio": "Portafolio",
+        "open": "Abrir menú de navegación",
+        "close": "Cerrar menú de navegación"
+      },
+      "theme": {
+        "light": "Claro",
+        "dark": "Oscuro",
+        "switchToLight": "Cambiar al modo claro",
+        "switchToDark": "Cambiar al modo oscuro"
+      },
+      "language": {
+        "label": "Idioma",
+        "select": "Seleccionar idioma"
+      },
+      "hero": {
+        "eyebrow": "Desarrollador Unity | Líder de iniciativas técnicas",
+        "lead": "Creo juegos y productos Android concretos desde el prototipo hasta el lanzamiento, combinando desarrollo práctico en Unity y nativo con planificación técnica, revisión y soporte de producción.",
+        "available": "Disponible para trabajar",
+        "primaryLinks": "Enlaces principales",
+        "resume": "Currículum",
+        "portfolio": "Portafolio",
+        "githubProfile": "Perfil de GitHub",
+        "profileSummary": "Resumen del perfil",
+        "featuredGameplay": "Selector de jugabilidad destacada",
+        "showGameplay": "Mostrar jugabilidad de {{title}}"
+      },
+      "stats": {
+        "label": "Estadísticas del portafolio"
+      },
+      "work": {
+        "eyebrow": "Trabajo Actual",
+        "title": "En qué trabajo ahora."
+      },
+      "pixel": {
+        "eyebrow": "Mundos Pixel",
+        "title": "Juegos pixel seleccionados.",
+        "summary": "Aventura, combate, supervivencia y multijugador.",
+        "sceneLabel": "Escena de proyectos pixel",
+        "openDetails": "Abrir detalles de {{title}}",
+        "show": "Mostrar {{title}}"
+      },
+      "featured": {
+        "eyebrow": "Trabajo Destacado",
+        "title": "Lanzamientos destacados.",
+        "reelLabel": "Reel de lanzamientos destacados"
+      },
+      "projects": {
+        "eyebrow": "Juegos y Aplicaciones",
+        "title": "Explorar todos los proyectos.",
+        "portfolioLabel": "Portafolio de proyectos",
+        "games": "Juegos",
+        "apps": "Aplicaciones",
+        "all": "Todos los proyectos",
+        "allType": "Todos los {{type}}",
+        "featured": "Destacados",
+        "mobile": "Móvil",
+        "pcWeb": "PC / Web",
+        "ar": "AR",
+        "simulation": "Simulación",
+        "leadership": "Liderazgo",
+        "filterType": "Filtrar {{type}}",
+        "clearFilter": "Quitar filtro de proyectos",
+        "clearFilterTitle": "Quitar filtro",
+        "openSearch": "Buscar proyectos",
+        "closeSearch": "Cerrar búsqueda",
+        "searchTitle": "Buscar proyectos",
+        "searchLabel": "Buscar por título, plataforma, género, tecnología o función",
+        "clearSearch": "Borrar búsqueda",
+        "clearSearchTitle": "Borrar búsqueda",
+        "shown_one": "{{count}} proyecto mostrado",
+        "shown_other": "{{count}} proyectos mostrados",
+        "noMatches": "No hay proyectos coincidentes",
+        "tryAnother": "Prueba otra búsqueda o restablece el filtro actual.",
+        "reset": "Restablecer"
+      },
+      "shelf": {
+        "browse": "{{count}} proyectos. Usa las flechas o arrastra para explorar.",
+        "openDetailsFor": "Abrir detalles de {{title}}",
+        "select": "Seleccionar {{title}}",
+        "openDetails": "Abrir detalles del proyecto",
+        "previous": "Proyecto anterior",
+        "next": "Proyecto siguiente",
+        "tags": "Etiquetas de {{title}}",
+        "inReview": "En revisión",
+        "source": "Código",
+        "sourceFor": "Código fuente de {{title}}",
+        "detailsFor": "Abrir detalles de {{title}}",
+        "details": "Detalles del proyecto"
+      },
+      "drawer": {
+        "close": "Cerrar detalles del proyecto",
+        "position": "Proyecto {{position}} de {{count}}",
+        "quickFacts": "Datos rápidos de {{title}}",
+        "appGallery": "Galería de la aplicación",
+        "gameplayGallery": "Galería de jugabilidad",
+        "projectArtwork": "Imagen del proyecto",
+        "animatedPreview": "Vista animada",
+        "animatedGameplay": "Jugabilidad animada",
+        "previousImage": "Imagen anterior de {{gallery}}",
+        "nextImage": "Imagen siguiente de {{gallery}}",
+        "previousImageTitle": "Imagen anterior",
+        "nextImageTitle": "Imagen siguiente",
+        "playGameplay": "Reproducir jugabilidad de {{title}}",
+        "showScreenshot": "Mostrar captura {{position}} de {{title}}",
+        "pauseGameplay": "Pausar jugabilidad",
+        "playGameplayControl": "Reproducir jugabilidad",
+        "pausePreview": "Pausar vista",
+        "playPreview": "Reproducir vista",
+        "overview": "Resumen",
+        "facts": "Datos del proyecto {{title}}",
+        "year": "Año",
+        "genre": "Género",
+        "platforms": "Plataformas",
+        "link": "Enlace",
+        "myRole": "Mi Función",
+        "systems": "Sistemas",
+        "tags": "Etiquetas de {{title}}",
+        "openLink": "Abrir {{label}} de {{title}}",
+        "openSource": "Abrir código fuente de {{title}}",
+        "sourceCode": "Código fuente",
+        "moreDetails": "Más detalles",
+        "copied": "Copiado",
+        "share": "Compartir proyecto",
+        "copy": "Copiar enlace",
+        "browse": "Explorar detalles de proyectos",
+        "previousProject": "Proyecto anterior: {{title}}",
+        "noPrevious": "No hay proyecto anterior",
+        "previous": "Anterior",
+        "start": "Inicio",
+        "nextProject": "Proyecto siguiente: {{title}}",
+        "noNext": "No hay proyecto siguiente",
+        "next": "Siguiente",
+        "end": "Fin"
+      },
+      "links": {
+        "play": "Play Store",
+        "appstore": "App Store",
+        "itch": "itch.io",
+        "drive": "Google Drive",
+        "github": "GitHub",
+        "web": "Abrir enlace"
+      },
+      "experience": {
+        "eyebrow": "Experiencia",
+        "title": "Dónde he trabajado.",
+        "timeline": "Trayectoria profesional",
+        "timelineLabel": "Navegación de la trayectoria profesional",
+        "current": "Actual",
+        "details": "Ver responsabilidades",
+        "hideDetails": "Ocultar responsabilidades",
+        "jumpTo": "Ir a {{company}}",
+        "responsibilities": "Responsabilidades en {{company}}"
+      },
+      "skills": {
+        "eyebrow": "Tecnologías",
+        "title": "Herramientas que utilizo.",
+        "summary": "Agrupadas por su uso diario.",
+        "groups": {
+          "game": {
+            "title": "Desarrollo de videojuegos",
+            "description": "Sistemas de juego, prototipado rápido y producción de contenido."
+          },
+          "backend": {
+            "title": "Backend y multijugador",
+            "description": "Multijugador, backend de juegos, datos y servicios en la nube."
+          },
+          "android": {
+            "title": "Android nativo",
+            "description": "Aplicaciones Android nativas, datos locales e interfaces modernas."
+          },
+          "web": {
+            "title": "Web y herramientas de desarrollo",
+            "description": "Aplicaciones web, herramientas de desarrollo y automatización de entregas."
+          },
+          "leadership": {
+            "title": "Liderazgo técnico",
+            "description": "Planificación RFC, arquitectura, revisiones y decisiones técnicas."
+          },
+          "production": {
+            "title": "Producción y lanzamiento",
+            "description": "Rendimiento, pruebas, AR y publicación en tiendas."
+          }
+        }
+      },
+      "recognition": {
+        "eyebrow": "Reconocimientos",
+        "title": "Premios y resultados.",
+        "summary": "{{count}} resultados entre {{start}} y {{end}}.",
+        "featured": "Resultados destacados",
+        "archive": "Archivo de premios",
+        "closeArchive": "Cerrar archivo de premios",
+        "showMore": "Mostrar {{count}} premios más",
+        "showFewer": "Mostrar menos"
+      },
+      "contact": {
+        "eyebrow": "Contacto",
+        "title": "Disponible para oportunidades remotas de desarrollo de videojuegos.",
+        "email": "Correo"
+      },
+      "footer": {
+        "rights": "© 2026 Amin Hanif. Todos los derechos reservados.",
+        "navigation": "Navegación del pie",
+        "terms": "Términos del sitio",
+        "privacy": "Privacidad"
+      },
+      "detail": {
+        "skip": "Saltar a los detalles del proyecto",
+        "breadcrumb": "Ruta de navegación",
+        "platformsAndTech": "Plataformas y tecnologías del proyecto",
+        "share": "Compartir proyecto",
+        "projectFacts": "Datos del proyecto",
+        "coreSystems": "Sistemas principales",
+        "eyebrow": "Detalles del Proyecto",
+        "title": "Una mirada más cercana al proyecto.",
+        "summary": "El contexto del proyecto, mi contribución directa y el resultado entregado.",
+        "overview": "Resumen",
+        "role": "Mi Función",
+        "outcome": "Resultado",
+        "roleTitle": "Contribución de implementación y producción.",
+        "systemsAndTech": "Sistemas y tecnologías del proyecto",
+        "galleryEyebrow": "Galería del Proyecto",
+        "galleryTitle": "Vistas de jugabilidad y producto.",
+        "moreEyebrow": "Más Trabajo",
+        "moreTitle": "Más detalles de proyectos.",
+        "mediaTitle": "Contenido del proyecto",
+        "openMedia": "Abrir {{label}} en el visor",
+        "closeMedia": "Cerrar visor",
+        "gameplayCaption": "Jugabilidad de {{title}}",
+        "appPreviewCaption": "Vista de la aplicación {{title}}",
+        "screenshotCaption": "Captura {{position}} de {{title}}",
+        "previousMedia": "Contenido anterior",
+        "nextMedia": "Contenido siguiente",
+        "counter": "{{position}} de {{count}}"
+      },
+      "directory": {
+        "skip": "Saltar a los detalles de proyectos",
+        "eyebrow": "Detalles de Proyectos Seleccionados",
+        "title": "Juegos y aplicaciones más allá de la tarjeta de lanzamiento.",
+        "lead": "Trabajo seleccionado en Unity, sistemas móviles, responsabilidad técnica y desarrollo Android nativo.",
+        "browse": "Explorar detalles",
+        "viewAll": "Ver todos los proyectos",
+        "count": "{{count}} Proyectos Seleccionados",
+        "detailsTitle": "Contribuciones, contexto y resultados.",
+        "detailsSummary": "Cada página presenta el proyecto y mi contribución directa sin revelar trabajo confidencial de estudio.",
+        "moreDetails": "Más detalles"
+      }
+    }
+  },
+  "pageContent": {
+    "en": {
+      "eyebrow": "Puzzle | 2026",
+      "genre": "Puzzle",
+      "description": "A clean one-tap puzzle game about reading blocked paths and clearing every arrow from an evolving board.",
+      "role": "Built the complete Unity release, including a guaranteed-solvable procedural generator, special tiles, scoring, ads, and Play Games leaderboard support.",
+      "note": "",
+      "outcome": "Released Arrow Flow on Google Play as a complete mobile puzzle game with repeatable generated challenges and production services.",
+      "linkLabel": "Play Store",
+      "galleryCaptions": [
+        "Arrow Flow screenshot 1",
+        "Arrow Flow screenshot 2",
+        "Arrow Flow screenshot 3"
+      ],
+      "projects": {
+        "tilltally-cash-counter": {
+          "meta": "Business Utility | 2026"
+        },
+        "laterpin-remind-me-later": {
+          "meta": "Productivity App | 2026"
+        },
+        "arrow-flow": {
+          "meta": "Puzzle | 2026"
+        },
+        "ding-elevator-game": {
+          "meta": "Casual Timing | 2026"
+        },
+        "block-garden": {
+          "meta": "Cozy Puzzle | 2026"
+        },
+        "heisters": {
+          "meta": "Tactical Shooter | 2022"
+        },
+        "ojol-life-food-delivery-game": {
+          "meta": "Life Simulation | 2025"
+        },
+        "dragon-ranch": {
+          "meta": "Farming Simulation | 2023"
+        },
+        "catmelon-kitty-merge-fever": {
+          "meta": "Casual Puzzle | 2024"
+        },
+        "collecto-frenzy-3d": {
+          "meta": "Casual 3D | 2024"
+        },
+        "goya-universe": {
+          "meta": "Web3 Virtual World | 2023"
+        },
+        "taxsim": {
+          "meta": "Educational Simulation | 2021"
+        }
+      }
+    },
+    "id": {
+      "eyebrow": "Puzzle | 2026",
+      "genre": "Puzzle",
+      "description": "Game puzzle satu sentuhan tentang membaca jalur yang terhalang dan mengeluarkan semua panah dari papan yang terus berubah.",
+      "role": "Membangun rilis Unity lengkap, termasuk generator prosedural yang selalu dapat diselesaikan, tile khusus, skor, iklan, dan leaderboard Play Games.",
+      "note": "",
+      "outcome": "Merilis Arrow Flow di Google Play sebagai game puzzle seluler lengkap dengan tantangan prosedural dan layanan produksi.",
+      "linkLabel": "Play Store",
+      "galleryCaptions": [
+        "Tangkapan layar Arrow Flow ke-1",
+        "Tangkapan layar Arrow Flow ke-2",
+        "Tangkapan layar Arrow Flow ke-3"
+      ],
+      "projects": {
+        "tilltally-cash-counter": {
+          "meta": "Utilitas Bisnis | 2026"
+        },
+        "laterpin-remind-me-later": {
+          "meta": "Aplikasi Produktivitas | 2026"
+        },
+        "arrow-flow": {
+          "meta": "Puzzle | 2026"
+        },
+        "ding-elevator-game": {
+          "meta": "Timing Kasual | 2026"
+        },
+        "block-garden": {
+          "meta": "Puzzle Santai | 2026"
+        },
+        "heisters": {
+          "meta": "Shooter Taktis | 2022"
+        },
+        "ojol-life-food-delivery-game": {
+          "meta": "Simulasi Kehidupan | 2025"
+        },
+        "dragon-ranch": {
+          "meta": "Simulasi Pertanian | 2023"
+        },
+        "catmelon-kitty-merge-fever": {
+          "meta": "Puzzle Kasual | 2024"
+        },
+        "collecto-frenzy-3d": {
+          "meta": "3D Kasual | 2024"
+        },
+        "goya-universe": {
+          "meta": "Dunia Virtual Web3 | 2023"
+        },
+        "taxsim": {
+          "meta": "Simulasi Edukasi | 2021"
+        }
+      }
+    },
+    "ar": {
+      "eyebrow": "ألغاز | 2026",
+      "genre": "ألغاز",
+      "description": "لعبة ألغاز بلمسة واحدة تعتمد على قراءة المسارات المحجوبة وإخراج جميع الأسهم من لوحة متغيرة.",
+      "role": "طورت إصدار Unity كاملاً مع مولّد إجرائي مضمون الحل وبلاطات خاصة ونقاط وإعلانات ولوحة صدارة Play Games.",
+      "note": "",
+      "outcome": "أطلقت Arrow Flow على Google Play كلعبة ألغاز محمولة مكتملة بتحديات مولدة وخدمات إنتاج.",
+      "linkLabel": "Play Store",
+      "galleryCaptions": [
+        "لقطة Arrow Flow رقم 1",
+        "لقطة Arrow Flow رقم 2",
+        "لقطة Arrow Flow رقم 3"
+      ],
+      "projects": {
+        "tilltally-cash-counter": {
+          "meta": "أداة أعمال | 2026"
+        },
+        "laterpin-remind-me-later": {
+          "meta": "تطبيق إنتاجية | 2026"
+        },
+        "arrow-flow": {
+          "meta": "ألغاز | 2026"
+        },
+        "ding-elevator-game": {
+          "meta": "توقيت خفيف | 2026"
+        },
+        "block-garden": {
+          "meta": "ألغاز هادئة | 2026"
+        },
+        "heisters": {
+          "meta": "تصويب تكتيكي | 2022"
+        },
+        "ojol-life-food-delivery-game": {
+          "meta": "محاكاة حياة | 2025"
+        },
+        "dragon-ranch": {
+          "meta": "محاكاة مزرعة | 2023"
+        },
+        "catmelon-kitty-merge-fever": {
+          "meta": "ألغاز خفيفة | 2024"
+        },
+        "collecto-frenzy-3d": {
+          "meta": "ثلاثية الأبعاد خفيفة | 2024"
+        },
+        "goya-universe": {
+          "meta": "عالم افتراضي Web3 | 2023"
+        },
+        "taxsim": {
+          "meta": "محاكاة تعليمية | 2021"
+        }
+      }
+    },
+    "ja": {
+      "eyebrow": "パズル | 2026",
+      "genre": "パズル",
+      "description": "ふさがれた経路を読み、変化する盤面からすべての矢印を消すワンタップパズルです。",
+      "role": "必ず解ける手続き型生成、特殊タイル、スコア、広告、Play Gamesランキングを含むUnity製品版を開発しました。",
+      "note": "",
+      "outcome": "繰り返し遊べる生成課題と運用機能を備えた完成版モバイルパズルとしてGoogle Playで公開しました。",
+      "linkLabel": "Play Store",
+      "galleryCaptions": [
+        "Arrow Flowのスクリーンショット1",
+        "Arrow Flowのスクリーンショット2",
+        "Arrow Flowのスクリーンショット3"
+      ],
+      "projects": {
+        "tilltally-cash-counter": {
+          "meta": "業務ユーティリティ | 2026"
+        },
+        "laterpin-remind-me-later": {
+          "meta": "生産性アプリ | 2026"
+        },
+        "arrow-flow": {
+          "meta": "パズル | 2026"
+        },
+        "ding-elevator-game": {
+          "meta": "カジュアル・タイミング | 2026"
+        },
+        "block-garden": {
+          "meta": "リラックスパズル | 2026"
+        },
+        "heisters": {
+          "meta": "タクティカルシューター | 2022"
+        },
+        "ojol-life-food-delivery-game": {
+          "meta": "生活シミュレーション | 2025"
+        },
+        "dragon-ranch": {
+          "meta": "農場シミュレーション | 2023"
+        },
+        "catmelon-kitty-merge-fever": {
+          "meta": "カジュアルパズル | 2024"
+        },
+        "collecto-frenzy-3d": {
+          "meta": "3Dカジュアル | 2024"
+        },
+        "goya-universe": {
+          "meta": "Web3仮想世界 | 2023"
+        },
+        "taxsim": {
+          "meta": "教育シミュレーション | 2021"
+        }
+      }
+    },
+    "ko": {
+      "eyebrow": "퍼즐 | 2026",
+      "genre": "퍼즐",
+      "description": "막힌 경로를 읽고 변화하는 보드에서 모든 화살표를 제거하는 원터치 퍼즐 게임입니다.",
+      "role": "항상 풀 수 있는 절차적 생성기, 특수 타일, 점수, 광고, Play Games 순위를 포함한 Unity 정식 버전을 개발했습니다.",
+      "note": "",
+      "outcome": "반복 가능한 생성형 도전과 운영 서비스를 갖춘 완성형 모바일 퍼즐로 Google Play에 출시했습니다.",
+      "linkLabel": "Play Store",
+      "galleryCaptions": [
+        "Arrow Flow 스크린샷 1",
+        "Arrow Flow 스크린샷 2",
+        "Arrow Flow 스크린샷 3"
+      ],
+      "projects": {
+        "tilltally-cash-counter": {
+          "meta": "비즈니스 도구 | 2026"
+        },
+        "laterpin-remind-me-later": {
+          "meta": "생산성 앱 | 2026"
+        },
+        "arrow-flow": {
+          "meta": "퍼즐 | 2026"
+        },
+        "ding-elevator-game": {
+          "meta": "캐주얼 타이밍 | 2026"
+        },
+        "block-garden": {
+          "meta": "편안한 퍼즐 | 2026"
+        },
+        "heisters": {
+          "meta": "전술 슈터 | 2022"
+        },
+        "ojol-life-food-delivery-game": {
+          "meta": "생활 시뮬레이션 | 2025"
+        },
+        "dragon-ranch": {
+          "meta": "농장 시뮬레이션 | 2023"
+        },
+        "catmelon-kitty-merge-fever": {
+          "meta": "캐주얼 퍼즐 | 2024"
+        },
+        "collecto-frenzy-3d": {
+          "meta": "캐주얼 3D | 2024"
+        },
+        "goya-universe": {
+          "meta": "Web3 가상 세계 | 2023"
+        },
+        "taxsim": {
+          "meta": "교육 시뮬레이션 | 2021"
+        }
+      }
+    },
+    "es": {
+      "eyebrow": "Puzle | 2026",
+      "genre": "Puzle",
+      "description": "Juego de puzles de un toque sobre leer caminos bloqueados y retirar todas las flechas de un tablero cambiante.",
+      "role": "Desarrollé la versión completa en Unity, con generador procedural siempre resoluble, fichas especiales, puntuación, anuncios y tablas de Play Games.",
+      "note": "",
+      "outcome": "Publiqué Arrow Flow en Google Play como un puzle móvil completo con desafíos generados y servicios de producción.",
+      "linkLabel": "Play Store",
+      "galleryCaptions": [
+        "Captura 1 de Arrow Flow",
+        "Captura 2 de Arrow Flow",
+        "Captura 3 de Arrow Flow"
+      ],
+      "projects": {
+        "tilltally-cash-counter": {
+          "meta": "Herramienta empresarial | 2026"
+        },
+        "laterpin-remind-me-later": {
+          "meta": "Aplicación de productividad | 2026"
+        },
+        "arrow-flow": {
+          "meta": "Puzle | 2026"
+        },
+        "ding-elevator-game": {
+          "meta": "Precisión casual | 2026"
+        },
+        "block-garden": {
+          "meta": "Puzle relajante | 2026"
+        },
+        "heisters": {
+          "meta": "Shooter táctico | 2022"
+        },
+        "ojol-life-food-delivery-game": {
+          "meta": "Simulación de vida | 2025"
+        },
+        "dragon-ranch": {
+          "meta": "Simulación de granja | 2023"
+        },
+        "catmelon-kitty-merge-fever": {
+          "meta": "Puzle casual | 2024"
+        },
+        "collecto-frenzy-3d": {
+          "meta": "Casual 3D | 2024"
+        },
+        "goya-universe": {
+          "meta": "Mundo virtual Web3 | 2023"
+        },
+        "taxsim": {
+          "meta": "Simulación educativa | 2021"
+        }
+      }
+    }
+  }
+};
+      (function () {
+        var config = window.__aminLocaleConfig;
+        var supported = config.locales.map(function (locale) { return locale.code; });
+        var selected = config.defaultLocale;
+        try {
+          var stored = window.localStorage.getItem(config.storageKey);
+          if (supported.indexOf(stored) >= 0) selected = stored;
+        } catch (error) {}
+        if (selected === config.defaultLocale && navigator.languages) {
+          for (var index = 0; index < navigator.languages.length; index += 1) {
+            var candidate = navigator.languages[index].toLowerCase().split('-')[0];
+            if (supported.indexOf(candidate) >= 0) {
+              selected = candidate;
+              break;
+            }
+          }
+        }
+        var locale = config.locales.find(function (item) { return item.code === selected; })
+          || config.locales[0];
+        document.documentElement.dataset.locale = locale.code;
+      })();
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": [
+    "VideoGame",
+    "MobileApplication"
+  ],
+  "name": "Arrow Flow",
+  "description": "Arrow Flow is a published Unity puzzle game with guaranteed-solvable procedural boards, special tiles, AdMob, scoring, and Play Games leaderboards.",
+  "url": "https://aminhanifm.github.io/projects/arrow-flow/",
+  "image": "https://aminhanifm.github.io/images/projects/gallery/arrow-flow-01.webp",
+  "screenshot": [
+    "https://aminhanifm.github.io/images/projects/gallery/arrow-flow-01.webp",
+    "https://aminhanifm.github.io/images/projects/gallery/arrow-flow-02.webp",
+    "https://aminhanifm.github.io/images/projects/gallery/arrow-flow-03.webp"
+  ],
+  "operatingSystem": "Android",
+  "applicationCategory": "GameApplication",
+  "datePublished": "2026-01-01",
+  "dateModified": "2026-07-23",
+  "keywords": "Unity puzzle game, procedural generation, solvable puzzle generator, AdMob, Google Play Games",
+  "downloadUrl": "https://play.google.com/store/apps/details?id=com.aminhanifm.arrowflow",
+  "author": {
+    "@type": "Person",
+    "name": "Amin Hanif",
+    "url": "https://aminhanifm.github.io"
+  }
+}
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Portfolio",
+      "item": "https://aminhanifm.github.io/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Project details",
+      "item": "https://aminhanifm.github.io/projects/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Arrow Flow",
+      "item": "https://aminhanifm.github.io/projects/arrow-flow/"
+    }
+  ]
+}
+    </script>
+      <script
+      defer
+      src="/site-analytics.js"
+      data-site-analytics="true"
+      data-measurement-id="G-TMGSL66PFH"
+      data-site-area="nested_project"
+      data-content-name="arrow-flow"
+    ></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#project-details" data-i18n="detail.skip">Skip to project details</a>
+    <header class="site-header">
+      <div class="header-surface">
+        <div class="header-inner">
+          <a class="brand-lockup" href="/" aria-label="Amin Hanif home" data-i18n-aria-label="brand.homeLabel">
+            <span class="brand-copy">
+              <strong>Amin Hanif</strong>
+              <small data-i18n="brand.role">Game Developer</small>
+            </span>
+          </a>
+          <nav class="header-nav desktop-navigation" aria-label="Primary navigation" data-i18n-aria-label="nav.primary">
+            <a href="/#work"><span data-i18n="nav.work">Work</span></a>
+            <a class="is-active" href="/#projects" aria-current="page">
+              <span data-i18n="nav.projects">Projects</span>
+              <span class="navigation-indicator" aria-hidden="true"></span>
+            </a>
+            <a href="/#experience"><span data-i18n="nav.experience">Experience</span></a>
+            <a href="/#contact"><span data-i18n="nav.contact">Contact</span></a>
+          </nav>
+          <span class="mobile-header-context" data-i18n="nav.projects">Projects</span>
+          <div class="header-utility">
+            <div class="static-language-root" data-project-language-root>
+              <span class="static-language-placeholder" aria-label="Language">EN</span>
+            </div>
+            <button class="theme-toggle" type="button" data-theme-toggle data-analytics-action="theme_toggle" aria-label="Switch theme">
+              <span class="theme-icon-wrap" aria-hidden="true">
+                <svg class="theme-icon theme-icon-sun" viewBox="0 0 512 512">
+                  <path d="M256 160c-52.9 0-96 43.1-96 96s43.1 96 96 96 96-43.1 96-96-43.1-96-96-96zm246.4 80.5l-94.7-47.3 33.5-100.4c4.5-13.6-8.4-26.5-21.9-21.9l-100.4 33.5-47.4-94.8c-6.4-12.8-24.6-12.8-31 0l-47.3 94.7L92.7 70.8c-13.6-4.5-26.5 8.4-21.9 21.9l33.5 100.4-94.7 47.4c-12.8 6.4-12.8 24.6 0 31l94.7 47.3-33.5 100.5c-4.5 13.6 8.4 26.5 21.9 21.9l100.4-33.5 47.3 94.7c6.4 12.8 24.6 12.8 31 0l47.3-94.7 100.4 33.5c13.6 4.5 26.5-8.4 21.9-21.9l-33.5-100.4 94.7-47.3c13-6.5 13-24.7.2-31.1zm-155.9 106c-49.9 49.9-131.1 49.9-181 0-49.9-49.9-49.9-131.1 0-181 49.9-49.9 131.1-49.9 181 0 49.9 49.9 49.9 131.1 0 181z"></path>
+                </svg>
+                <svg class="theme-icon theme-icon-moon" viewBox="0 0 512 512">
+                  <path d="M283.211 512c78.962 0 151.079-35.925 198.857-94.792 7.068-8.708-.639-21.43-11.562-19.35-124.203 23.654-238.262-71.576-238.262-196.954 0-72.222 38.662-138.635 101.498-174.394 9.686-5.512 7.25-20.197-3.756-22.23A258.156 258.156 0 0 0 283.211 0c-141.309 0-256 114.511-256 256 0 141.309 114.511 256 256 256z"></path>
+                </svg>
+              </span>
+              <span class="theme-label" data-theme-label data-i18n="theme.light">Light</span>
+            </button>
+            <button class="mobile-menu-toggle" type="button" data-mobile-menu-toggle aria-expanded="false" aria-controls="mobile-navigation-panel" aria-label="Open navigation menu" title="Open navigation menu" data-i18n-aria-label="nav.open" data-i18n-title="nav.open">
+              <span class="mobile-menu-icon" aria-hidden="true"><span></span><span></span></span>
+            </button>
+          </div>
+        </div>
+        <button class="mobile-navigation-scrim" type="button" data-mobile-menu-close aria-label="Close navigation menu" data-i18n-aria-label="nav.close" hidden></button>
+        <nav class="mobile-navigation-panel" id="mobile-navigation-panel" data-mobile-navigation aria-label="Mobile navigation" data-i18n-aria-label="nav.mobile" hidden>
+          <div class="mobile-navigation-inner">
+            <a href="/#work"><span>01</span><strong data-i18n="nav.work">Work</strong></a>
+            <a class="is-active" href="/#projects" aria-current="page"><span>02</span><strong data-i18n="nav.projects">Projects</strong><span class="mobile-navigation-indicator" aria-hidden="true"></span></a>
+            <a href="/#experience"><span>03</span><strong data-i18n="nav.experience">Experience</strong></a>
+            <a href="/#contact"><span>04</span><strong data-i18n="nav.contact">Contact</strong></a>
+          </div>
+        </nav>
+      </div>
+      <div class="page-progress" aria-hidden="true">
+        <span data-scroll-progress></span>
+      </div>
+    </header>
+
+    <main>
+      <section class="project-hero" aria-labelledby="project-title" data-analytics-section="project_hero">
+        <img class="hero-media" src="/images/projects/gallery/arrow-flow-01.webp" alt="" fetchpriority="high" decoding="async" />
+        <div class="content-shell">
+          <nav class="breadcrumbs" aria-label="Breadcrumb" data-i18n-aria-label="detail.breadcrumb">
+            <ol>
+              <li><a href="/" data-i18n="nav.portfolio">Portfolio</a></li>
+              <li><a href="/projects/" data-i18n="drawer.moreDetails">More details</a></li>
+              <li aria-current="page">Arrow Flow</li>
+            </ol>
+          </nav>
+          <p class="eyebrow" data-project-i18n="eyebrow">Puzzle | 2026</p>
+          <h1 id="project-title">Arrow Flow</h1>
+          <p class="hero-lede" data-project-i18n="description">A clean one-tap puzzle game about reading blocked paths and clearing every arrow from an evolving board.</p>
+          <div class="pill-row" aria-label="Project platforms and technologies" data-i18n-aria-label="detail.platformsAndTech">
+            <span>Android</span>
+            <span>Unity</span>
+            <span>Procedural</span>
+            <span>Puzzle</span>
+            <span>AdMob</span>
+          </div>
+          <div class="hero-actions">
+            <a class="button primary" href="https://play.google.com/store/apps/details?id=com.aminhanifm.arrowflow" target="_blank" rel="noreferrer" data-project-i18n="linkLabel">View on Google Play</a>
+            <button class="button secondary" type="button" data-share-project data-analytics-action="share_project" data-i18n="detail.share">Share project</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="project-facts" aria-label="Project facts" data-i18n-aria-label="detail.projectFacts">
+        <div class="content-shell fact-grid">
+          <div><span data-i18n="drawer.year">Year</span><strong>2026</strong></div>
+          <div><span data-i18n="drawer.genre">Genre</span><strong data-project-i18n="genre">Puzzle</strong></div>
+          <div><span data-i18n="drawer.platforms">Platforms</span><strong>Android</strong></div>
+          <div><span data-i18n="detail.coreSystems">Core systems</span><strong>Unity, Procedural, Puzzle</strong></div>
+        </div>
+      </section>
+
+      <section class="page-section" id="project-details" data-analytics-section="case_study">
+        <div class="content-shell">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="detail.eyebrow">Project Details</p>
+            <h2 data-i18n="detail.title">A closer look at the project.</h2>
+            <p data-i18n="detail.summary">The project context, my direct contribution, and the delivered result.</p>
+          </div>
+          <div class="case-grid">
+            <article class="case-item">
+              <span class="case-label" data-i18n="detail.overview">Overview</span>
+              <p data-project-i18n="description">A clean one-tap puzzle game about reading blocked paths and clearing every arrow from an evolving board.</p>
+            </article>
+            <article class="case-item">
+              <span class="case-label" data-i18n="detail.role">My Role</span>
+              <p data-project-i18n="role">Built the complete Unity release, including a guaranteed-solvable procedural generator, special tiles, scoring, ads, and Play Games leaderboard support.</p>
+            </article>
+            <article class="case-item">
+              <span class="case-label" data-i18n="detail.outcome">Outcome</span>
+              <p data-project-i18n="outcome">Released Arrow Flow on Google Play as a complete mobile puzzle game with repeatable generated challenges and production services.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" data-analytics-section="role_and_systems">
+        <div class="content-shell role-layout">
+          <div>
+            <p class="eyebrow" data-i18n="detail.role">My Role</p>
+            <h2 data-i18n="detail.roleTitle">Implementation and production contribution.</h2>
+          </div>
+          <div>
+            <div class="role-summary">
+              <p data-project-i18n="role">Built the complete Unity release, including a guaranteed-solvable procedural generator, special tiles, scoring, ads, and Play Games leaderboard support.</p>
+            </div>
+            
+            <div class="tag-row" aria-label="Project systems and technologies" data-i18n-aria-label="detail.systemsAndTech">
+              <span>Unity</span>
+              <span>Procedural</span>
+              <span>Puzzle</span>
+              <span>AdMob</span>
+              <span>Play Games</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" data-analytics-section="project_gallery">
+        <div class="content-shell">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="detail.galleryEyebrow">Project Gallery</p>
+            <h2 data-i18n="detail.galleryTitle">Gameplay and product views.</h2>
+          </div>
+          <div class="gallery-grid">
+            <figure>
+              <button class="gallery-media-button" type="button" data-gallery-open data-gallery-index="0" data-gallery-kind="image" data-gallery-src="/images/projects/gallery/arrow-flow-01.webp" data-gallery-alt="Arrow Flow board-clearing puzzle gameplay" data-project-media-key="galleryCaptions.0" data-analytics-action="project_gallery_open" aria-label="Open Arrow Flow board-clearing puzzle gameplay in media viewer" aria-haspopup="dialog">
+                <img class="gallery-media-backdrop" src="/images/projects/gallery/arrow-flow-01.webp" alt="" aria-hidden="true" loading="eager" decoding="async" />
+                <img class="gallery-media-foreground" src="/images/projects/gallery/arrow-flow-01.webp" alt="" loading="eager" decoding="async" />
+              </button>
+              <figcaption data-project-i18n="galleryCaptions.0">Arrow Flow board-clearing puzzle gameplay</figcaption>
+            </figure>
+            <figure>
+              <button class="gallery-media-button" type="button" data-gallery-open data-gallery-index="1" data-gallery-kind="image" data-gallery-src="/images/projects/gallery/arrow-flow-02.webp" data-gallery-alt="Arrow Flow directional path puzzle" data-project-media-key="galleryCaptions.1" data-analytics-action="project_gallery_open" aria-label="Open Arrow Flow directional path puzzle in media viewer" aria-haspopup="dialog">
+                <img class="gallery-media-backdrop" src="/images/projects/gallery/arrow-flow-02.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                <img class="gallery-media-foreground" src="/images/projects/gallery/arrow-flow-02.webp" alt="" loading="lazy" decoding="async" />
+              </button>
+              <figcaption data-project-i18n="galleryCaptions.1">Arrow Flow directional path puzzle</figcaption>
+            </figure>
+            <figure>
+              <button class="gallery-media-button" type="button" data-gallery-open data-gallery-index="2" data-gallery-kind="image" data-gallery-src="/images/projects/gallery/arrow-flow-03.webp" data-gallery-alt="Arrow Flow special tile mechanics" data-project-media-key="galleryCaptions.2" data-analytics-action="project_gallery_open" aria-label="Open Arrow Flow special tile mechanics in media viewer" aria-haspopup="dialog">
+                <img class="gallery-media-backdrop" src="/images/projects/gallery/arrow-flow-03.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                <img class="gallery-media-foreground" src="/images/projects/gallery/arrow-flow-03.webp" alt="" loading="lazy" decoding="async" />
+              </button>
+              <figcaption data-project-i18n="galleryCaptions.2">Arrow Flow special tile mechanics</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" data-analytics-section="related_projects">
+        <div class="content-shell">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="detail.moreEyebrow">More Work</p>
+            <h2 data-i18n="detail.moreTitle">More project details.</h2>
+          </div>
+          <div class="related-grid">
+            <a class="related-card" href="/projects/ding-elevator-game/">
+              <img src="/images/projects/ding.webp" alt="" loading="lazy" decoding="async" />
+              <div>
+                <span data-project-i18n="projects.ding-elevator-game.meta">Casual Timing | 2026</span>
+                <strong>Ding!</strong>
+              </div>
+            </a>
+            <a class="related-card" href="/projects/block-garden/">
+              <img src="/images/projects/block-garden.webp" alt="" loading="lazy" decoding="async" />
+              <div>
+                <span data-project-i18n="projects.block-garden.meta">Cozy Puzzle | 2026</span>
+                <strong>Block Garden</strong>
+              </div>
+            </a>
+            <a class="related-card" href="/projects/heisters/">
+              <img src="/images/projects/heisters.webp" alt="" loading="lazy" decoding="async" />
+              <div>
+                <span data-project-i18n="projects.heisters.meta">Tactical Shooter | 2022</span>
+                <strong>Heisters</strong>
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="content-shell footer-inner">
+        <span data-i18n="footer.rights">&copy; 2026 Amin Hanif. All rights reserved.</span>
+        <nav class="footer-links" aria-label="Footer navigation" data-i18n-aria-label="footer.navigation">
+          <a href="/terms/" data-i18n="footer.terms">Site terms</a>
+          <a href="/privacy/" data-i18n="footer.privacy">Privacy</a>
+          <a href="/#contact" data-i18n="nav.contact">Contact</a>
+        </nav>
+      </div>
+    </footer>
+    <div class="gallery-lightbox" data-gallery-lightbox hidden>
+      <div class="gallery-lightbox-backdrop" data-lightbox-close></div>
+      <section class="gallery-lightbox-dialog" role="dialog" aria-modal="true" aria-labelledby="gallery-lightbox-title" tabindex="-1">
+        <header class="gallery-lightbox-toolbar">
+          <div>
+            <strong id="gallery-lightbox-title" data-lightbox-title data-i18n="detail.mediaTitle">Project media</strong>
+            <span data-lightbox-counter></span>
+          </div>
+          <button class="gallery-lightbox-close" type="button" data-lightbox-close aria-label="Close media viewer" title="Close media viewer" data-i18n-aria-label="detail.closeMedia" data-i18n-title="detail.closeMedia"></button>
+        </header>
+        <div class="gallery-lightbox-stage" data-lightbox-stage></div>
+        <footer class="gallery-lightbox-caption" data-lightbox-caption></footer>
+        <button class="gallery-lightbox-nav gallery-lightbox-prev" type="button" data-lightbox-prev aria-label="Previous media" title="Previous media" data-i18n-aria-label="detail.previousMedia" data-i18n-title="detail.previousMedia"></button>
+        <button class="gallery-lightbox-nav gallery-lightbox-next" type="button" data-lightbox-next aria-label="Next media" title="Next media" data-i18n-aria-label="detail.nextMedia" data-i18n-title="detail.nextMedia"></button>
+      </section>
+    </div>
+    <script src="/project-page.js" defer></script>
+    <script type="module" src="/project-page-language.js"></script>
+  </body>
+</html>
