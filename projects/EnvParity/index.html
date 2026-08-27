@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Try EnvParity in your browser with a safe, local environment-variable parity check."
+    />
+    <meta name="theme-color" content="#07110f" />
+    <title>EnvParity | Interactive demo</title>
+    <script type="module" crossorigin src="/projects/EnvParity/assets/index-CB2nmE0b.js"></script>
+    <link rel="stylesheet" crossorigin href="/projects/EnvParity/assets/index-Bo1kk-3Q.css">
+      <script
+      defer
+      src="/site-analytics.js"
+      data-site-analytics="true"
+      data-measurement-id="G-TMGSL66PFH"
+      data-site-area="nested_project"
+      data-content-name="EnvParity"
+    ></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to demo</a>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="EnvParity demo home">
+        <span class="brand-mark" aria-hidden="true">EP</span>
+        <span>EnvParity</span>
+      </a>
+      <nav aria-label="Project links">
+        <a href="https://github.com/aminhanifm/EnvParity">GitHub</a>
+        <a href="https://www.npmjs.com/package/@aminhanifm/envparity">npm</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="eyebrow">
+          <span></span> Open-source configuration linting
+        </div>
+        <h1 id="hero-title">
+          Catch environment drift <em>before setup breaks.</em>
+        </h1>
+        <p class="hero-copy">
+          Compare source references with <code>.env.example</code>. Missing,
+          stale, duplicate, and risky public names surface in one deterministic
+          report.
+        </p>
+        <div class="install-row">
+          <code>npx @aminhanifm/envparity check</code>
+          <button class="copy-command" type="button" data-copy-command>
+            Copy command
+          </button>
+        </div>
+        <ul class="trust-list" aria-label="EnvParity guarantees">
+          <li>Runs locally</li>
+          <li>Never reads real .env files</li>
+          <li>No values in reports</li>
+        </ul>
+      </section>
+
+      <section class="demo-shell" id="workspace" aria-labelledby="demo-title">
+        <div class="demo-heading">
+          <div>
+            <div class="eyebrow"><span></span> Interactive one-file lab</div>
+            <h2 id="demo-title">See the same engine in action</h2>
+            <p>
+              Edit either virtual file. Everything stays in this browser tab and
+              no source is uploaded.
+            </p>
+          </div>
+          <div class="demo-controls">
+            <label for="scenario">Scenario</label>
+            <select id="scenario">
+              <option value="broken-ts">Broken TypeScript</option>
+              <option value="clean-ts">Clean TypeScript</option>
+              <option value="python-drift">Python drift</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="editor-grid">
+          <article class="editor-card">
+            <div class="editor-toolbar">
+              <div class="window-dots" aria-hidden="true">
+                <i></i><i></i><i></i>
+              </div>
+              <strong>.env.example</strong>
+              <span id="example-lines">0 lines</span>
+            </div>
+            <label class="sr-only" for="example-editor"
+              >Example environment file</label
+            >
+            <textarea id="example-editor" spellcheck="false"></textarea>
+          </article>
+
+          <article class="editor-card">
+            <div class="editor-toolbar">
+              <div class="window-dots" aria-hidden="true">
+                <i></i><i></i><i></i>
+              </div>
+              <strong id="source-filename">src/config.ts</strong>
+              <span id="source-lines">0 lines</span>
+            </div>
+            <label class="sr-only" for="source-editor">Source code</label>
+            <textarea id="source-editor" spellcheck="false"></textarea>
+          </article>
+        </div>
+
+        <div class="run-bar">
+          <label class="check-control">
+            <input id="strict-unused" type="checkbox" />
+            <span>Treat unused variables as errors</span>
+          </label>
+          <span class="shortcut">Ctrl / ⌘ + Enter</span>
+          <button class="run-button" id="run-check" type="button">
+            Run parity check <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <section
+          class="results"
+          aria-labelledby="results-title"
+          aria-live="polite"
+        >
+          <div class="result-header">
+            <div class="result-state" id="result-state">
+              <span class="state-icon" aria-hidden="true">!</span>
+              <div>
+                <p>Ready to analyze</p>
+                <h3 id="results-title">Run the parity check</h3>
+              </div>
+            </div>
+            <button class="json-button" id="copy-json" type="button" disabled>
+              Copy JSON report
+            </button>
+          </div>
+
+          <div class="metrics" aria-label="Report summary">
+            <article>
+              <span>Errors</span><strong id="error-count">-</strong>
+            </article>
+            <article>
+              <span>Warnings</span><strong id="warning-count">-</strong>
+            </article>
+            <article>
+              <span>Verified</span><strong id="verified-count">-</strong>
+            </article>
+            <article>
+              <span>Dynamic</span><strong id="dynamic-count">-</strong>
+            </article>
+          </div>
+
+          <div class="findings" id="findings">
+            <p class="empty-state">
+              Findings will appear here in deterministic order.
+            </p>
+          </div>
+        </section>
+      </section>
+
+      <section class="how-it-works" aria-labelledby="how-title">
+        <div>
+          <div class="eyebrow"><span></span> Designed for trust</div>
+          <h2 id="how-title">Static analysis, narrow by design.</h2>
+        </div>
+        <ol>
+          <li>
+            <span>01</span><strong>Extract</strong>
+            <p>Find supported references without executing code.</p>
+          </li>
+          <li>
+            <span>02</span><strong>Compare</strong>
+            <p>Discard values and compare names deterministically.</p>
+          </li>
+          <li>
+            <span>03</span><strong>Report</strong>
+            <p>Return actionable errors, warnings, and source lines.</p>
+          </li>
+        </ol>
+      </section>
+    </main>
+
+    <footer>
+      <span>EnvParity is MIT licensed.</span>
+      <a
+        href="https://github.com/aminhanifm/EnvParity#security-and-privacy-guarantees"
+      >
+        Security &amp; privacy
+      </a>
+    </footer>
+
+  </body>
+</html>
