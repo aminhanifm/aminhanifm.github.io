@@ -1,0 +1,7 @@
+User-agent: Google-adstxt
+Disallow:
+
+User-agent: *
+Disallow:
+
+Sitemap: https://aminhanifm.github.io/sitemap.xml
